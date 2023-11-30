@@ -11,6 +11,7 @@ import { PaginatedRequest } from '../dtos/skills';
 export class BlogService {
   blogEndpoint:string=`${environment.apiUrl}/blogs`;
 
+  
   constructor(private httpClient:HttpClient) { }
 
   getBlogs(request:PaginatedRequest){

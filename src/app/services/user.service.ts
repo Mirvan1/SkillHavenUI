@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environment/environment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import {  ChangePasswordDto, LoginUserDto, UserDto } from '../dtos/user.dto';
 
@@ -8,12 +8,22 @@ import {  ChangePasswordDto, LoginUserDto, UserDto } from '../dtos/user.dto';
   providedIn: 'root'
 })
 export class UserService {
+  
   userEndpoint:string=`${environment.apiUrl}/user`;
+
+  private accessToken = new BehaviorSubject<string>('');
+  getAccessToken$ = this.accessToken.asObservable();
+
+  private getUserInfos =new BehaviorSubject<UserDto | null>(null);
+  getUser$=this.getUserInfos.asObservable();
 
   constructor(private httpClient:HttpClient) { }
 
   getUser(id:number):Observable<UserDto>{
-    return this.httpClient.get<UserDto>(`${this.userEndpoint}/${id}`);
+    return this.httpClient.get<UserDto>(`${this.userEndpoint}/${id}`)
+    .pipe(
+      tap(res=>this.getUserInfos.next(res))
+    );
   }
 
   registerUser(request:UserDto):Observable<boolean>{
@@ -34,9 +44,10 @@ export class UserService {
   }
 
   login(request:LoginUserDto):Observable<string>{
-    return this.httpClient.post<string>(`${this.userEndpoint}/login`,request);
+    return this.httpClient.post<string>(`${this.userEndpoint}/login`,request)
+    .pipe(
+      tap(res=>this.accessToken.next(res))
+    );
   }
-
-
 
 }

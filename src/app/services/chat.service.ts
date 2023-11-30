@@ -10,7 +10,7 @@ import { PaginatedRequest } from '../dtos/skills';
 })
 export class ChatService {
   chatEndpoint:string=`${environment.apiUrl}/blogs`;
-
+   
   constructor(private httpClient:HttpClient) { }
 
   getMessagesByUser(id:number):Observable<ListChatUsersDtos>{
