@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../../../services/user.service';
 import { LoginUserDto } from '../../../dtos/user.dto';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { StreamInvocationMessage } from '@microsoft/signalr';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +14,15 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-  email!:string;
-  password!:string
-  constructor(private userService:UserService){}
+  email:string
+  password:string;
+  constructor(
+    private userService:UserService,
+    private router:Router
+    ){
+      this.email='deneme6@gmail.com';
+      this.password='12345';
+    }
 
 
   ngOnInit(): void {
@@ -29,7 +37,10 @@ export class LoginComponent implements OnInit {
     };
 debugger
     this.userService.login(request).subscribe({
-     next:( res)=>console.log(JSON.stringify(res)),
+     next:(res)=>{
+      this.router.navigateByUrl('/home');
+      console.log(JSON.stringify(res))
+    },
      error:(err)=>alert(JSON.stringify(err))
     }
     )

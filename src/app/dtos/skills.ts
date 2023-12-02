@@ -7,7 +7,7 @@ export interface PaginatedRequest{
 
 
 export interface getAllSkillerDto  extends PaginatedRequest{
-    searchByName: string;
+    searchByName?: string;
 
 }
 
@@ -27,7 +27,7 @@ export interface ListSkillerDtos {
 }
 
 export interface SkillerDto  {
-    role: Role | null;
+    role: Role ;
     fullName: string;
     supervisorExpertise: string | null;
     supervisorDescription: string | null;

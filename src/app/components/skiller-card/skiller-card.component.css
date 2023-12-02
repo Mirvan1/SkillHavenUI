@@ -1,0 +1,14 @@
+.skiller-card {
+    width: 33%;
+    max-width: 33.3%;
+    margin-bottom: 8px;
+  }
+
+.skiller-area{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:flex-start;
+    align-items: flex-start;
+    flex: 0 0 auto;
+  }

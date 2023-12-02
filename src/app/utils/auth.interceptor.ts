@@ -4,13 +4,15 @@ import { inject } from '@angular/core';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   let userService=inject(UserService);
-
-  let accessToken= userService.getAccessToken$.subscribe();
-
+  let accessToken;
+   userService.getAccessToken$.subscribe(
+    res=> accessToken=res
+  );
+    console.log("access",accessToken)
   if(accessToken){
     req = req.clone({
       setHeaders: {
-        Authorization: `Bearer ${userService.getAccessToken$}`
+        Authorization: `Bearer ${accessToken}`
       }
     });
   }

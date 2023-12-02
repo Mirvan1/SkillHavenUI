@@ -11,10 +11,13 @@ export const authGuard: CanActivateFn = (route, state) => {
   return firstValueFrom(
     userService.getAccessToken$.pipe(
       map(accessToken => {
+        debugger
+        console.log("Acces guard",accessToken)
         if(!accessToken){
           router.navigateByUrl('/login');
           return false;
         }
+        console.log("Guard rreturn true")
         return true;;
       })
     )

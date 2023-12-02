@@ -44,9 +44,12 @@ export class UserService {
   }
 
   login(request:LoginUserDto):Observable<string>{
-    return this.httpClient.post<string>(`${this.userEndpoint}/login`,request)
+    return this.httpClient.post(`${this.userEndpoint}/login`,request, {responseType: 'text'})
     .pipe(
-      tap(res=>this.accessToken.next(res))
+      tap(res=>{
+        debugger
+        this.accessToken.next(res)
+      })
     );
   }
 
