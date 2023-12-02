@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { SkillsService } from '../../services/skills.service';
-import { ListSkillerDtos } from '../../dtos/skills';
+import { ListSkillerDtos, PaginatedRequest, getAllSkillerDto } from '../../dtos/skills';
 import { BehaviorSubject } from 'rxjs';
 import { UserDto } from '../../dtos/user.dto';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,NgFor],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -44,18 +44,31 @@ export class HomeComponent implements OnInit{
 
 
   getAllSkiller(){
-    this.skillsService.getAllSkillers$.subscribe({
+    let request:getAllSkillerDto={
+      page:10,
+      pageSize:1,
+      searchByName:'id',
+      orderBy:true
+
+    };
+    this.skillsService.getAllSkillerQuery(request).subscribe({
       next:(res)=>{
         if(res){
           this.allSkillers=res;
         }
       },
-      error:(err)=>alert(err)
+      error:(err)=>alert(JSON.stringify(err))
     });
   }
 
   getSupervisors(){
-    this.skillsService.getSupervisors$.subscribe({
+    let request:PaginatedRequest={
+      page:10,
+      pageSize:1,
+      orderBy:true
+
+    };
+    this.skillsService.getSupervisors(request).subscribe({
       next:(res)=>{
         if(res){
           this.supervisors=res;
@@ -66,13 +79,18 @@ export class HomeComponent implements OnInit{
   }
 
   getConsultants(){
-    this.skillsService.getConsultants$.subscribe({
+    let request:PaginatedRequest={
+      page:10,
+      pageSize:1,
+      orderBy:true
+    };
+    this.skillsService.getConsultants(request).subscribe({
       next:(res)=>{
         if(res){
           this.consultants=res;
         }
       },
-      error:(err)=>alert(err)
+      error:(err)=>alert(JSON.stringify(err))
     });
   }
   }

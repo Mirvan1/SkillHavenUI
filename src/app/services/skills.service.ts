@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class SkillsService {
-  skillsEndpoint:string=`${environment.apiUrl}/skills`;
+  skillsEndpoint:string=`${environment.apiUrl}/Skill`;
 
   private getAllSkillersSubject=new BehaviorSubject<ListSkillerDtos | null>(null);
   getAllSkillers$=this.getAllSkillersSubject.asObservable();
@@ -55,7 +55,7 @@ export class SkillsService {
     .set('PageSize', request.pageSize || '')
     .set('OrderBy', request.orderBy || '');
 
-    return this.httpClient.get<ListSkillerDtos>(`${this.skillsEndpoint}/GetAllSkiller`,{params})
+    return this.httpClient.get<ListSkillerDtos>(`${this.skillsEndpoint}/GetConsultants`,{params})
     .pipe(
       tap(res=>this.getConsultantsSubject.next(res))
     );

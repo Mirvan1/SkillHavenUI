@@ -1,8 +1,8 @@
 export interface PaginatedRequest{
     page: number;
     pageSize: number;
-    orderBy: boolean;
-    orderByPropertname: string;
+    orderBy?: boolean;
+    orderByPropertname?: string;
 }
 
 
