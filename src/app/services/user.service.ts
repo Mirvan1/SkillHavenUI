@@ -14,15 +14,23 @@ export class UserService {
   private accessToken = new BehaviorSubject<string>('');
   getAccessToken$ = this.accessToken.asObservable();
 
-  private getUserInfos =new BehaviorSubject<UserDto | null>(null);
+  private getUserInfos =new BehaviorSubject<UserDto|null>(null);
   getUser$=this.getUserInfos.asObservable();
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient) {
+   
+   }
 
-  getUser(id:number):Observable<UserDto>{
-    return this.httpClient.get<UserDto>(`${this.userEndpoint}/${id}`)
+  getUser():Observable<UserDto>{
+    debugger
+    console.log("---------");
+    
+    return this.httpClient.get<UserDto>(`${this.userEndpoint}/get-logged-user`)
     .pipe(
-      tap(res=>this.getUserInfos.next(res))
+      tap(res=>{debugger;
+        console.log("GetUawe",res);
+        
+        this.getUserInfos.next(res)})
     );
   }
 
@@ -31,7 +39,7 @@ export class UserService {
   }
 
   updateUser(request:UserDto):Observable<boolean>{
-    return this.httpClient.put<boolean>(`${this.userEndpoint}/register`,request);
+    return this.httpClient.put<boolean>(`${this.userEndpoint}`,request);
   }
 
 

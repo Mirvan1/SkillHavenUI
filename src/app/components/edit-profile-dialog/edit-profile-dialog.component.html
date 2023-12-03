@@ -1,6 +1,141 @@
-<mat-dialog-content>
-    This is a dialog
-  </mat-dialog-content>
-  <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Okay</button>
+<div class="edit-header">
+    <p class="edit-header-title"> User Settings</p>
+    <button mat-dialog-title class="edit-header-button" (click)="dialogRef.close()" mat-icon-button >
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+  <mat-divider></mat-divider>
+  <mat-accordion class="edit-headers-align" multi>
+   
+    <mat-expansion-panel  [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Edit Profile
+        </mat-panel-title>
+        <mat-panel-description>
+          Edit your Profile
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description>
+
+      </mat-expansion-panel-header>
+            <ng-container *ngTemplateOutlet="editProfileTemplate">
+            </ng-container>
+
+    </mat-expansion-panel>
+
+
+
+    <mat-expansion-panel  >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Change Password
+        </mat-panel-title>
+        <mat-panel-description>
+          Change Account Password
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+   <ng-container  *ngTemplateOutlet="changePasswordTemplate"></ng-container>
+    </mat-expansion-panel>
+  
+
+  </mat-accordion>
+
+
+
+
+
+
+
+
+
+
+
+<ng-template #editProfileTemplate>
+  <!-- <h2 mat-dialog-title>Edit Profile</h2> -->
+<mat-divider></mat-divider>
+
+<form *ngIf="userProfile" [formGroup]="userProfile" (ngSubmit)="SubmitUserUpdate(userProfile)">
+    <mat-dialog-content class="grid-container">
+
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Picture</mat-label>
+            <input matInput formControlName="profilePicture">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role">
+              <mat-option value="3">Supervisor</mat-option>
+              <mat-option value="4">Consultant</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+</mat-dialog-content>
+<mat-divider></mat-divider>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close  (click)="dialogRef.close()">Close</button>
+    <button mat-raised-button cdkFocusInitial color="primary" type="submit">Save</button>
+
   </mat-dialog-actions>
+
+</form>
+</ng-template>
+
+
+<ng-template #changePasswordTemplate>
+    <mat-divider></mat-divider>
+
+
+    <form *ngIf="changePassword" [formGroup]="changePassword" (ngSubmit)="SubmitChangePassword(changePassword)">
+        <mat-dialog-content class="grid-container">
+    
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Old Password</mat-label>
+                <input matInput formControlName="oldPassword">
+              </mat-form-field>
+    
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>New Password</mat-label>
+                <input matInput formControlName="newPassword">
+              </mat-form-field>
+    
+    
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>New Confirm Password</mat-label>
+                <input matInput formControlName="newConfirmPassword">
+              </mat-form-field>
+
+    
+    
+    </mat-dialog-content>
+    <mat-divider></mat-divider>
+      <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close  (click)="dialogRef.close()">Close</button>
+        <button mat-raised-button cdkFocusInitial color="primary" type="submit">Change Password</button>
+    
+      </mat-dialog-actions>
+    
+    </form>
+
+
+</ng-template>

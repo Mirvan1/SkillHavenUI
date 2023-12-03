@@ -1,0 +1,41 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-gap: 16px; 
+    margin:2%;
+  }
+  
+  .form-field {
+    width: 100%; 
+  }
+
+  .edit-header-button{
+  }
+
+  .edit-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin:2%;
+
+  }
+
+  .edit-header-title{
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin: 2%;
+  }
+
+  .edit-action-buttons {
+    padding-bottom: 20px;
+  }
+  
+  .edit-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .edit-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+    margin-left: 8px;
+  }
+  

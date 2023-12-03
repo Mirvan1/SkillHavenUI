@@ -39,11 +39,12 @@ export class HomeComponent implements OnInit{
     private skillsService:SkillsService,
     private router:Router,
     public dialog: MatDialog
-  ){}
+  ){
+    this.userService.getUser().subscribe({});
+  }
 
 
   ngOnInit(): void {
-  //  this.getUser();
     this.getAllSkiller();
     //this.getConsultants();
     //this.getSupervisors();
@@ -130,9 +131,11 @@ export class HomeComponent implements OnInit{
 
 
   openEditProfile(){
-    const dialogRef = this.dialog.open(EditProfileDialogComponent, {restoreFocus: false});
+    const dialogRef = this.dialog.open(EditProfileDialogComponent, {restoreFocus: false,width:'40%',height:'90%'});
    // dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
-
+   dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+  });
   }
 
   logout=()=>this.router.navigateByUrl('/login');
