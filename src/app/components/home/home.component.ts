@@ -18,6 +18,8 @@ import {
   MatDialogContent,
 } from '@angular/material/dialog';
 import { EditProfileDialogComponent } from '../edit-profile-dialog/edit-profile-dialog.component';
+import { SkillerDetailDialogComponent } from '../skiller-detail-dialog/skiller-detail-dialog.component';
+import { ChatDialogComponent } from '../chat-dialog/chat-dialog.component';
 
 
 @Component({
@@ -38,8 +40,9 @@ export class HomeComponent implements OnInit{
     private userService:UserService,
     private skillsService:SkillsService,
     private router:Router,
-    public dialog: MatDialog
-  ){
+    public editProfileDialog: MatDialog,
+    public chatDialog: MatDialog
+      ){
     this.userService.getUser().subscribe({});
   }
 
@@ -131,12 +134,21 @@ export class HomeComponent implements OnInit{
 
 
   openEditProfile(){
-    const dialogRef = this.dialog.open(EditProfileDialogComponent, {restoreFocus: false,width:'40%',height:'90%'});
+    const dialogRef = this.editProfileDialog.open(EditProfileDialogComponent, {restoreFocus: false,width:'40%',height:'90%'});
    // dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
    dialogRef.afterClosed().subscribe(result => {
     console.log('The dialog was closed');
   });
   }
+
+  openChatDialog() {
+    const chatDialogRef = this.chatDialog.open(ChatDialogComponent,{restoreFocus: false,width:'60%',height:'90%'});
+
+    chatDialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
 
   logout=()=>this.router.navigateByUrl('/login');
 

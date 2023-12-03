@@ -1,0 +1,49 @@
+<div class="detail-header">
+    <p class="detail-header-title">Details</p>
+    <button mat-dialog-title class="detail-header-button" (click)="dialogRef.close()" mat-icon-button>
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<mat-divider></mat-divider>
+@if(skiller){
+<div  class="detail-container">
+    <div class="detail-photo">
+        <img [src]="skiller.profilePicture" [alt]="skiller.fullName">
+    </div>
+
+    <div class="detail-info">
+        <div class="detail-info-item">
+            <mat-label>{{ skiller.fullName }}</mat-label>
+        </div>
+        <div class="detail-info-item">
+            <mat-label>{{ role[skiller.role] }}</mat-label>
+        </div>
+        <div class="detail-info-item">
+            <mat-label>{{ skiller.experience }}-{{ skiller.rating }}</mat-label>
+        </div>
+        <div class="detail-info-item">
+            <section>
+                <bar-rating class="rating" [(rate)]="skiller.rating" [max]="5"></bar-rating>
+                <ngx-stars [readonly]="true" [color]="'yellow'" [size]="2" [maxStars]="5" [initialStars]="skiller.rating"></ngx-stars>
+
+            </section>
+        </div>
+    </div>
+</div>
+
+<div class="detail-description">
+    @if(skiller.role === role.Supervisor){
+    <mat-label body-2>
+        <h4>{{ skiller.supervisorDescription }}</h4>
+    </mat-label>
+}
+@else if(skiller.role === role.Consultant){
+    <mat-label body-2>
+        <h4>{{ skiller.description }}</h4>
+    </mat-label>   
+}
+</div>
+}
+<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close color="primary">Send Message</button>
+</mat-dialog-actions>

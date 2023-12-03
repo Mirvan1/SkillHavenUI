@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Chat</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>Users</h3>
+  <div class="chat-user-list">
+    @for( user of chatUsers.data; track user.connectionId){
+    <div class="chat-user">
+        {{user.userId}}-{{user.status}}
+
+        {{user.status}}-{{user.lastSeen}}
+    </div>
+    }
+  </div>
+
+<div class="chat-messages">
+<div class="chat-messages-content">
+
+    <button>Send</button>
+</div>
+</div>
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+</mat-dialog-actions>

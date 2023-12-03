@@ -17,7 +17,7 @@
 
         <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
 <mat-menu #menu="matMenu">
-    <button mat-menu-item ><mat-icon>supervisor_account</mat-icon>Open Chat</button>
+    <button mat-menu-item (click)="openChatDialog()" ><mat-icon>supervisor_account</mat-icon>Open Chat</button>
 
     <button mat-menu-item (click)="openEditProfile()"><mat-icon>supervisor_account</mat-icon>Edit Profile</button>
   <button mat-menu-item (click)="logout()"><mat-icon>settings_power</mat-icon>Logout</button>

@@ -1,0 +1,96 @@
+/* Import ngx-bar-rating themes */
+@import '../../../../node_modules/ngx-bar-rating/themes/br-default-theme.scss';
+@import '../../../../node_modules/ngx-bar-rating/themes/br-stars-theme.scss';
+
+/* Detail Container */
+.detail-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fafafa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Detail Photo */
+.detail-photo {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.detail-photo img {
+    width: 100%;
+    height: auto;
+}
+
+/* Detail Info */
+.detail-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.detail-info-item {
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #333;
+    margin: 10px 0;
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.detail-header-title {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #333;
+}
+.detail-header-button{
+margin: 0 !important;
+
+}
+/* Rating Bar Customization */
+.rating {
+    --br-font-size: 24px;
+    --br-active-color: #ff9800;
+    --br-inactive-color: #e0e0e0;
+}
+
+h4{
+    font-weight: 500;
+    text-justify: inter-character;
+}
+
+.detail-description {
+    background-color: #fafafa;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: #666;
+    height: 40%;
+}
+
+@media (max-width: 768px) {
+    .detail-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .detail-info {
+        width: 100%;
+    }
+}
