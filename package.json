@@ -21,6 +21,9 @@
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
     "@microsoft/signalr": "^8.0.0",
+    "angular-star-rating": "^7.0.0",
+    "ngx-bar-rating": "^6.0.0",
+    "ngx-stars": "^1.6.5",
     "rxjs": "~7.8.0",
     "zone.js": "~0.14.2"
   },

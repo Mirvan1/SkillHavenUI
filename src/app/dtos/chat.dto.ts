@@ -1,6 +1,7 @@
 import { PaginatedRequest } from "./skills";
+import { UserDto } from "./user.dto";
 
-export interface GetMessagesByUserQuery extends PaginatedRequest {
+export interface GetMessagesByUser extends PaginatedRequest {
     receiverUserId: number;
 }
 
@@ -26,6 +27,7 @@ export interface GetChatUserDto {
     profilePicture: string | null;
     connectionId: string | null;
     connectedTime: string | null;
+    fullName:string;
 }
 
 export interface GetOnlineUsersDto {
@@ -34,4 +36,30 @@ export interface GetOnlineUsersDto {
     lastSeen: string;
     status: string | null;
     profilePicture: string | null;
+}
+
+
+export interface ListChatMessagesDtos {
+    totalCount: number;
+    totalPages: number;
+    data: GetMessagesByUserResponse[];
+}
+
+export interface GetMessagesByUserResponse {
+ messageId  :number;
+ senderChatId  :number;
+ senderUserId  :number;
+ receiverChatId  :number;
+ receiverUserId  :number;
+ content  :string;
+ timestamp  :Date;
+ messageType:string ;
+ seenStatus :string;
+
+ senderProfilePicture :string
+
+receiverProfilePicture :string
+ senderStatus:string;
+    
+ receiverStatus :string
 }

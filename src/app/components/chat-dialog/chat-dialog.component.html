@@ -1,19 +1,36 @@
 <h2 mat-dialog-title>Chat</h2>
-<mat-dialog-content class="mat-typography">
-  <h3>Users</h3>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mat-typography chat-container">
   <div class="chat-user-list">
     @for( user of chatUsers.data; track user.connectionId){
-    <div class="chat-user">
-        {{user.userId}}-{{user.status}}
+    <div class="chat-user" >
 
-        {{user.status}}-{{user.lastSeen}}
+
+        <mat-card class="user-card" (click)="GetUserMesssage(user.userId)">
+            <mat-card-content>{{user.fullName}} 
+                <mat-icon class="status-icon" [class.online]="user.status ==='Online'"
+                    [class.offline]="user.status === 'Offline'"
+                >fiber_manual_record</mat-icon>
+            </mat-card-content>
+          </mat-card>
     </div>
     }
   </div>
 
 <div class="chat-messages">
 <div class="chat-messages-content">
+@if(getMessageByUser){
+    @for( message of getMessageByUser.data ; track message.messageId){
 
+    <p>
+     {{message.content}}
+      
+    </p>
+  }
+}
+@else{
+ <h4> Plase select any conversation</h4>
+}
     <button>Send</button>
 </div>
 </div>

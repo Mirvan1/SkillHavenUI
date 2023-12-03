@@ -27,6 +27,7 @@ export interface ListSkillerDtos {
 }
 
 export interface SkillerDto  {
+    userId:number;
     role: Role ;
     fullName: string;
     supervisorExpertise: string | null;
@@ -35,5 +36,5 @@ export interface SkillerDto  {
     profilePicture: string | null;
     experience: number | null;
     description: string | null;
-    rating: number | null;
+    rating: number ;
 }

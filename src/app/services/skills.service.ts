@@ -64,7 +64,7 @@ export class SkillsService {
 
   
   getSkiller(id:number):Observable<SkillerDto>{
-    return this.httpClient.get<SkillerDto>(`${this.skillsEndpoint}/${id}`);
+    return this.httpClient.get<SkillerDto>(`${this.skillsEndpoint}/GetSkiller/${id}`);
   }
 
 }
