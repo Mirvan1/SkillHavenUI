@@ -20,6 +20,7 @@ import {
 import { EditProfileDialogComponent } from '../edit-profile-dialog/edit-profile-dialog.component';
 import { SkillerDetailDialogComponent } from '../skiller-detail-dialog/skiller-detail-dialog.component';
 import { ChatDialogComponent } from '../chat-dialog/chat-dialog.component';
+import { ChatHubService } from '../../services/chat-hub.service';
 
 
 @Component({
@@ -41,9 +42,11 @@ export class HomeComponent implements OnInit{
     private skillsService:SkillsService,
     private router:Router,
     public editProfileDialog: MatDialog,
-    public chatDialog: MatDialog
+    public chatDialog: MatDialog,
+    public chatHubService:ChatHubService
       ){
     this.userService.getUser().subscribe({});
+    this.chatHubService.startConnection();
   }
 
 

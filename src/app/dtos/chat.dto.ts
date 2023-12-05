@@ -49,8 +49,10 @@ export interface GetMessagesByUserResponse {
  messageId  :number;
  senderChatId  :number;
  senderUserId  :number;
+ senderUsername:string;
  receiverChatId  :number;
  receiverUserId  :number;
+ receiverUsername:string;
  content  :string;
  timestamp  :Date;
  messageType:string ;

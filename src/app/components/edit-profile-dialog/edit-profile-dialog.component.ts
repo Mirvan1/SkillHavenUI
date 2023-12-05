@@ -43,12 +43,9 @@ constructor(
 
 
   ngOnInit() {
-    debugger
     this.userService.getUser$.subscribe({
       next:(res)=>{
-        debugger
           if(res){
-            debugger
             this.userProfile= this.fb.group({
               userId:new FormControl(res.userId),
               firstName:new FormControl(res.firstName),

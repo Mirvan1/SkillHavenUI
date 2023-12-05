@@ -2,9 +2,9 @@
 <mat-divider></mat-divider>
 <mat-dialog-content class="mat-typography chat-container">
   <div class="chat-user-list">
+    @if(chatUsers){
     @for( user of chatUsers.data; track user.connectionId){
     <div class="chat-user" >
-
 
         <mat-card class="user-card" (click)="GetUserMesssage(user.userId)">
             <mat-card-content>{{user.fullName}} 
@@ -15,29 +15,45 @@
           </mat-card>
     </div>
     }
+  }
   </div>
 
 <div class="chat-messages">
 <div class="chat-messages-content">
-@if(getMessageByUser){
-    @for( message of getMessageByUser.data ; track message.messageId){
+  @if((getUserMessage$ | async)?.data){
+        <div >
+          <h4 class="chat-messages-content-header-title">{{receiverUsername}}</h4>
+        </div>
+      <mat-divider></mat-divider>
+    @for( message of  (getUserMessage$ | async)?.data ; track message.messageId){
 
-    <p>
-     {{message.content}}
-      
-    </p>
+      <p [ngClass]="message.senderUserId === loggedUser?.userId?
+                    'chat-messages-sender':
+                    'chat-messages-receiver'">
+         {{message.content}}-{{message.senderUsername}} -{{message.receiverUsername}}  
+      <span class="chat-message-timestamp">{{message.timestamp | date :'short' }}</span>
+        </p>
   }
+  <form class="chat-message-send" (ngSubmit)="sendMessageToUser($event,receiverUserId,messageInput)">
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Send Message</mat-label>
+      <input matInput [(ngModel)]="messageInput" [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+    
+        <button mat-raised-button type="submit" >Send</button>
+  </form>
 }
-@else{
+
+
+<!-- @else{
  <h4> Plase select any conversation</h4>
-}
-    <button>Send</button>
+} -->
+
+
 </div>
 </div>
 
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
 </mat-dialog-actions>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
@@ -9,22 +9,38 @@ import { UserService } from '../../services/user.service';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDivider, MatDividerModule} from '@angular/material/divider'
+import { MatFormField, MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import { UserDto } from '../../dtos/user.dto';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChatHubService } from '../../services/chat-hub.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 @Component({
   selector: 'app-chat-dialog',
   standalone: true,
-  imports: [CommonModule,MatButtonModule, MatDividerModule,MatDialogModule,MatCardModule,MatIconModule],
+  imports: [CommonModule,MatInputModule,FormsModule ,MatButtonModule, MatDividerModule,MatDialogModule,MatCardModule,MatFormFieldModule,MatIconModule],
   templateUrl: './chat-dialog.component.html',
   styleUrl: './chat-dialog.component.css'
 })
 export class ChatDialogComponent implements OnInit {
+
    chatUsers!:ListChatUsersDtos;
-   getMessageByUser!:ListChatMessagesDtos;
+
+   getUserMessage$!:Observable<ListChatMessagesDtos | null>;
+   receiverUserId!:number;
+   receiverUsername!:string;
+   loggedUser!:UserDto|null;
+   messageInput:string='';
+
+
    constructor(
     private chatService:ChatService,
-    private userService:UserService
-   ){}
-
-
+    private userService:UserService,
+    private chatHub:ChatHubService
+   ){
+    this.userService.getUser$.subscribe(res=>{this.loggedUser=res});
+    this.getUserMessage$ = this.chatService.message$;
+  }
 
   ngOnInit(): void {
     let request:PaginatedRequest={
@@ -41,23 +57,48 @@ export class ChatDialogComponent implements OnInit {
       error:(err)=>alert(JSON.stringify(err))
     });
 
+
+
+    this.chatHub.addReceiveMessageListener((userId, message) => { 
+        if(this.receiverUserId){
+        this.chatHub.loadChatHistory(this.receiverUserId);
+        }
+    });
+
   }
 
   GetUserMesssage(userId:number){
     let messsages:GetMessagesByUser={
       page:1,
-      pageSize:10,
+      pageSize:100,
       orderBy:true,
       receiverUserId:userId
-    }
+    };
+
     this.chatService.getMessagesByUser(messsages).subscribe({
       next:(res)=>{
-        this.getMessageByUser=res;
-
-        console.log('getUsermessage',this.getMessageByUser)
+       this.receiverUserId=userId;
+       this.receiverUsername =res.data.find(x=>x.receiverUserId === this.receiverUserId)?.receiverUsername!;
+       
+        //console.log('getUsermessage',this.getMessageByUser)
+        
       },
       error:(err)=>alert(JSON.stringify(err))
     });
+  }
+
+
+  async sendMessageToUser(event:Event,userId:number,message:string){
+    event.preventDefault();
+    console.log("UserId",userId);
+    console.log("Message,",message);
+
+   await this.chatHub.sendMessageToClient(userId,message)
+    .then(()=>{
+      this.chatHub.loadChatHistory(userId);
+    })
+    .catch((err)=>alert(err));
+
   }
 
 }

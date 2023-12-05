@@ -54,8 +54,7 @@ h2.mat-dialog-title {
 .chat-messages {
     width:100%;
     overflow-y: auto;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     padding: 15px;
     background-color: #f9f9f9;
     margin-bottom: 20px;
@@ -69,12 +68,12 @@ h2.mat-dialog-title {
 }
 
 .chat-messages-content div {
-    padding: 10px;
-    border-radius: 20px;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 70%;
-    word-break: break-word;
+    /* padding: 10px; */
+    /* border-radius: 20px; */
+    /* background-color: white; */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    /* max-width: 70%;
+    word-break: break-word; */
 }
 
 /* Send Button Styling */
@@ -82,7 +81,7 @@ h2.mat-dialog-title {
     background-color: #4caf50;
     color: white;
     border: none;
-    padding: 10px 20px;
+   /* // padding: 10px 20px; */
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
@@ -90,6 +89,42 @@ h2.mat-dialog-title {
 
 .chat-messages-content button:hover {
     background-color: #43a047;
+}
+
+
+
+.chat-messages-content-header-title{
+    margin-left: 1%;
+    font-weight:400 !important;
+    font-size:1.2rem !important;
+}
+
+.chat-messages-receiver{
+    border:2%;
+    background-color:rgb(54, 54, 148);
+    color:white;
+    align-items: flex-start;
+    margin-left: auto;
+    padding: 5px ;
+    border-radius: 20%;
+    overflow-wrap: break-word; 
+
+}
+
+.chat-messages-sender{
+    border:2%;
+    background-color:rgb(53, 168, 53);
+    color:white;
+    float:right;
+    margin-right: auto;
+    padding: 10px ;
+    border-radius: 20%;
+    max-width: 50%;
+    overflow-wrap: break-word; 
+}
+.chat-messages-send-area{
+display: flex;
+flex-direction: row;
 }
 
 /* Chat Actions Styling */
@@ -124,4 +159,23 @@ mat-dialog-actions button:hover {
     mat-dialog-actions button {
         padding: 8px 15px;
     }
+}
+.chat-message-send{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.chat-message-send .form-field{
+    width: 70%;
+}
+
+.chat-message-send button{
+    margin-top: 2%;
+}
+
+.chat-message-timestamp{
+    font-size: 0.5rem;
+    float: right;
+    margin-top: 15px;
+
 }

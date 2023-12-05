@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environment/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { GetChatUserDto, GetMessagesByUser, ListChatMessagesDtos, ListChatUsersDtos } from '../dtos/chat.dto';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { PaginatedRequest } from '../dtos/skills';
 
 @Injectable({
@@ -10,7 +10,10 @@ import { PaginatedRequest } from '../dtos/skills';
 })
 export class ChatService {
   chatEndpoint:string=`${environment.apiUrl}/chat`;
-   
+
+   messageSubject = new BehaviorSubject<ListChatMessagesDtos | null>(null);
+  message$ = this.messageSubject.asObservable();
+  
   constructor(private httpClient:HttpClient) { }
 
   getMessagesByUser(request:GetMessagesByUser):Observable<ListChatMessagesDtos>{
@@ -20,7 +23,13 @@ export class ChatService {
     .set('OrderBy', request.orderBy || '')
     .set('ReceiverUserId', request.receiverUserId || '');
 
-    return this.httpClient.get<ListChatMessagesDtos>(`${this.chatEndpoint}/GetMessageByUser`,{params})
+    return this.httpClient.get<ListChatMessagesDtos>(`${this.chatEndpoint}/GetMessageByUser`,{params}).pipe(
+      tap((res)=>{
+        if(res){
+            this.messageSubject.next(res);
+        }
+      })
+    )
   }
 
   getAllChatUser(request:PaginatedRequest):Observable<ListChatUsersDtos>{

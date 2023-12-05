@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
       email:this.email,
       password:this.password
     };
-debugger
     this.userService.login(request).subscribe({
      next:(res)=>{
       this.router.navigateByUrl('/home');

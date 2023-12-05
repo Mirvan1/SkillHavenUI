@@ -22,12 +22,11 @@ export class UserService {
    }
 
   getUser():Observable<UserDto>{
-    debugger
     console.log("---------");
     
     return this.httpClient.get<UserDto>(`${this.userEndpoint}/get-logged-user`)
     .pipe(
-      tap(res=>{debugger;
+      tap(res=>{
         console.log("GetUawe",res);
         
         this.getUserInfos.next(res)})
@@ -55,7 +54,6 @@ export class UserService {
     return this.httpClient.post(`${this.userEndpoint}/login`,request, {responseType: 'text'})
     .pipe(
       tap(res=>{
-        debugger
         this.accessToken.next(res)
       })
     );
