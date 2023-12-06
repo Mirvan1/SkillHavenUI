@@ -29,6 +29,7 @@ export class ChatDialogComponent implements OnInit {
    getUserMessage$!:Observable<ListChatMessagesDtos | null>;
    receiverUserId!:number;
    receiverUsername!:string;
+   receiverStatus!:string;
    loggedUser!:UserDto|null;
    messageInput:string='';
 
@@ -78,8 +79,8 @@ export class ChatDialogComponent implements OnInit {
     this.chatService.getMessagesByUser(messsages).subscribe({
       next:(res)=>{
        this.receiverUserId=userId;
-       this.receiverUsername =res.data.find(x=>x.receiverUserId === this.receiverUserId)?.receiverUsername!;
-       
+       this.receiverUsername = res.data.find(x=>x.receiverUserId === this.receiverUserId)?.receiverUsername!;
+       this.receiverStatus= res.data.find(x=>x.receiverUserId === this.receiverUserId)?.receiverStatus!;
         //console.log('getUsermessage',this.getMessageByUser)
         
       },

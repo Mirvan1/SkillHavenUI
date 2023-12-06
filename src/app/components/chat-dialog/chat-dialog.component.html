@@ -7,7 +7,12 @@
     <div class="chat-user" >
 
         <mat-card class="user-card" (click)="GetUserMesssage(user.userId)">
-            <mat-card-content>{{user.fullName}} 
+          <div class="user-card-photo">
+            <img [src]="user.profilePicture" [alt]="user.fullName">
+
+          </div>
+            <mat-card-content class="user-card-content">{{user.fullName}} 
+
                 <mat-icon class="status-icon" [class.online]="user.status ==='Online'"
                     [class.offline]="user.status === 'Offline'"
                 >fiber_manual_record</mat-icon>
@@ -21,19 +26,26 @@
 <div class="chat-messages">
 <div class="chat-messages-content">
   @if((getUserMessage$ | async)?.data){
-        <div >
+        <div class="chat-messages-content-header">
           <h4 class="chat-messages-content-header-title">{{receiverUsername}}</h4>
+          <mat-icon class="status-icon" [class.online]="receiverStatus ==='Online'"
+          [class.offline]="receiverStatus === 'Offline'"
+      >fiber_manual_record</mat-icon>
         </div>
       <mat-divider></mat-divider>
+      <div class="chat-messages-content-container">
     @for( message of  (getUserMessage$ | async)?.data ; track message.messageId){
 
       <p [ngClass]="message.senderUserId === loggedUser?.userId?
                     'chat-messages-sender':
                     'chat-messages-receiver'">
+
          {{message.content}}-{{message.senderUsername}} -{{message.receiverUsername}}  
       <span class="chat-message-timestamp">{{message.timestamp | date :'short' }}</span>
         </p>
+      
   }
+</div>
   <form class="chat-message-send" (ngSubmit)="sendMessageToUser($event,receiverUserId,messageInput)">
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Send Message</mat-label>
@@ -44,16 +56,9 @@
   </form>
 }
 
-
-<!-- @else{
- <h4> Plase select any conversation</h4>
-} -->
-
-
+@else{
+ <h4 class="empty-message"> Please select any conversation</h4>
+} 
 </div>
 </div>
-
-
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-</mat-dialog-actions>
