@@ -12,6 +12,7 @@ export interface GetBlogDto {
     fullName: string;
     role: Role | null;
     email: string;
+    photoPath:string;
 }
 
 

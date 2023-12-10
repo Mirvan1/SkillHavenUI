@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { GetMessagesByUser,  ListChatMessagesDtos, ListChatUsersDtos } from '../../dtos/chat.dto';
 import { ChatService } from '../../services/chat.service';
@@ -37,7 +37,9 @@ export class ChatDialogComponent implements OnInit {
    constructor(
     private chatService:ChatService,
     private userService:UserService,
-    private chatHub:ChatHubService
+    private chatHub:ChatHubService,
+    public dialogRef: MatDialogRef<ChatDialogComponent>
+
    ){
     this.userService.getUser$.subscribe(res=>{this.loggedUser=res});
     this.getUserMessage$ = this.chatService.message$;

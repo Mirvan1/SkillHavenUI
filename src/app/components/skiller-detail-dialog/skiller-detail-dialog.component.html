@@ -23,14 +23,13 @@
         </div>
         <div class="detail-info-item">
             <section>
-                <bar-rating class="rating" [(rate)]="skiller.rating" [max]="5"></bar-rating>
                 <ngx-stars [readonly]="true" [color]="'yellow'" [size]="2" [maxStars]="5" [initialStars]="skiller.rating"></ngx-stars>
 
             </section>
         </div>
     </div>
 </div>
-
+<mat-divider></mat-divider>
 <div class="detail-description">
     @if(skiller.role === role.Supervisor){
     <mat-label body-2>

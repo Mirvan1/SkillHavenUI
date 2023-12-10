@@ -40,6 +40,21 @@
     </mat-expansion-panel>
   
 
+    <mat-expansion-panel  >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Delete Account
+        </mat-panel-title>
+        <mat-panel-description>
+          Delete Account Permenantly
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+   <ng-container  *ngTemplateOutlet="deleteAccountTemplate"></ng-container>
+    </mat-expansion-panel>
+
+
   </mat-accordion>
 
 
@@ -138,4 +153,15 @@
     </form>
 
 
+</ng-template>
+
+
+<ng-template #deleteAccountTemplate>
+  <mat-divider></mat-divider>
+@if(userId){
+    <mat-dialog-content class="delete-user-container">
+      <p>Delete Account</p>
+    <button mat-flat-button color="warn"(click)="deleteAccount(userId)" ><mat-icon>delete</mat-icon> Delete Account</button>
+  </mat-dialog-content>
+}
 </ng-template>

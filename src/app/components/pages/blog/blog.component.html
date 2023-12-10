@@ -1,0 +1,66 @@
+
+<div class="blog-container">
+
+<div class="blog-cards-container">
+@if(blogContent){
+    @for( blog of blogContent.data;track blog.blogId){
+<mat-card class="blog-card" (click)="getBlogDetail(blog.blogId)">
+    <img mat-card-image [src]="blog.photoPath" [alt]="blog.title"  >
+    <mat-card-content class="blog-content">
+      <div class="blog-content-creater">
+        <img mat-card-image [src]="blog.photoPath" [alt]="blog.title"  >
+        <span>{{blog.fullName}}</span>
+        <span> · </span>
+        <span>{{blog.publishDate}}</span>
+      </div>
+      <h2> {{blog.title}}</h2>
+      <mat-divider></mat-divider>
+      <span>
+        {{blog.content}}
+      </span>
+      <p>
+        Readed: {{blog.userId}} · Voted: {{blog.userId}}
+      </p>
+
+    </mat-card-content>
+    <!-- <mat-card-actions>
+      <button mat-button>Details</button>
+    </mat-card-actions> -->
+  </mat-card>
+}
+
+}
+
+</div>
+
+
+
+<div class="most-used-blog-container">
+  
+@if(blogContent){
+  <h2> </h2>
+  <div mat-subheader>Most Voted Blogs</div>
+
+<mat-list>
+  @for( blog of blogContent.data;track blog.blogId){
+
+  <mat-list-item>
+    <div >
+      <div matListItemLine class="most-used-blog-creater">
+        <img mat-card-image [src]="blog.photoPath" [alt]="blog.title"  >
+        <span>{{blog.fullName}}</span>
+      </div>
+
+
+    <div matListItemTitle class="most-used-blog-title">{{blog.title}}</div>
+     </div>
+  </mat-list-item>
+}
+
+</mat-list>
+}
+
+</div>
+
+</div>
+

@@ -1,0 +1,17 @@
+
+@if(blogContent){
+<owl-carousel-o [options]="customOptions" >
+    @for(blog of blogContent.data;track blog.blogId){
+    <ng-template  carouselSlide  >
+<div class="image-container">
+    <img (click)="getBlogFromCarousel(blog.blogId)"   src="../../../assets/cover.png" [alt]="blog.photoPath"/>
+    <div class="text-area">
+        <h3>Blog Title</h3>
+        <p>Blog Description</p>
+    </div>
+</div> 
+
+</ng-template>
+    }
+
+  </owl-carousel-o>}

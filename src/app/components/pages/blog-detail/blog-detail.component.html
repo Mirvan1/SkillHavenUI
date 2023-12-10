@@ -1,0 +1,34 @@
+@if(blog){
+<div class="blog-detail-page">
+    <h1>{{blog.title}}</h1>
+    <div class="blog-detail-creater">
+        <img src="../../../assets/cover.png" [alt]="blog.fullName" />
+        <p>{{blog.fullName}}</p>
+        <p>{{blog.publishDate}}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="blog-detail-info">
+        
+        <div class="blog-detail-vote-info">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+            <span style="align-items: center;">{{blog.userId}}</span>
+            <mat-icon>keyboard_arrow_right </mat-icon>
+        </div>
+
+        <div class="blog-detail-comments">
+            <p><mat-icon>comment</mat-icon>{{blog.userId}}</p>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="blog-detail-content">
+        <img src="../../../assets/cover.png" [alt]="blog.photoPath" height="300" />
+
+        <div class="blog-detail-text-content">
+            {{blog.content}}
+        </div>
+    </div>
+
+</div>
+
+}

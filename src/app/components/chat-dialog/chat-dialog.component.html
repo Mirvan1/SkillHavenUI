@@ -1,4 +1,10 @@
-<h2 mat-dialog-title>Chat</h2>
+<div class="chat-header">
+  <p class="chat-header-title"> Chat</p>
+  <button mat-dialog-title class="chat-action-button" (click)="dialogRef.close()" mat-icon-button >
+      <mat-icon>close</mat-icon>
+  </button>
+</div>
+
 <mat-divider></mat-divider>
 <mat-dialog-content class="mat-typography chat-container">
   <div class="chat-user-list">

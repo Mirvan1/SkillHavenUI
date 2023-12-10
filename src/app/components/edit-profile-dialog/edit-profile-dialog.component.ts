@@ -18,6 +18,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatDividerModule} from '@angular/material/divider';
 import { ChangePasswordDto, UserDto } from '../../dtos/user.dto';
 import {MatIconModule} from '@angular/material/icon';
+import { Router } from '@angular/router';
+import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -34,10 +36,13 @@ export class EditProfileDialogComponent implements OnInit {
 
   changePassword!:FormGroup;
 
+  userId:number|undefined;
 constructor(
   private fb: FormBuilder,
   private userService:UserService,
-  public dialogRef: MatDialogRef<EditProfileDialogComponent>
+  public dialogRef: MatDialogRef<EditProfileDialogComponent>,
+  private router:Router,
+  public dialog: MatDialog
 ){
 }
 
@@ -60,6 +65,8 @@ constructor(
               newPassword:new FormControl(''),
               newConfirmPassword:new FormControl('')
             });
+
+            this.userId=res.userId;
           }
       },
       error:(err)=>alert(err)
@@ -121,6 +128,20 @@ this.userService.updateUser(submitUserUpdateForm).subscribe({
       },
       error:(err)=>alert(err)
     });
+
+
+  }
+
+
+  deleteAccount(userId:number){
+
+    const dialogData = new ConfirmDialogModel("Confirm Action", userId);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
 
 
   }

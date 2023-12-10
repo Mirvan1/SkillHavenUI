@@ -9,18 +9,18 @@ import { PaginatedRequest } from '../dtos/skills';
   providedIn: 'root'
 })
 export class BlogService {
-  blogEndpoint:string=`${environment.apiUrl}/blogs`;
+  blogEndpoint:string=`${environment.apiUrl}/blog`;
 
   
   constructor(private httpClient:HttpClient) { }
 
-  getBlogs(request:PaginatedRequest){
+  getBlogs(request:PaginatedRequest):Observable<ListBlogDtos>{
     let params = new HttpParams()
     .set('Page', request.page || '')
     .set('PageSize', request.pageSize || '')
     .set('OrderBy', request.orderBy || '');
 
-    this.httpClient.get<ListBlogDtos>(this.blogEndpoint,{params});
+    return this.httpClient.get<ListBlogDtos>(this.blogEndpoint,{params});
   }
  
   getBlog(id:number):Observable<GetBlogDto>{

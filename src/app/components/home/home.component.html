@@ -9,54 +9,46 @@
     Empty list of users
   } -->
 
-  <p>
-    <mat-toolbar color="primary">
-      <mat-toolbar-row>
-        <span>Skill Haven</span>
-        <span class="toolbar-spacer"></span>
 
-        <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
-<mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="openChatDialog()" ><mat-icon>chat_bubble</mat-icon>Open Chat</button>
-
-    <button mat-menu-item (click)="openEditProfile()"><mat-icon>supervisor_account</mat-icon>Edit Profile</button>
-  <button mat-menu-item (click)="logout()"><mat-icon>settings_power</mat-icon>Logout</button>
-</mat-menu>
-      </mat-toolbar-row>
-    </mat-toolbar>
-  </p>
   
+<div class="home-container neu-element">
+  <div class="carousel">
+<app-blog-carousel></app-blog-carousel>
+  </div>
+  <div class="site-content">
+    <mat-tab-group  (selectedIndexChange)="onTabChange($event)">
 
-  <mat-tab-group  (selectedIndexChange)="onTabChange($event)">
-
-    <mat-tab label="All Skillers">
-        <ng-template matTabContent>
-
-        @if(activeTab===0 && allSkillers != null){
-        <app-skiller-card [skillerList]="allSkillers"></app-skiller-card> 
-        }   
-    </ng-template>
-
-    </mat-tab>
-
-    <mat-tab label="Consultants">
-        <ng-template matTabContent>
-
-        @if(activeTab===1 && consultants != null){
-        <app-skiller-card [skillerList]="consultants"></app-skiller-card> 
-        } 
-    </ng-template>
+      <mat-tab label="All Skillers">
+          <ng-template matTabContent>
   
-    </mat-tab>
-
-    <mat-tab label="Supervisors">
-        <ng-template matTabContent>
-
-        @if(activeTab===2 && supervisors != null){
-        <app-skiller-card [skillerList]="supervisors"></app-skiller-card>
-        }
-    </ng-template>
-
-    </mat-tab>
-  </mat-tab-group>
+          @if(activeTab===0 && allSkillers != null){
+          <app-skiller-card [skillerList]="allSkillers"></app-skiller-card> 
+          }   
+      </ng-template>
+  
+      </mat-tab>
+  
+      <mat-tab label="Consultants">
+          <ng-template matTabContent>
+  
+          @if(activeTab===1 && consultants != null){
+          <app-skiller-card [skillerList]="consultants"></app-skiller-card> 
+          } 
+      </ng-template>
+    
+      </mat-tab>
+  
+      <mat-tab label="Supervisors">
+          <ng-template matTabContent>
+  
+          @if(activeTab===2 && supervisors != null){
+          <app-skiller-card [skillerList]="supervisors"></app-skiller-card>
+          }
+      </ng-template>
+  
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+ 
   

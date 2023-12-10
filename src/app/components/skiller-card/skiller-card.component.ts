@@ -8,12 +8,13 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { SkillerDetailDialogComponent } from '../skiller-detail-dialog/skiller-detail-dialog.component';
 import { BarRatingModule } from 'ngx-bar-rating';
+import { NgxStarsModule } from 'ngx-stars';
 
 
 @Component({
   selector: 'app-skiller-card',
   standalone: true,
-  imports: [CommonModule,BarRatingModule,MatCardModule,MatDividerModule,MatProgressBarModule,MatButtonModule],
+  imports: [CommonModule,NgxStarsModule,MatCardModule,MatDividerModule,MatProgressBarModule,MatButtonModule],
   templateUrl: './skiller-card.component.html',
   styleUrl: './skiller-card.component.css'
 })

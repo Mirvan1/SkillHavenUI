@@ -1,14 +1,54 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { SkillerCardComponent } from './components/skiller-card/skiller-card.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialog } from '@angular/material/dialog';
+import { ChatHubService } from './services/chat-hub.service';
+import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
+import { EditProfileDialogComponent } from './components/edit-profile-dialog/edit-profile-dialog.component';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterLink,RouterOutlet,ChatDialogComponent,EditProfileDialogComponent,MatToolbarModule,MatIconModule,MatButtonModule, MatMenuModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'skill-haven-ui';
+
+constructor(
+  public router:Router,
+  public editProfileDialog: MatDialog,
+  public chatDialog: MatDialog,
+  public chatHubService:ChatHubService,
+  public userService:UserService
+){}
+
+
+
+openEditProfile(){
+  const dialogRef = this.editProfileDialog.open(EditProfileDialogComponent, {restoreFocus: false,width:'40%',height:'90%'});
+ // dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
+ dialogRef.afterClosed().subscribe(result => {
+  console.log('The dialog was closed');
+});
+}
+
+openChatDialog() {
+  const chatDialogRef = this.chatDialog.open(ChatDialogComponent,{restoreFocus: false,width:'60%',height:'90%'});
+
+  chatDialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
+}
+
+
+logout=()=>this.router.navigateByUrl('/login');
+
 }

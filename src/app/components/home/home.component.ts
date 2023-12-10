@@ -10,7 +10,7 @@ import { SkillerCardComponent } from '../skiller-card/skiller-card.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import {
   MatDialog,
   MatDialogActions,
@@ -21,12 +21,13 @@ import { EditProfileDialogComponent } from '../edit-profile-dialog/edit-profile-
 import { SkillerDetailDialogComponent } from '../skiller-detail-dialog/skiller-detail-dialog.component';
 import { ChatDialogComponent } from '../chat-dialog/chat-dialog.component';
 import { ChatHubService } from '../../services/chat-hub.service';
+import { BlogCarouselComponent } from '../blog-carousel/blog-carousel.component';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,NgFor,MatTabsModule,SkillerCardComponent,MatToolbarModule,MatIconModule,MatButtonModule, MatMenuModule],
+  imports: [CommonModule,NgFor,RouterModule,BlogCarouselComponent,MatTabsModule,SkillerCardComponent,MatToolbarModule,MatIconModule,MatButtonModule, MatMenuModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -40,9 +41,6 @@ export class HomeComponent implements OnInit{
   constructor(
     private userService:UserService,
     private skillsService:SkillsService,
-    private router:Router,
-    public editProfileDialog: MatDialog,
-    public chatDialog: MatDialog,
     public chatHubService:ChatHubService
       ){
     this.userService.getUser().subscribe({});
@@ -136,23 +134,5 @@ export class HomeComponent implements OnInit{
   }
 
 
-  openEditProfile(){
-    const dialogRef = this.editProfileDialog.open(EditProfileDialogComponent, {restoreFocus: false,width:'40%',height:'90%'});
-   // dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
-   dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
-  });
-  }
-
-  openChatDialog() {
-    const chatDialogRef = this.chatDialog.open(ChatDialogComponent,{restoreFocus: false,width:'60%',height:'90%'});
-
-    chatDialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-
-
-  logout=()=>this.router.navigateByUrl('/login');
-
+ 
   }
