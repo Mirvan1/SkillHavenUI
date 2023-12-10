@@ -21,7 +21,7 @@ export class BlogComponent implements OnInit{
 
   request:PaginatedRequest={
     page:1,
-    pageSize:10,
+    pageSize:40,
     orderBy:true,
   };
   blogContent!:ListBlogDtos;

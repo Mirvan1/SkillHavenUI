@@ -1,0 +1,15 @@
+
+<form [formGroup]="blogForm" (ngSubmit)="submitForm()">
+
+    <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title">
+      </mat-form-field>
+
+
+        <mat-label>Content</mat-label>
+      <angular-editor placeholder="Write blog content here.." formControlName="content" [config]="config"></angular-editor>
+
+      <button mat-button cdkFocusInitial color="primary" type="submit">Save</button>
+
+</form>

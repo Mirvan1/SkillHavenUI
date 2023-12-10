@@ -15,8 +15,7 @@
       </div>
       <h2> {{blog.title}}</h2>
       <mat-divider></mat-divider>
-      <span>
-        {{blog.content}}
+      <span [innerHTML]="blog.content">
       </span>
       <p>
         Readed: {{blog.userId}} · Voted: {{blog.userId}}
@@ -44,7 +43,7 @@
 <mat-list>
   @for( blog of blogContent.data;track blog.blogId){
 
-  <mat-list-item>
+  <mat-list-item class="most-used-blog-item">
     <div >
       <div matListItemLine class="most-used-blog-creater">
         <img mat-card-image [src]="blog.photoPath" [alt]="blog.title"  >
