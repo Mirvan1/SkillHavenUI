@@ -1,5 +1,6 @@
-
+<div class="blog-edit">
 <form [formGroup]="blogForm" (ngSubmit)="submitForm()">
+  <h3> {{ crudType === 1 ? 'Add' : 'Update' }} Blog</h3>
 
     <mat-form-field appearance="outline" class="form-field">
         <mat-label>Title</mat-label>
@@ -10,6 +11,7 @@
         <mat-label>Content</mat-label>
       <angular-editor placeholder="Write blog content here.." formControlName="content" [config]="config"></angular-editor>
 
-      <button mat-button cdkFocusInitial color="primary" type="submit">Save</button>
+      <button mat-button     color="primary" type="submit">Save</button>
 
 </form>
+</div>

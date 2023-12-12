@@ -1,3 +1,11 @@
+.blog-edit{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+  font-size: 16px;
+  line-height: 1.6;
+  font-family: 'Roboto', sans-serif;
+  margin: 2%;
+}
+
 .form-field {
     width: 100%; 
   }
@@ -5,5 +13,5 @@
   form{
     display: flex;
     flex-direction: column;
-    
+    padding: 5%;
   }
