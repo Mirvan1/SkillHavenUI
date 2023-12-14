@@ -1,34 +1,43 @@
 @if(blog){
-<div class="blog-detail-page">
+<div class="blog-detail-page" [ngClass]="openCommentDrawer?'comment-background':''">
     <h1>{{blog.title}}</h1>
     <div class="blog-detail-creater">
         <img src="../../../assets/cover.png" [alt]="blog.fullName" />
-        <p>{{blog.fullName}}</p>
+        <p>{{blog.fullName}} </p>
         <p>{{blog.publishDate}}</p>
     </div>
     <mat-divider></mat-divider>
     <div class="blog-detail-info">
         
         <div class="blog-detail-vote-info">
-            <mat-icon>keyboard_arrow_left</mat-icon>
-            <span style="align-items: center;">{{blog.userId}}</span>
-            <mat-icon>keyboard_arrow_right </mat-icon>
+            <mat-icon (click)="vote(blog.blogId,false)">keyboard_arrow_left</mat-icon>
+            <span style="align-items: center;">{{blog.vote}}</span>
+            <mat-icon (click)="vote(blog.blogId,true)">keyboard_arrow_right </mat-icon>
         </div>
 
-        <div class="blog-detail-comments">
+        <div class="blog-detail-comments" (click)="openCommentDrawer=!openCommentDrawer"   >
             <p><mat-icon>comment</mat-icon>{{blog.userId}}</p>
         </div>
+
+        @if(blog.userId == (userService.getUser$ |async)?.userId){
+        <div class="blog-detail-comments">
+            <p (click)="updateBlog(blog.blogId)"><mat-icon>comment</mat-icon>Update</p>
+        </div>
+    }
     </div>
     <mat-divider></mat-divider>
 
     <div class="blog-detail-content">
         <img src="../../../assets/cover.png" [alt]="blog.photoPath" height="300" />
 
-        <div class="blog-detail-text-content">
-            {{blog.content}}
+        <div [innerHTML]="blog.content" class="blog-detail-text-content">
         </div>
     </div>
 
 </div>
 
+
+@if(openCommentDrawer){
+    <app-blog-detail-comment [blogId]="blog.blogId" [isDrawerOpen]="openCommentDrawer"></app-blog-detail-comment>
+}
 }

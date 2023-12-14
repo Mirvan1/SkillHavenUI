@@ -27,6 +27,22 @@
         }
 
     </div>
+
+    <div class="add-comment-sidenav-content"> 
+
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Add Comment</mat-label>
+            <input matInput type="text" [(ngModel)]="addCommentValue">
+            @if (addCommentValue) {
+              <button matSuffix mat-icon-button aria-label="Clear" (click)="addCommentValue=''">
+                <mat-icon>close</mat-icon>
+              </button>
+            }
+          </mat-form-field>
+             <button type="button" mat-raised-button (click)="addComment(addCommentValue)">
+        Send
+      </button>
+    </div>
 </mat-sidenav-content>
 
   

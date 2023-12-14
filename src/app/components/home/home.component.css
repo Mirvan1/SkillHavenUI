@@ -3,6 +3,11 @@
     scroll-behavior: smooth;
 }
 
+.search-results {
+  overflow: hidden;
+
+}
+
   .home-container {
     max-width: 1200px; /* Maximum width of the container */
     margin: 0 auto; /* Centers the container */
@@ -12,6 +17,10 @@
     font-size: 16px;
     line-height: 1.6;
     font-family: 'Roboto', sans-serif;
+ }
+
+mat-tab{
+  overflow-y: hidden;
 
 }
 

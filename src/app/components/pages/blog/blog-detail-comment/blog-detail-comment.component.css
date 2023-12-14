@@ -12,10 +12,11 @@
 }
 
 mat-card-avatar {
-    width: 40px; /* Adjust size as needed */
+    width: 40px;
+    /* Adjust size as needed */
     height: 40px;
     border-radius: 50%;
-margin-top:4% !important;
+    margin-top: 4% !important;
 }
 
 .text-content {
@@ -40,34 +41,49 @@ margin-top:4% !important;
     color: gray;
 }
 
+.add-comment-sidenav-content {
+    width: 100%;
+    margin-left: 2%;
+}
 
-mat-sidenav-container{
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+.add-comment-sidenav-content .form-field {
+    width: 70%;
+    margin-right: 5%;
+}
+
+mat-sidenav-container {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow */
 
 }
 
 .comment-container {
     z-index: 2000;
     position: absolute;
-     top: 9%;
+    top: 9%;
     left: 0;
     width: 40%;
     height: 100vh;
- 
-  }
- 
-  
-  .comment-sidenav-content {
+
+}
+
+
+.comment-sidenav-content {
     display: flex;
-    height: 100%;
-flex-direction: column;
-margin: 2%;
-  }
-  /* mat-sidenav-content{
+    height: 80%;
+    flex-direction: column;
+    margin: 2%;
+    overflow-y: auto;
+}
+
+.mat-drawer-content {
+    overflow-y: scroll;
+    overflow-x: hidden !important;
+}
+
+/* mat-sidenav-content{
     padding: 12px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   } */
-
-  

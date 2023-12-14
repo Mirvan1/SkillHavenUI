@@ -1,5 +1,29 @@
+<div class="blog-toolbar">
+  <div>
+  <button mat-stroked-button color="primary" (click)="gotoAddBlog()" > <mat-icon>plus_one</mat-icon> Add Blog</button>
+</div>
+<div>
+  <mat-form-field appearance="outline" class="filter-form-field">
+    <mat-label>Search</mat-label>
+    <input matInput type="text" [(ngModel)]="filterValue">
+       <button matSuffix mat-icon-button aria-label="Search" (click)="filterByContent(filterValue)">
+        <mat-icon>search</mat-icon>
+      </button>
+     <!-- <button mat-stroked-button color="primary" (click)="filterByContent(filterValue)" > <mat-icon>filter_alt</mat-icon> Filter</button> -->
 
-<div class="blog-container">
+  </mat-form-field>
+</div>
+
+</div>
+
+
+
+<div
+infiniteScroll [infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="500"
+(scrolled)="onScroll()"
+[scrollWindow]="true"
+class="blog-container">
 
 <div class="blog-cards-container">
 @if(blogContent){

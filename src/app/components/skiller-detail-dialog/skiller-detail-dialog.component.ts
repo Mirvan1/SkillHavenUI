@@ -18,6 +18,7 @@ import { BarRatingModule } from 'ngx-bar-rating';
 import {MatDivider, MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import { NgxStarsModule } from 'ngx-stars';
+import { SkillerCardComponent } from '../skiller-card/skiller-card.component';
 
 
 @Component({

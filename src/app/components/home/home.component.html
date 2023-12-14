@@ -11,7 +11,18 @@
 
 
   
-<div class="home-container neu-element">
+<div infiniteScroll [infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="500"
+(scrolled)="onScroll()"
+[scrollWindow]="true"
+ class="home-container neu-element">
+
+
+  <div
+  
+  >
+
+
   <div class="carousel">
 <app-blog-carousel></app-blog-carousel>
   </div>
@@ -22,7 +33,13 @@
           <ng-template matTabContent>
   
           @if(activeTab===0 && allSkillers != null){
-          <app-skiller-card [skillerList]="allSkillers"></app-skiller-card> 
+       <app-skiller-card-toolbar (searchEmitter)="setSearchVal($event)"></app-skiller-card-toolbar>
+            <app-skiller-card
+            [skillerList]="allSkillers"
+            [pageSize]="defaultPageSize"
+            [page]="defaultPage"
+            (pageChanged)="allSkillerChanged($event)"
+           ></app-skiller-card> 
           }   
       </ng-template>
   
@@ -32,7 +49,14 @@
           <ng-template matTabContent>
   
           @if(activeTab===1 && consultants != null){
-          <app-skiller-card [skillerList]="consultants"></app-skiller-card> 
+            <app-skiller-card-toolbar (searchEmitter)="setSearchVal($event)"></app-skiller-card-toolbar>
+
+          <app-skiller-card
+           [skillerList]="consultants"
+           [pageSize]="defaultPageSize"
+            [page]="defaultPage"
+            (pageChanged)="getConsultantsChanged($event)"
+           ></app-skiller-card> 
           } 
       </ng-template>
     
@@ -42,13 +66,26 @@
           <ng-template matTabContent>
   
           @if(activeTab===2 && supervisors != null){
-          <app-skiller-card [skillerList]="supervisors"></app-skiller-card>
+            <app-skiller-card-toolbar (searchEmitter)="setSearchVal($event)"></app-skiller-card-toolbar>
+
+          <app-skiller-card 
+          [skillerList]="supervisors"
+          [pageSize]="defaultPageSize"
+          [page]="defaultPage"
+          (pageChanged)="getSupervisorsChanged($event)"
+
+          ></app-skiller-card>
           }
       </ng-template>
   
       </mat-tab>
+
     </mat-tab-group>
   </div>
+
+
+</div>
+
 </div>
  
   

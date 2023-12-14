@@ -1,27 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GetBlogDto } from '../../../dtos/blog';
+import { GetBlogDto, VoteBlogDto } from '../../../dtos/blog';
 import { BlogService } from '../../../services/blog.service';
 import { UserService } from '../../../services/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {  MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDrawer } from '@angular/material/sidenav';
+import { BlogDetailCommentComponent } from '../blog/blog-detail-comment/blog-detail-comment.component';
 
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [CommonModule,MatDividerModule,MatIconModule],
+  imports: [CommonModule,MatDividerModule,MatIconModule,BlogDetailCommentComponent],
   templateUrl: './blog-detail.component.html',
   styleUrl: './blog-detail.component.css'
 })
 export class BlogDetailComponent implements OnInit {
   blogId!:number;
   blog!:GetBlogDto;
+  openCommentDrawer=false;
 
   constructor(
     private router:ActivatedRoute,
+    private redirectRoute:Router,
     private blogService:BlogService,
-    private userService:UserService
+    public userService:UserService
   ){
     this.blogId=router.snapshot.params['id'];
     debugger
@@ -41,4 +45,27 @@ export class BlogDetailComponent implements OnInit {
     })
   }
   }
+
+
+  updateBlog(blogId:number){
+    this.redirectRoute.navigate(['update-blog',blogId]);
+  }
+
+
+  vote(blogId:number,isIncreased:boolean){
+    let request:VoteBlogDto={
+      isIncreased:isIncreased,
+      blogId:blogId
+    }
+    this.blogService.voteBlog(request).subscribe({
+      next:(res)=>{
+        this.blog.vote=res;
+          console.log("Unvote",res);
+      },
+      error:(err)=>alert(JSON.stringify(err))
+    })
+  }
+
+  
+
 }

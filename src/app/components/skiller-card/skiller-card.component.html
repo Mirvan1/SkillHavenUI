@@ -1,4 +1,18 @@
+@if(skillerList){
+  <!-- <mat-paginator #paginator [length]="skillerList.totalCount"
+  [pageSize]="pageSize"
+  [pageIndex]="page-1"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  aria-label="Select page"
+  [disabled]="false"
+  (page)="pagination($event)"
+  width="100">
+</mat-paginator> -->
+
+
 <div class="skiller-area">
+
+
 @for( skiller of skillerList.data ; track skiller.email){
     <mat-card class="skiller-card">
         <mat-card-header>
@@ -31,8 +45,9 @@
         </mat-card-footer>
       </mat-card>
 }
-@empty {
-    <p> Did not find any skiller </p>
-}
-
 </div>
+}
+ 
+@else {
+  <p> Did not find any skiller </p>
+}
