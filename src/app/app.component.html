@@ -1,3 +1,11 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
 
 @if((userService.getUser$ | async)?.userId){
 <p>
@@ -12,6 +20,7 @@
 <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="openChatDialog()" ><mat-icon>chat_bubble</mat-icon>Open Chat</button>
 
+    <!-- <button mat-menu-item (click)="goEditBlogPage()" ><mat-icon>chat_bubble</mat-icon> Write Blog</button> -->
     <button mat-menu-item (click)="openEditProfile()"><mat-icon>supervisor_account</mat-icon>Edit Profile</button>
   <button mat-menu-item (click)="logout()"><mat-icon>settings_power</mat-icon>Logout</button>
 </mat-menu>

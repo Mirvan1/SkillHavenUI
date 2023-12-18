@@ -4,14 +4,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BlogService } from '../../services/blog.service';
 import { PaginatedRequest } from '../../dtos/skills';
 import { ListBlogDtos } from '../../dtos/blog';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { JsonHubProtocol } from '@microsoft/signalr';
+import { ShortStrPipe } from '../../utils/short-str.pipe';
 
 @Component({
   selector: 'app-blog-carousel',
   standalone: true,
-  imports: [CommonModule,RouterLink,CarouselModule,NgFor ],
+  imports: [CommonModule,RouterLink,CarouselModule,NgFor,ShortStrPipe ],
   templateUrl: './blog-carousel.component.html',
   styleUrl: './blog-carousel.component.css'
 })
@@ -47,11 +48,13 @@ export class BlogCarouselComponent  implements OnInit {
     page:1,
     pageSize:10,
     orderBy:true,
+    orderByPropertname:'PublishDate'
   };
   blogContent!:ListBlogDtos;
-  constructor(private blogService:BlogService){
-    
-  }
+  constructor(
+    private blogService:BlogService,
+    private router:Router
+    ){ }
 
   ngOnInit(): void {
 
@@ -72,10 +75,10 @@ export class BlogCarouselComponent  implements OnInit {
     })
   }
 
-  getBlogFromCarousel(e:any){
-    alert(JSON.stringify(e));
-    console.log(JSON.stringify(e));
-    
+  getBlogFromCarousel(blogId:number){
+    alert(JSON.stringify(blogId));
+    console.log(JSON.stringify(blogId));
+    this.router.navigate(['blog-detail',blogId]);
   }
 
 }

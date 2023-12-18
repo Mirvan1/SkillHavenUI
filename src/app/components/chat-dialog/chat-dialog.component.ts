@@ -1,6 +1,6 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit,Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { GetMessagesByUser,  ListChatMessagesDtos, ListChatUsersDtos } from '../../dtos/chat.dto';
 import { ChatService } from '../../services/chat.service';
@@ -15,6 +15,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatHubService } from '../../services/chat-hub.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { ErrorResult } from '../../utils/global.dto';
 @Component({
   selector: 'app-chat-dialog',
   standalone: true,
@@ -38,9 +40,14 @@ export class ChatDialogComponent implements OnInit {
     private chatService:ChatService,
     private userService:UserService,
     private chatHub:ChatHubService,
-    public dialogRef: MatDialogRef<ChatDialogComponent>
-
+    public dialogRef: MatDialogRef<ChatDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) data:any,
+    private toastr: ToastrService
    ){
+    if(data){
+      this.receiverUserId = data.userId;
+      this.receiverUsername = data.fullName
+    }
     this.userService.getUser$.subscribe(res=>{this.loggedUser=res});
     this.getUserMessage$ = this.chatService.message$;
   }
@@ -57,7 +64,7 @@ export class ChatDialogComponent implements OnInit {
           this.chatUsers=res;
         }
       },
-      error:(err)=>alert(JSON.stringify(err))
+      error:(err:ErrorResult)=>this.toastr.error(err.Message,`Failed with ${err.StatusCode}`)
     });
 
 
@@ -100,7 +107,7 @@ export class ChatDialogComponent implements OnInit {
     .then(()=>{
       this.chatHub.loadChatHistory(userId);
     })
-    .catch((err)=>alert(err));
+    .catch((err:ErrorResult)=>this.toastr.error(err.Message,`Failed with ${err.StatusCode}`));
 
   }
 

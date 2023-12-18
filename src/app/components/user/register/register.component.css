@@ -1,0 +1,29 @@
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-mdc-form-field {
+    margin-top: 16px;
+  }
+
+  .register-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+
+.photo-input{
+    margin:15px 0;
+    padding: 10px 20px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.photo-input:hover{
+    border: 1px solid #0275d8;
+}
+
+.photo-input mat-label{
+    margin-right:10px
+}

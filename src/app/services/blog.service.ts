@@ -18,8 +18,12 @@ export class BlogService {
     let params = new HttpParams()
     .set('Page', request.page || '')
     .set('PageSize', request.pageSize || '')
-    .set('OrderBy', request.orderBy || '');
-
+    .set('OrderBy', String(request.orderBy) || '')
+    .set('OrderByPropertname', request.orderByPropertname || '');
+if(request.filter){
+    params.set('Filter', request.filter!   );
+    };    ;
+debugger
     return this.httpClient.get<ListBlogDtos>(this.blogEndpoint,{params});
   }
  
@@ -33,15 +37,17 @@ export class BlogService {
     .set('PageSize', request.pageSize || '')
     .set('OrderBy', request.orderBy || '');
 
-    return this.httpClient.get<ListBloCommentsDtos>(`${this.blogEndpoint}/`,{params});
+    // return this.httpClient.get<ListBloCommentsDtos>(`http://localhost:5095/comments/${request.blogId}`,{params});
+    return this.httpClient.post<ListBloCommentsDtos>(`http://localhost:5095/comments/`,request);
+
   }
 
   createBlog(request:CreateBlogDto):Observable<boolean>{
-    return this.httpClient.post<boolean>(this.blogEndpoint,request);
+    return this.httpClient.post<boolean>(`${this.blogEndpoint}/`,request);
   }
 
   createBlogComment(request:CreateBlogCommentDto):Observable<boolean>{
-   return this.httpClient.post<boolean>(`${this.blogEndpoint}/commment/create`,request);
+   return this.httpClient.post<boolean>(`http://localhost:5095/commment/create`,request);
   }
 
   updateBlog(request:UpdateBlogDto):Observable<boolean>{
@@ -58,6 +64,6 @@ export class BlogService {
 
 
   voteBlog(request:VoteBlogDto){
-    return this.httpClient.post<number>(`${this.blogEndpoint}/vote`,request);
+    return this.httpClient.put<number>(`http://localhost:5095/vote`,request);
   }
 }

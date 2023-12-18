@@ -5,11 +5,18 @@ import { LoginUserDto } from '../../../dtos/user.dto';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StreamInvocationMessage } from '@microsoft/signalr';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { ToastrService } from 'ngx-toastr';
+import { ErrorResult } from '../../../utils/global.dto';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,MatCardModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatIconModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -18,7 +25,8 @@ export class LoginComponent implements OnInit {
   password:string;
   constructor(
     private userService:UserService,
-    private router:Router
+    private router:Router,
+    private toastr:ToastrService
     ){
       this.email='deneme6@gmail.com';
       this.password='12345';
@@ -40,7 +48,7 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('/home');
       console.log(JSON.stringify(res))
     },
-     error:(err)=>alert(JSON.stringify(err))
+     error:(err:ErrorResult)=>this.toastr.error(err.DetailMessage,`Failed ${err.StatusCode}`)
     }
     )
   }

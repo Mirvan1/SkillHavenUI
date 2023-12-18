@@ -8,11 +8,12 @@ import {  MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer } from '@angular/material/sidenav';
 import { BlogDetailCommentComponent } from '../blog/blog-detail-comment/blog-detail-comment.component';
+import { ToDatePipe } from '../../../utils/to-date.pipe';
 
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [CommonModule,MatDividerModule,MatIconModule,BlogDetailCommentComponent],
+  imports: [CommonModule,MatDividerModule,MatIconModule,BlogDetailCommentComponent,ToDatePipe],
   templateUrl: './blog-detail.component.html',
   styleUrl: './blog-detail.component.css'
 })

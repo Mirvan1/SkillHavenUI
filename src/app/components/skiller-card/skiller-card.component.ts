@@ -11,6 +11,7 @@ import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxStarsModule } from 'ngx-stars';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ChatDialogComponent } from '../chat-dialog/chat-dialog.component';
 
 
 @Component({
@@ -24,11 +25,12 @@ export class SkillerCardComponent {
   @Input() skillerList!: ListSkillerDtos;
   @Input() pageSize: number = 7;
   @Input() page: number = 1;
-  @Output() pageChanged: EventEmitter<any>=new EventEmitter<any>();
+ // @Output() pageChanged: EventEmitter<any>=new EventEmitter<any>();
 
   role = Role;
   constructor(
-    public detailDialog: MatDialog
+    public detailDialog: MatDialog,
+    public chatDialog: MatDialog,
   ) { }
 
 
@@ -36,6 +38,18 @@ export class SkillerCardComponent {
     this.detailDialog.open(SkillerDetailDialogComponent, {
       data: userId,
       restoreFocus: false, width: '60%', height: '90%'
+    });
+  }
+
+  openChatDialog(userId:number,fullName:string) {
+    const chatDialogRef = this.chatDialog.open(ChatDialogComponent,{
+      data:{userId:userId,fullName:fullName},
+      restoreFocus: false,
+      width:'60%',
+      height:'90%'});
+  
+    chatDialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
     });
   }
 

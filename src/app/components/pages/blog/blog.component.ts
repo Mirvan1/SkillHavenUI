@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PaginatedRequest } from '../../../dtos/skills';
+import { PaginatedRequest, SortResultDto } from '../../../dtos/skills';
 import { BlogService } from '../../../services/blog.service';
 import { ListBlogDtos } from '../../../dtos/blog';
 import { MatCardModule } from '@angular/material/card';
@@ -13,26 +13,40 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ToDatePipe } from '../../../utils/to-date.pipe';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatRippleModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [CommonModule,InfiniteScrollModule,MatFormFieldModule, MatInputModule, FormsModule,MatIconModule,MatCardModule,MatDividerModule, MatButtonModule,MatListModule],
+  imports: [CommonModule,MatSlideToggleModule,MatRippleModule,MatSelectModule,MatMenuModule, InfiniteScrollModule,MatFormFieldModule, ToDatePipe,MatInputModule, FormsModule,MatIconModule,MatCardModule,MatDividerModule, MatButtonModule,MatListModule],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.css'
 })
 export class BlogComponent implements OnInit{
   defaultPageSize:number=10;
   defaultPage:number=1;
+  filterValue!:string
+  defaultOrderByName:string='PublishDate';
+  orderBy:boolean=true;
+  selectedSort?:string;
+   sortingValues=[
+    {value:'PublishDate',text:'Publish Date'},
+    {value:'Vote',text:'Vote'}
+  ]
 
   request:PaginatedRequest={
     page:this.defaultPage,
     pageSize:this.defaultPageSize,
     orderBy:true,
+    orderByPropertname:this.defaultOrderByName,
+    filter:this.filterValue
   };
   blogContent!:ListBlogDtos;
 
-  filterValue:string=''
 
   constructor(
     private router:Router,
@@ -81,4 +95,16 @@ export class BlogComponent implements OnInit{
       this.getBlogs(this.request);
     }
 
+    sort(){
+      debugger
+      let sortResult:SortResultDto={
+        column:this.selectedSort,
+        orderBy:this.orderBy
+      };
+      this.request.orderBy=this.orderBy;
+      this.request.orderByPropertname=this.selectedSort; 
+      this.getBlogs(this.request);
+
+    }
+  
 }

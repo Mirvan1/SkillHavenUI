@@ -1,3 +1,40 @@
 .toolbar-spacer {
     flex: 1 1 auto;
   }
+
+  /* Basic styles for the toolbar */
+mat-toolbar {
+   background-color: #3f51b5; /* Primary color */
+  color: white;
+}
+
+/* Styles for the toolbar content */
+mat-toolbar-row {
+  display: flex;
+  align-items: center;
+}
+
+/* Styles for the span wrapping the links */
+mat-toolbar-row span {
+  margin-right: 10px; /* Adjust as needed */
+}
+
+/* Basic styles for the links */
+a[mat-menu-item] {
+  color: white; /* Text color */
+  text-decoration: none; /* Removes underline */
+  padding: 10px; /* Adds some padding around the text */
+  border-radius: 4px; /* Rounded corners for the hover effect */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Hover effect */
+a[mat-menu-item]:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Slight white overlay on hover */
+}
+
+/* Active link styles */
+.active-link {
+  background-color: rgba(255, 255, 255, 0.3); /* More pronounced white overlay for active link */
+  border-radius: 4px; /* Ensure rounded corners for active link */
+}

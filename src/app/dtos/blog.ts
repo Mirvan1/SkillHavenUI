@@ -13,6 +13,7 @@ export interface GetBlogDto {
     role: Role | null;
     email: string;
     photoPath:string;
+    vote:number;
 }
 
 
@@ -21,7 +22,7 @@ export interface UpdateBlogDto {
     title: string;
     content: string;
     isPublished: boolean;
-    updateDate: string;
+    updateDate?: Date;
 }
 
 
@@ -29,7 +30,7 @@ export interface CreateBlogCommentDto {
     blogId: number;
     commentTitle: string;
     commentContent: string;
-    publishDate: string;
+    publishDate: Date;
     isPublished: boolean;
 }
 export interface ListBlogDtos {
@@ -42,7 +43,7 @@ export interface ListBlogDtos {
 export interface CreateBlogDto{
     title: string;
     content: string;
-    publishDate: string;
+    publishDate?: Date;
     isPublished: boolean;
 }
 
@@ -72,4 +73,11 @@ export interface ListBloCommentsDtos {
     totalCount: number;
     totalPages: number;
     data: BlogCommentsDto[];
+}
+
+
+export enum BlogAddOrUpdate
+{
+    Add=1,
+    Update=2
 }

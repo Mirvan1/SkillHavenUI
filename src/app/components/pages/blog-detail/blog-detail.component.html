@@ -4,7 +4,7 @@
     <div class="blog-detail-creater">
         <img src="../../../assets/cover.png" [alt]="blog.fullName" />
         <p>{{blog.fullName}} </p>
-        <p>{{blog.publishDate}}</p>
+        <p>{{blog.publishDate | toDate}}</p>
     </div>
     <mat-divider></mat-divider>
     <div class="blog-detail-info">

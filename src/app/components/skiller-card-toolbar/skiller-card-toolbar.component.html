@@ -1,6 +1,28 @@
 <div class="skiller-toolbar">
     <div>
 
+        <button mat-icon-button [matMenuTriggerFor]="sortMenu" matTooltip="Sort Elements">
+            <mat-icon>sort</mat-icon>
+          </button>
+          
+          <mat-menu #sortMenu="matMenu" >
+            <div class="popover-menu"  (click)="$event.stopPropagation()">
+              <!-- Select Dropdown -->
+              <mat-select appearance="outline" placeholder="Select property" [(value)]="selectedSort">
+                <mat-option *ngFor="let optionSort of skillerSortingValues" [value]="optionSort.value">
+                  {{ optionSort.text }}
+                </mat-option>
+              </mat-select>
+          
+              <!-- Slide Toggle -->
+              <mat-slide-toggle class="sort-toggle" color="primary" [(ngModel)]="orderBy">
+                Order By {{ selectedSort }}
+              </mat-slide-toggle>
+            </div>
+            <button class="sort-button " mat-raised-button color="primary" (click)="sort()">
+                Sort
+              </button>
+          </mat-menu>
     </div>
   <div>
     <mat-form-field appearance="outline" class="filter-form-field">

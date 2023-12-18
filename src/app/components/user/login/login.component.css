@@ -1,0 +1,39 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px;
+}
+
+.login-icon {
+    background-image: url('/assets/skillhaven-logo.png'); /* Replace with your logo */
+    background-size: cover;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+mat-form-field.mat-form-field {
+    width: 100%;
+}
+
+.login-button {
+    margin-top: 10px;
+}
+
+/* Style for Material Icons */
+mat-icon {
+    color: rgba(0, 0, 0, 0.54);
+}

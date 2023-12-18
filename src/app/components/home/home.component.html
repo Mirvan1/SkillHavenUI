@@ -33,12 +33,14 @@
           <ng-template matTabContent>
   
           @if(activeTab===0 && allSkillers != null){
-       <app-skiller-card-toolbar (searchEmitter)="setSearchVal($event)"></app-skiller-card-toolbar>
+       <app-skiller-card-toolbar
+        (searchEmitter)="setSearchVal($event)"
+          (sortEmitter)="setSortVal($event)"
+        ></app-skiller-card-toolbar>
             <app-skiller-card
             [skillerList]="allSkillers"
             [pageSize]="defaultPageSize"
             [page]="defaultPage"
-            (pageChanged)="allSkillerChanged($event)"
            ></app-skiller-card> 
           }   
       </ng-template>
@@ -49,13 +51,19 @@
           <ng-template matTabContent>
   
           @if(activeTab===1 && consultants != null){
-            <app-skiller-card-toolbar (searchEmitter)="setSearchVal($event)"></app-skiller-card-toolbar>
+            <app-skiller-card-toolbar
+            [skillerSortingValues]="[
+            {value:'Rating',text:'Rate'},
+            {value:'Experience',text:'Experience'},
+          ]"
+             (searchEmitter)="setSearchVal($event)"           
+             (sortEmitter)="setSortVal($event)"
+            ></app-skiller-card-toolbar>
 
           <app-skiller-card
            [skillerList]="consultants"
            [pageSize]="defaultPageSize"
             [page]="defaultPage"
-            (pageChanged)="getConsultantsChanged($event)"
            ></app-skiller-card> 
           } 
       </ng-template>
@@ -66,13 +74,18 @@
           <ng-template matTabContent>
   
           @if(activeTab===2 && supervisors != null){
-            <app-skiller-card-toolbar (searchEmitter)="setSearchVal($event)"></app-skiller-card-toolbar>
+            <app-skiller-card-toolbar
+             (searchEmitter)="setSearchVal($event)"
+             (sortEmitter)="setSortVal($event)"
+             [skillerSortingValues]="[
+    {value:'Rating',text:'Rate'},
+  ]"
+            ></app-skiller-card-toolbar>
 
           <app-skiller-card 
           [skillerList]="supervisors"
           [pageSize]="defaultPageSize"
           [page]="defaultPage"
-          (pageChanged)="getSupervisorsChanged($event)"
 
           ></app-skiller-card>
           }

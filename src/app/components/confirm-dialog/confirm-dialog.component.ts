@@ -5,6 +5,8 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { Inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { ToasterService } from '@coreui/angular';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -20,7 +22,8 @@ export class ConfirmDialogComponent {
   constructor(public dialogRef: MatDialogRef<ConfirmDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogModel,
     private userService:UserService,
-    private router:Router
+    private router:Router,
+    private toastr:ToastrService
     ) {
     // Update view with given values
     this.title = data.title;
@@ -37,7 +40,7 @@ export class ConfirmDialogComponent {
         }
       },
       error:(err)=>{
-        alert(JSON.stringify(err));
+        this.toastr.error(err.message,`Failed with ${err.statusCode}`)
       }
     })
     this.dialogRef.close(true);

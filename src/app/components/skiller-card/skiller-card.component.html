@@ -37,7 +37,7 @@
         </mat-card-content>
         <mat-card-actions>
           <button mat-stroked-button color="primary" (click)="getDataDetail(skiller.userId)">Detail</button>
-          <button mat-stroked-button color="accent">Start to Chat</button>
+          <button mat-stroked-button color="accent" (click)="openChatDialog(skiller.userId,skiller.fullName)">Start to Chat</button>
         </mat-card-actions>
         <mat-card-footer>
 

@@ -1,1 +1,130 @@
-<p>register works!</p>
+<mat-stepper linear #stepper>
+    <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+
+      <form [formGroup]="firstFormGroup" class="register-form">
+        <ng-template matStepLabel>Fill out login information</ng-template>
+
+        <mat-form-field appearance="outline" class="register-input">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="email" placeholder="Last name, First name" required>
+          @if (firstFormGroup.get('email')?.value) {
+            <button matSuffix mat-icon-button aria-label="Clear" (click)="firstFormGroup.get('email')?.setValue('')">
+                <mat-icon>close</mat-icon>
+              </button>
+        }
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline" class="register-input">
+            <mat-label>Password</mat-label>
+            <input [type]="showPassword ? 'text' : 'password'" matInput formControlName="password" placeholder="Last name, First name" required>
+            @if (firstFormGroup.get('password')?.value) {
+                <button matSuffix mat-icon-button aria-label="Clear" (click)="firstFormGroup.get('password')?.setValue('')">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                
+            }
+            <button matSuffix mat-icon-button aria-label="Show" (click)="showPassword=!showPassword">
+@if(showPassword){
+    <mat-icon>visibility</mat-icon>
+
+}
+@else{
+    <mat-icon>visibility_off</mat-icon>
+
+}
+            </button>
+        </mat-form-field>
+
+
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+
+        <form [formGroup]="secondFormGroup" (ngSubmit)="onSubmit()" class="register-form">
+        <ng-template matStepLabel>Fill out your information</ng-template>
+
+        <mat-form-field appearance="outline" class="register-input">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" placeholder="Ex. 1 Main St, New York, NY"
+                 required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="register-input">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" placeholder="Ex. 1 Main St, New York, NY"
+                   required>
+          </mat-form-field>
+
+          <div  appearance="outline" class="photo-input register-input">
+            <mat-label>Profile Picture:</mat-label>
+            <input type="file" #fileInput   (change)="onFileSelected($event)" hidden/>
+
+            <button mat-raised-button type="button" (click)="fileInput.click()">Choose File</button>
+          
+            <!-- <div *ngIf="secondFormGroup.get('picture')?.value">
+                <strong>Selected File:</strong>{{ (secondFormGroup.get('picture')?.value as File)?.name }}
+
+            </div> -->
+        </div>
+
+          <mat-form-field appearance="outline" class="register-input">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role" >
+              <mat-option value="4">Supervisor</mat-option>
+              <mat-option value="3">Consultant</mat-option>
+              <mat-option value="2">User</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          @if(secondFormGroup.get('role')?.value === '3'){
+            <mat-form-field appearance="outline" class="register-input">
+                <mat-label>Experience</mat-label>
+                <input matInput formControlName="experience" placeholder="Ex. 1 Main St, New York, NY"
+                       required>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+              </mat-form-field>
+          }
+
+          @if(secondFormGroup.get('role')?.value === '4'){
+            <mat-form-field appearance="outline" class="register-input">
+                <mat-label>Expertise</mat-label>
+                <input matInput formControlName="expertise" placeholder="Ex. 1 Main St, New York, NY"
+                       required>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+              </mat-form-field>
+          }
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    
+    
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Confirm you profile</ng-template>
+      <p>Welcome you registered.Please confirm with your mail</p>
+      <mat-form-field appearance="outline" class="register-input">
+        <mat-label>Code</mat-label>
+        <input matInput [(ngModel)]="mailCode"  placeholder="Code" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="confirmMailCode()">Confirm</button>
+      </div>
+    </mat-step>
+  </mat-stepper>

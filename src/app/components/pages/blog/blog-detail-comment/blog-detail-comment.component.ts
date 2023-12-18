@@ -10,12 +10,13 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { ToDatePipe } from '../../../../utils/to-date.pipe';
 
 
 @Component({
   selector: 'app-blog-detail-comment',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatSidenavModule, MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatSidenavModule, ToDatePipe,MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
   templateUrl: './blog-detail-comment.component.html',
   styleUrl: './blog-detail-comment.component.css'
 })

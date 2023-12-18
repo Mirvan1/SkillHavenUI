@@ -3,6 +3,7 @@ export interface PaginatedRequest{
     pageSize: number;
     orderBy?: boolean;
     orderByPropertname?: string;
+    filter?:string ;
 }
 
 
@@ -37,4 +38,9 @@ export interface SkillerDto  {
     experience: number | null;
     description: string | null;
     rating: number ;
+}
+
+export interface SortResultDto{
+    column?:string;
+    orderBy?:boolean;
 }

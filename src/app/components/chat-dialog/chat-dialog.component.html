@@ -41,7 +41,7 @@
       <mat-divider></mat-divider>
       <div class="chat-messages-content-container">
     @for( message of  (getUserMessage$ | async)?.data ; track message.messageId){
-
+<!-- @if(message.receiverUserId === receiverUserId){ -->
       <p [ngClass]="message.senderUserId === loggedUser?.userId?
                     'chat-messages-sender':
                     'chat-messages-receiver'">
@@ -49,8 +49,9 @@
          {{message.content}}-{{message.senderUsername}} -{{message.receiverUsername}}  
       <span class="chat-message-timestamp">{{message.timestamp | date :'short' }}</span>
         </p>
-      
+      <!-- }     -->
   }
+
 </div>
   <form class="chat-message-send" (ngSubmit)="sendMessageToUser($event,receiverUserId,messageInput)">
     <mat-form-field appearance="outline" class="form-field">

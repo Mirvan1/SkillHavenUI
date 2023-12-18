@@ -24,11 +24,14 @@ export class SkillsService {
 
   getAllSkillerQuery(request:getAllSkillerDto):Observable<ListSkillerDtos>{
     let params = new HttpParams()
-    .set('SearchByName', request.searchByName || '')
+   // .set('SearchByName', request.searchByName || '')
     .set('Page', request.page || '')
     .set('PageSize', request.pageSize || '')
-    .set('OrderBy', request.orderBy || '');
-
+    .set('OrderBy', String(request.orderBy) || '')
+    .set('OrderByPropertname', request.orderByPropertname || '')
+  
+    .set('SearchByName', request.filter || '');
+debugger
     return this.httpClient.get<ListSkillerDtos>(`${this.skillsEndpoint}/GetAllSkiller`,{params})
     .pipe(
       tap(res=>this.getAllSkillersSubject.next(res))
@@ -40,7 +43,10 @@ export class SkillsService {
     let params = new HttpParams()
     .set('Page', request.page || '')
     .set('PageSize', request.pageSize || '')
-    .set('OrderBy', request.orderBy || '');
+    .set('OrderBy', request.orderBy || '')
+    .set('OrderByPropertname', request.orderByPropertname || '')
+    .set('filter', request.filter || '');
+
 
     return this.httpClient.get<ListSkillerDtos>(`${this.skillsEndpoint}/GetSupervisors`,{params})
     .pipe(
@@ -53,7 +59,10 @@ export class SkillsService {
     let params = new HttpParams()
     .set('Page', request.page || '')
     .set('PageSize', request.pageSize || '')
-    .set('OrderBy', request.orderBy || '');
+    .set('OrderBy', request.orderBy || '')
+    .set('OrderByPropertname', request.orderByPropertname || '')
+    .set('filter', request.filter || '');
+
 
     return this.httpClient.get<ListSkillerDtos>(`${this.skillsEndpoint}/GetConsultants`,{params})
     .pipe(

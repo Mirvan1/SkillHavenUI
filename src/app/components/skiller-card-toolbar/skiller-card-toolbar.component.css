@@ -28,3 +28,64 @@
     flex-direction: row;
     height: 45px !important;
   }
+  .mat-menu-content{
+    padding:25px 50px !important;    
+    width:500px;
+  }
+  mat-menu{
+  }
+  
+  .mat-menu-item {
+    height: inherit;
+    width: inherit;
+    background: lightgoldenrodyellow
+  }
+
+  .mat-menu-item:hover{
+    background: lightgoldenrodyellow
+
+  }
+  .ripple-container {
+    cursor: default;
+    text-align: center;
+  
+    height: 100px;
+    line-height: 300px;
+  
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    gap: 20px;
+  
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .sorting-form-container:hover{
+    background-color: transparent !important; /* Removes any background change on hover */
+    color: inherit  !important;
+  }
+
+  .popover-menu {
+    padding: 15px; /* Adjust padding as needed */
+    display: flex;
+    flex-direction: row ;
+    gap: 20px; /* Spacing between elements */
+  }
+
+.sort-toggle{
+    margin-left: 15px;
+}
+  
+  .sorting-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 40px;
+    width: 100%;
+    
+    /* width: 800px; */
+  }
+
+  .sort-button{
+    margin-left: 10px;
+  }

@@ -174,7 +174,12 @@ padding: 0 !important;
 border: 0 !important;
 }
  
-
+.popover-menu {
+  padding: 15px; /* Adjust padding as needed */
+  display: flex;
+  flex-direction: row ;
+  gap: 20px; /* Spacing between elements */
+}
  
 .mat-mdc-text-field-wrapper{
   display: flex;

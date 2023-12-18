@@ -20,6 +20,8 @@ import { ChangePasswordDto, UserDto } from '../../dtos/user.dto';
 import {MatIconModule} from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
+import { ErrorResult } from '../../utils/global.dto';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -42,7 +44,8 @@ constructor(
   private userService:UserService,
   public dialogRef: MatDialogRef<EditProfileDialogComponent>,
   private router:Router,
-  public dialog: MatDialog
+  public dialog: MatDialog,
+  private toastr:ToastrService
 ){
 }
 
@@ -81,6 +84,7 @@ constructor(
     console.log("save");
     if(!userProfile.valid){
       alert("Not valid");
+      this.toastr.error('User Profile not valid','')
       return;
     }
     let submitUserUpdateForm:UserDto={
@@ -101,8 +105,8 @@ this.userService.updateUser(submitUserUpdateForm).subscribe({
       
     }
   },
-  error:(err)=>{
-    alert(JSON.stringify(err));
+  error:(err:ErrorResult)=>{
+    this.toastr.error(err.Message,`Failed with ${err.StatusCode}`)
   }
 })
     
@@ -112,6 +116,7 @@ this.userService.updateUser(submitUserUpdateForm).subscribe({
   SubmitChangePassword(changePassword:FormGroup){
     if(!changePassword.valid){
       alert("Not valid");
+      this.toastr.error('Form Not valid')
       return;
     }
     let changePasswordForm:ChangePasswordDto={

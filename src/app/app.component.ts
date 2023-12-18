@@ -6,16 +6,20 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogActions } from '@angular/material/dialog';
 import { ChatHubService } from './services/chat-hub.service';
 import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
 import { EditProfileDialogComponent } from './components/edit-profile-dialog/edit-profile-dialog.component';
 import { UserService } from './services/user.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterLink,RouterOutlet,ChatDialogComponent,EditProfileDialogComponent,MatToolbarModule,MatIconModule,MatButtonModule, MatMenuModule],
+  imports: [CommonModule, RouterLink,RouterOutlet,ChatDialogComponent,EditProfileDialogComponent,
+     MatDialogActions,MatFormFieldModule,MatToolbarModule,MatIconModule,MatButtonModule, MatMenuModule,NgxSpinnerModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -48,7 +52,11 @@ openChatDialog() {
   });
 }
 
+goEditBlogPage=()=>this.router.navigate(['/add-blog']);
 
-logout=()=>this.router.navigateByUrl('/login');
+logout=()=>{
+  this.userService.logout();
+  this.router.navigateByUrl('/login');
+}
 
 }

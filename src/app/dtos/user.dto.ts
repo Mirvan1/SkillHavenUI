@@ -9,24 +9,29 @@ export interface UserDto {
 
 
 export interface RegisterUserDto{
-    email: string;
-    password: string;
-    role: Role;
-    firstName: string;
-    lastName: string;
-    profilePicture: string;
-    consultantInfo: ConsultantRegistrationInfo;
-    supervisorInfo: SupervisorRegistrationInfo;
+    email?: string;
+    password?: string;
+    role?: number;//Role;
+    firstName?: string;
+    lastName?: string;
+    profilePicture?: string;
+    consultantInfo?: ConsultantRegistrationInfo;
+    supervisorInfo?: SupervisorRegistrationInfo;
 }
 
 export interface ConsultantRegistrationInfo {
-    experience: number;
-    description: string;
+    experience?: number|undefined;
+    description?: string;
 }
 
 export interface SupervisorRegistrationInfo {
-    expertise: string;
-    description: string;
+    expertise?: string |undefined;
+    description?: string |undefined;
+}
+
+export interface VerifyUserDto{
+    userId?:number;
+    mailSendCode?:string;
 }
 
 export enum Role {

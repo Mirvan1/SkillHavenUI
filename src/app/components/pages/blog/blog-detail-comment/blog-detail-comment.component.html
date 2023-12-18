@@ -18,7 +18,7 @@
                   <div class="text-content">
                     <h3 class="username">{{blogComment.fullName}}</h3>
                     <p class="comment-text">{{blogComment.commentContent}}</p>
-                    <p class="comment-date">{{blogComment.publishDate}}</p>
+                    <p class="comment-date">{{blogComment.publishDate | toDate}}</p>
                   </div>
                 </div>
               </mat-card>

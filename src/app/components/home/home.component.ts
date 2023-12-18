@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { SkillsService } from '../../services/skills.service';
-import { ListSkillerDtos, PaginatedRequest, getAllSkillerDto } from '../../dtos/skills';
+import { ListSkillerDtos, PaginatedRequest, SortResultDto, getAllSkillerDto } from '../../dtos/skills';
 import { UserDto } from '../../dtos/user.dto';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -41,6 +41,8 @@ export class HomeComponent implements OnInit {
   defaultPageSize: number = 8;
   defaultPage: number = 1;
   defaultSearchValue: string = '';
+  defaultOrderBy:boolean=true;
+defaultOrderByName:string='Rating';
 
   activeTab = 0;
   constructor(
@@ -54,7 +56,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getAllSkiller(this.defaultPageSize, this.defaultPage,this.defaultSearchValue);
+    this.getAllSkiller(this.defaultPageSize, this.defaultPage,this.defaultSearchValue,this.defaultOrderBy,this.defaultOrderByName);
     //this.getConsultants();
     //this.getSupervisors();
   }
@@ -71,12 +73,12 @@ export class HomeComponent implements OnInit {
   }
 
 
-  getAllSkiller(defaultPageSize: number, defaultPage: number, defaultSearchValue: string) {
+  getAllSkiller(defaultPageSize: number, defaultPage: number, defaultSearchValue: string,defaultOrderBy:boolean,defaultOrderByName:string) {
     let request: getAllSkillerDto = {
       page: defaultPage,
       pageSize: defaultPageSize,
-      orderBy: true,
-      orderByPropertname: 'Rating',
+      orderBy: defaultOrderBy,
+      orderByPropertname: defaultOrderByName,
       filter: defaultSearchValue
     };
     console.log(request)
@@ -90,11 +92,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getSupervisors(defaultPageSize: number, defaultPage: number, defaultSearchValue: string) {
+  getSupervisors(defaultPageSize: number, defaultPage: number, defaultSearchValue: string,defaultOrderBy:boolean,defaultOrderByName:string) {
     let request: PaginatedRequest = {
       page: defaultPage,
-      pageSize: defaultPageSize,
-      orderBy: true,
+      pageSize:defaultPageSize,
+      orderBy: defaultOrderBy,
+      orderByPropertname: defaultOrderByName,
       filter: defaultSearchValue
 
     };
@@ -108,13 +111,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getConsultants(defaultPageSize: number, defaultPage: number, defaultSearchValue: string) {
+  getConsultants(defaultPageSize: number, defaultPage: number, defaultSearchValue: string,defaultOrderBy:boolean,defaultOrderByName:string) {
     let request: PaginatedRequest = {
       page: defaultPage,
       pageSize: defaultPageSize,
-      orderBy: true,
+      orderBy: defaultOrderBy,
+      orderByPropertname: defaultOrderByName,
       filter: defaultSearchValue
     };
+    debugger
     this.skillsService.getConsultants(request).subscribe({
       next: (res) => {
         if (res) {
@@ -128,43 +133,43 @@ export class HomeComponent implements OnInit {
 
   onTabChange(index: number) {
     if(this.activeTab !==index) this.defaultSearchValue='';
-    
+
     this.activeTab = index;
     //   this.defaultPageSize=8;
     // this.defaultPage=1;
   
     if (this.activeTab === 0) {
-      this.getAllSkiller(this.defaultPageSize, this.defaultPage,this.defaultSearchValue);
+      this.getAllSkiller(this.defaultPageSize, this.defaultPage,this.defaultSearchValue,this.defaultOrderBy,this.defaultOrderByName);
     }
     else if (this.activeTab === 1) {
-      this.getConsultants(this.defaultPageSize, this.defaultPage,this.defaultSearchValue);
+      this.getConsultants(this.defaultPageSize, this.defaultPage,this.defaultSearchValue,this.defaultOrderBy,this.defaultOrderByName);
     }
     else if (this.activeTab === 2) {
-      this.getSupervisors(this.defaultPageSize, this.defaultPage,this.defaultSearchValue);
+      this.getSupervisors(this.defaultPageSize, this.defaultPage,this.defaultSearchValue,this.defaultOrderBy,this.defaultOrderByName);
     }
   }
 
-  allSkillerChanged($e: any) {
-    debugger
-    this.defaultPageSize = $e.pageSize;
-    //this.defaultPage=$e.pageIndex+1;
-    this.getAllSkiller(this.defaultPageSize, this.defaultPage,this.defaultSearchValue);
-    console.log("allskiller", $e);
-  }
+  // allSkillerChanged($e: any) {
+  //   debugger
+  //   this.defaultPageSize = $e.pageSize;
+  //   //this.defaultPage=$e.pageIndex+1;
+  //   this.getAllSkiller(this.defaultPageSize, this.defaultPage,this.defaultSearchValue);
+  //   console.log("allskiller", $e);
+  // }
 
-  getSupervisorsChanged($e: any) {
-    this.defaultPageSize = $e.pageSize;
-    this.defaultPage = $e.pageIndex + 1;
-    this.getSupervisors(this.defaultPageSize, this.defaultPage,this.defaultSearchValue);
+  // getSupervisorsChanged($e: any) {
+  //   this.defaultPageSize = $e.pageSize;
+  //   //this.defaultPage = $e.pageIndex + 1;
+  //   this.getSupervisors(this.defaultPageSize, this.defaultPage,this.defaultSearchValue);
 
-  }
+  // }
 
-  getConsultantsChanged($e: any) {
-    this.defaultPageSize = $e.pageSize;
-    this.defaultPage = $e.pageIndex + 1;
-    this.getConsultants(this.defaultPageSize, this.defaultPage,this.defaultSearchValue);
+  // getConsultantsChanged($e: any) {
+  //   this.defaultPageSize = $e.pageSize;
+  //   //this.defaultPage = $e.pageIndex + 1;
+  //   this.getConsultants(this.defaultPageSize, this.defaultPage,this.defaultSearchValue);
 
-  }
+  // }
 
   onScroll = () => {
     debugger
@@ -180,5 +185,14 @@ export class HomeComponent implements OnInit {
 
     }
   }
+  setSortVal($e:SortResultDto){
+    debugger
+
+    this.defaultOrderBy=$e.orderBy!;
+    this.defaultOrderByName=$e.column!;
+    this.onTabChange(this.activeTab);
+
+  }
+
 
 }
