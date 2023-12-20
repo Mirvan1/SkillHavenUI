@@ -2,7 +2,7 @@
 <div class="blog-detail-page" [ngClass]="openCommentDrawer?'comment-background':''">
     <h1>{{blog.title}}</h1>
     <div class="blog-detail-creater">
-        <img src="../../../assets/cover.png" [alt]="blog.fullName" />
+        <img [src]="blog.photoPath" [alt]="blog.fullName" />
         <p>{{blog.fullName}} </p>
         <p>{{blog.publishDate | toDate}}</p>
     </div>
@@ -28,7 +28,7 @@
     <mat-divider></mat-divider>
 
     <div class="blog-detail-content">
-        <img src="../../../assets/cover.png" [alt]="blog.photoPath" height="300" />
+        <img [src]="blog.photoPath" [alt]="blog.photoPath" height="300" />
 
         <div [innerHTML]="blog.content" class="blog-detail-text-content">
         </div>

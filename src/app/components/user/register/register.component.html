@@ -1,12 +1,18 @@
+<div class="register-container">
+  <div class="register-label">
+    <mat-toolbar color="primary">
+      <span>Register</span>
+    </mat-toolbar>
+    </div>
 <mat-stepper linear #stepper>
-    <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+    <mat-step [stepControl]="firstFormGroup" [editable]="true">
 
       <form [formGroup]="firstFormGroup" class="register-form">
         <ng-template matStepLabel>Fill out login information</ng-template>
 
         <mat-form-field appearance="outline" class="register-input">
           <mat-label>Email</mat-label>
-          <input type="email" matInput formControlName="email" placeholder="Last name, First name" required>
+          <input type="email" matInput formControlName="email" placeholder="Ex:xxxx@xxx.com" required>
           @if (firstFormGroup.get('email')?.value) {
             <button matSuffix mat-icon-button aria-label="Clear" (click)="firstFormGroup.get('email')?.setValue('')">
                 <mat-icon>close</mat-icon>
@@ -17,7 +23,7 @@
 
         <mat-form-field appearance="outline" class="register-input">
             <mat-label>Password</mat-label>
-            <input [type]="showPassword ? 'text' : 'password'" matInput formControlName="password" placeholder="Last name, First name" required>
+            <input [type]="showPassword ? 'text' : 'password'" matInput formControlName="password"  required>
             @if (firstFormGroup.get('password')?.value) {
                 <button matSuffix mat-icon-button aria-label="Clear" (click)="firstFormGroup.get('password')?.setValue('')">
                     <mat-icon>close</mat-icon>
@@ -38,7 +44,7 @@
 
 
         <div>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-raised-button class="right-button" color="primary"  matStepperNext>Next</button>
         </div>
       </form>
 
@@ -84,32 +90,32 @@
           @if(secondFormGroup.get('role')?.value === '3'){
             <mat-form-field appearance="outline" class="register-input">
                 <mat-label>Experience</mat-label>
-                <input matInput formControlName="experience" placeholder="Ex. 1 Main St, New York, NY"
+                <input matInput formControlName="experience" placeholder="Choose your role"
                        required>
               </mat-form-field>
 
-              <mat-form-field>
+              <mat-form-field appearance="outline">
                 <mat-label>Description</mat-label>
-                <textarea matInput formControlName="description"></textarea>
+                <textarea matInput  formControlName="description"></textarea>
               </mat-form-field>
           }
 
           @if(secondFormGroup.get('role')?.value === '4'){
             <mat-form-field appearance="outline" class="register-input">
                 <mat-label>Expertise</mat-label>
-                <input matInput formControlName="expertise" placeholder="Ex. 1 Main St, New York, NY"
+                <input matInput formControlName="expertise" placeholder="Your area of expertise "
                        required>
               </mat-form-field>
 
-              <mat-form-field>
+              <mat-form-field appearance="outline" >
                 <mat-label>Description</mat-label>
                 <textarea matInput formControlName="description"></textarea>
               </mat-form-field>
           }
 
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+                    <button mat-raised-button class="right-button" color="primary" matStepperNext>Next</button>
+          <button mat-raised-button class="right-button" matStepperPrevious>Back</button>
         </div>
       </form>
     
@@ -117,14 +123,19 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Confirm you profile</ng-template>
-      <p>Welcome you registered.Please confirm with your mail</p>
+      <div class="confirmation-area">
+      <p >Welcome you registered.Please confirm with your mail</p>
       <mat-form-field appearance="outline" class="register-input">
-        <mat-label>Code</mat-label>
+        <mat-label>Confirmation Code:</mat-label>
         <input matInput [(ngModel)]="mailCode"  placeholder="Code" required>
       </mat-form-field>
+    </div>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="confirmMailCode()">Confirm</button>
+        <button mat-raised-button class="right-button"  (click)="confirmMailCode()">Confirm</button>
+        <button mat-raised-button class="right-button" matStepperPrevious>Back</button>
       </div>
     </mat-step>
   </mat-stepper>
+
+  
+</div>

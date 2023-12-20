@@ -1,25 +1,40 @@
+<div class="login-page">
 <div class="login-container">
+    <div class="login-label">
+     
+        </div>
     <mat-card class="login-card">
-        <mat-card-header>
-            <div mat-card-avatar class="login-icon"></div>
-            <mat-card-title>SkillHaven Login</mat-card-title>
-        </mat-card-header>
+        <mat-toolbar class="login-label" color="primary">
+            <span>Login</span>
+          </mat-toolbar>
+
         <mat-card-content>
             <form class="login-form">
                 <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Email</mat-label>
                     <input matInput [(ngModel)]="email" name="email" type="email" required>
-                    <mat-icon matSuffix>alternate_email</mat-icon>
-                </mat-form-field>
+                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Password</mat-label>
-                    <input matInput [(ngModel)]="password" name="password" type="password" required>
-                    <mat-icon matSuffix>lock</mat-icon>
+                    <input matInput [(ngModel)]="password" name="password" type="password"   required>
+                    
+                    <button matSuffix mat-icon-button aria-label="Show" (click)="showPassword=!showPassword">
+                        @if(showPassword){
+                        <mat-icon matSuffix>visibility</mat-icon>
+                    
+                    }
+                    @else{
+                        <mat-icon matSuffix>visibility_off</mat-icon>
+                    
+                    }
+                </button>
+
                 </mat-form-field>
 
                 <button mat-raised-button color="primary" class="login-button" (click)="getLogin()">Login</button>
             </form>
         </mat-card-content>
     </mat-card>
+</div>
 </div>

@@ -12,14 +12,16 @@ export interface GetBlogDto {
     fullName: string;
     role: Role | null;
     email: string;
-    photoPath:string;
-    vote:number;
+    photoPath?:string;
+    vote?:number;
+    nOfReading?:number
 }
 
 
 export interface UpdateBlogDto {
     id: number;
     title: string;
+    photo?:string;
     content: string;
     isPublished: boolean;
     updateDate?: Date;
@@ -42,6 +44,7 @@ export interface ListBlogDtos {
 
 export interface CreateBlogDto{
     title: string;
+    photo?:string;
     content: string;
     publishDate?: Date;
     isPublished: boolean;

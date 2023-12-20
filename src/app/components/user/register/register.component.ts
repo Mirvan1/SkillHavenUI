@@ -11,11 +11,12 @@ import { Role } from '../../../dtos/skills';
 import { UserService } from '../../../services/user.service';
 import { ConsultantRegistrationInfo, RegisterUserDto, SupervisorRegistrationInfo, VerifyUserDto } from '../../../dtos/user.dto';
 import { Router } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, MatIconModule,MatSelectModule ,MatButtonModule,MatStepperModule,FormsModule,ReactiveFormsModule,MatFormFieldModule,MatInputModule],
+  imports: [CommonModule, MatIconModule,MatSelectModule,MatToolbarModule ,MatButtonModule,MatStepperModule,FormsModule,ReactiveFormsModule,MatFormFieldModule,MatInputModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })

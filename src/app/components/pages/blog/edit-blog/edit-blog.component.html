@@ -7,6 +7,18 @@
         <input matInput formControlName="title">
       </mat-form-field>
 
+      <div  appearance="outline" class="photo-input register-input">
+        <mat-label>Profile Picture:</mat-label>
+        <input type="file" #fileInput   (change)="onFileSelected($event)" hidden/>
+
+        <button mat-raised-button type="button" (click)="fileInput.click()">Choose File</button>
+      
+        <!-- <div *ngIf="secondFormGroup.get('picture')?.value">
+            <strong>Selected File:</strong>{{ (secondFormGroup.get('picture')?.value as File)?.name }}
+
+        </div> -->
+    </div>
+
 
         <mat-label>Content</mat-label>
       <angular-editor placeholder="Write blog content here.." formControlName="content" [config]="config"></angular-editor>

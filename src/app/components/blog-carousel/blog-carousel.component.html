@@ -4,7 +4,7 @@
     @for(blog of blogContent.data;track blog.blogId){
     <ng-template  carouselSlide  >
 <div class="image-container" (click)="getBlogFromCarousel(blog.blogId)" >
-    <img   src="../../../assets/cover.png" [alt]="blog.photoPath"/>
+    <img   [src]="blog.photoPath" [alt]="blog.photoPath"/>
     <div class="text-area">
         <h3>{{blog.title}}</h3>
         <p>{{blog.content | shortStr : '30' }}</p>

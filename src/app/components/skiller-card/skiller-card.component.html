@@ -28,10 +28,10 @@
         <mat-divider></mat-divider>
         <mat-card-content>
           <div class="skiller-description">
-            <p>{{skiller.description}}</p>
+            <p class="skiller-description-text" >{{skiller.description}}</p>
           </div>
           <div class="skiller-picture">
-            <img  src="../../../assets/cover.png" [alt]="skiller.fullName"/>
+            <img  [src]="skiller.profilePicture" [alt]="skiller.fullName"/>
 
           </div>  
         </mat-card-content>

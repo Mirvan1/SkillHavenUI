@@ -12,17 +12,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorResult } from '../../../utils/global.dto';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule,FormsModule,MatCardModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatIconModule],
+  imports: [CommonModule,MatToolbarModule,FormsModule,MatCardModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatIconModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
   email:string
   password:string;
+  showPassword: boolean = false;
+
   constructor(
     private userService:UserService,
     private router:Router,

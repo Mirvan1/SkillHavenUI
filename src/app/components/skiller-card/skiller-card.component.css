@@ -86,3 +86,10 @@ mat-card-actions{
   flex-direction: row;
   justify-content: space-between;
 }
+.skiller-description-text{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; 
+          line-clamp: 3; 
+  -webkit-box-orient: vertical;
+}
