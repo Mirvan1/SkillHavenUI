@@ -31,6 +31,16 @@
                 </button>
 
                 </mat-form-field>
+<div class="login-external" >
+<div>
+    <mat-slide-toggle [(ngModel)]="saveSession" name="remember-me">Remember Me</mat-slide-toggle>
+</div>
+
+<div>
+    <a (click)="router.navigateByUrl('forgot-password')">Forgot Password?</a>
+</div>
+
+</div>
 
                 <button mat-raised-button color="primary" class="login-button" (click)="getLogin()">Login</button>
             </form>
