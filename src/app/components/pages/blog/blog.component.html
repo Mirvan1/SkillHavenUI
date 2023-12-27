@@ -77,6 +77,9 @@ class="blog-container">
 }
 
 }
+@else{
+<h3>No blog found</h3>
+}
 
 </div>
 
@@ -84,12 +87,12 @@ class="blog-container">
 
 <div class="most-used-blog-container">
   
-@if(blogContent){
+@if(mostVotedBlog){
   <h2> </h2>
   <div mat-subheader>Most Voted Blogs</div>
 
 <mat-list>
-  @for( blog of blogContent.data;track blog.blogId){
+  @for( blog of mostVotedBlog;track blog.blogId){
 
   <mat-list-item class="most-used-blog-item">
     <div >

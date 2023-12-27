@@ -1,6 +1,6 @@
 <div class="blog-edit">
 <form [formGroup]="blogForm" (ngSubmit)="submitForm()">
-  <h3> {{ crudType === 1 ? 'Add' : 'Update' }} Blog</h3>
+  <h2> {{ crudType === 1 ? 'Add' : 'Update' }} Blog</h2>
 
     <mat-form-field appearance="outline" class="form-field">
         <mat-label>Title</mat-label>
@@ -8,7 +8,7 @@
       </mat-form-field>
 
       <div  appearance="outline" class="photo-input register-input">
-        <mat-label>Profile Picture:</mat-label>
+        <mat-label>Blog Picture:</mat-label>
         <input type="file" #fileInput   (change)="onFileSelected($event)" hidden/>
 
         <button mat-raised-button type="button" (click)="fileInput.click()">Choose File</button>
@@ -20,10 +20,9 @@
     </div>
 
 
-        <mat-label>Content</mat-label>
       <angular-editor placeholder="Write blog content here.." formControlName="content" [config]="config"></angular-editor>
 
-      <button mat-button     color="primary" type="submit">Save</button>
+      <button mat-raised-button class="save-button"  color="primary" type="submit">Save</button>
 
 </form>
 </div>

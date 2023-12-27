@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaginatedRequest, SortResultDto } from '../../../dtos/skills';
 import { BlogService } from '../../../services/blog.service';
-import { ListBlogDtos } from '../../../dtos/blog';
+import { GetBlogDto, ListBlogDtos } from '../../../dtos/blog';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -18,6 +18,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRippleModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
+import { Toast, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-blog',
@@ -41,20 +42,23 @@ export class BlogComponent implements OnInit{
   request:PaginatedRequest={
     page:this.defaultPage,
     pageSize:this.defaultPageSize,
-    orderBy:true,
+    orderBy:false,
     orderByPropertname:this.defaultOrderByName,
     filter:this.filterValue
   };
   blogContent!:ListBlogDtos;
 
+  mostVotedBlog!:GetBlogDto[];
 
   constructor(
     private router:Router,
-    private blogService:BlogService){}
+    private blogService:BlogService,
+    private toastrService:ToastrService){}
 
 
   ngOnInit(): void {
     this.getBlogs(this.request);
+    this.getMostVotedBlog(this.request);
   }
   
   getBlogs(request:PaginatedRequest){
@@ -75,6 +79,19 @@ export class BlogComponent implements OnInit{
     })
   }
 
+  getMostVotedBlog(request:PaginatedRequest){
+    let mostVotedRequest=request;
+    mostVotedRequest.orderBy=false;
+    mostVotedRequest.orderByPropertname="Vote";
+    this.blogService.getBlogs(request).subscribe({
+      next:(res)=>{
+          this.mostVotedBlog=res.data;
+      },
+      error:(err)=>this.toastrService.error(JSON.stringify(err))
+    })
+
+  }
+
     getBlogDetail(blogId:number){
      this.router.navigate(['blog-detail',blogId]);
     }
@@ -91,6 +108,7 @@ export class BlogComponent implements OnInit{
 
 
     filterByContent(filter:string){
+      debugger
       this.request.filter=filter;
       this.getBlogs(this.request);
     }

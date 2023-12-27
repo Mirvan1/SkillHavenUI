@@ -66,10 +66,10 @@ body {
 
 /* Vote & Comment Info Styles */
 .blog-detail-info {
-    display: flex;
-    align-items: center;
+    /* display: flex;
+    align-items: center; */
     margin-left: 5%;
-    gap: 20px; /* Space between elements */
+    /* gap: 20px; Space between elements */
 }
 
 .blog-detail-info mat-icon {
@@ -93,6 +93,37 @@ mat-icon:hover {
 
 .comment-background{
     background: rgba(255,255,255,0.4);
+}
+
+
+.blog-detail-readed, .blog-detail-vote-info, .blog-detail-comments {
+    display: flex;
+    align-items: center; /* Centers content vertically */
+    gap: 5px; /* Spacing between icon and text */
+}
+
+/* Icon Styles */
+.blog-detail-info mat-icon {
+    margin: 0;
+    color: gray;
+    /* Remove fixed margin, let flexbox handle spacing */
+}
+.divider{
+    margin-top: 50px;
+}
+
+.blog-detail-info-right{
+    float:right;
+    display: flex;
+    align-items: center;
+     gap: 20px;
+}
+
+.blog-detail-info-left{
+float:left;
+display: flex;
+align-items: center;
+ gap: 20px;
 }
 /* Media Query for Responsive Design */
 @media screen and (max-width: 768px) {

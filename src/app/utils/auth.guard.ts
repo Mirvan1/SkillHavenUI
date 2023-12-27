@@ -7,10 +7,11 @@ import { firstValueFrom, map } from 'rxjs';
 export const authGuard: CanActivateFn = (route, state) => {
   const userService = inject(UserService);
   const router = inject(Router);
-
+debugger
   return firstValueFrom(
     userService.getAccessToken$.pipe(
       map(accessToken => {
+        debugger
         console.log("Acces guard",accessToken)
         if(!accessToken){
           router.navigateByUrl('/login');

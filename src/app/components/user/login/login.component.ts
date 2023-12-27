@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     private toastr:ToastrService
     ){
       this.email='deneme6@gmail.com';
-      this.password='12345';
+      this.password='robert';
     }
 
 

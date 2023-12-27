@@ -7,6 +7,8 @@ import { BlogComponent } from './components/pages/blog/blog.component';
 import { BlogDetailComponent } from './components/pages/blog-detail/blog-detail.component';
 import { EditBlogComponent } from './components/pages/blog/edit-blog/edit-blog.component';
 import { RegisterComponent } from './components/user/register/register.component';
+import { ForgotPasswordComponent } from './components/user/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/user/reset-password/reset-password.component';
 
 export const routes: Routes = [
     {
@@ -18,6 +20,14 @@ export const routes: Routes = [
     {
         path: 'register',
         component: RegisterComponent
+    },
+    {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent
+    },
+    {
+        path: 'reset-password',
+        component: ResetPasswordComponent
     },
     {
         path: 'home',

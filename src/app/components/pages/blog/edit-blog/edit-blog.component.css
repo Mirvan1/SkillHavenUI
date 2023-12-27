@@ -31,3 +31,7 @@
 .photo-input mat-label{
   margin-right:10px
 }
+
+.save-button{
+  margin-top: 20px;
+}

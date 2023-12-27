@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environment/environment';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import {  ChangePasswordDto, LoginUserDto, RegisterUserDto, UserDto, VerifyUserDto } from '../dtos/user.dto';
+import {  ChangePasswordDto, ForgotPasswordDto, LoginUserDto, RegisterUserDto, ResetPasswordDto, UserDto, VerifyUserDto } from '../dtos/user.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class UserService {
   getUser$=this.getUserInfos.asObservable();
 
   constructor(private httpClient:HttpClient) {
-   
+   this.getSession();
    }
 
   getUser():Observable<UserDto>{
@@ -27,8 +27,11 @@ export class UserService {
     return this.httpClient.get<UserDto>(`${this.userEndpoint}/get-logged-user`)
     .pipe(
       tap(res=>{
+        debugger
         console.log("GetUawe",res);
-        
+        if(!res){
+          res=JSON.parse(localStorage.getItem('session')!) as UserDto;
+        }
         this.getUserInfos.next(res)})
     );
   }
@@ -54,6 +57,10 @@ export class UserService {
     return this.httpClient.post(`${this.userEndpoint}/login`,request, {responseType: 'text'})
     .pipe(
       tap(res=>{
+        debugger
+        if(!res){
+          res=JSON.parse(localStorage.getItem('token')!) as string;
+        }
         this.accessToken.next(res)
       })
     );
@@ -63,9 +70,29 @@ export class UserService {
     return this.httpClient.post<boolean>('http://localhost:5095/api/User/verify-user',request);
   }
 
+  forgotPassword(request:ForgotPasswordDto){
+    return this.httpClient.post<boolean>(`${this.userEndpoint}/forgot-password`,request);
+  }
+
+  resetPassword(request:ResetPasswordDto){
+    return this.httpClient.post<boolean>(`${this.userEndpoint}/reset-password`,request);
+ 
+  }
+
   logout(){
     this.accessToken.next('');
     this.getUserInfos.next(null);
+    localStorage.clear();
   }
+
+  private getSession(){
+    const accessToken=JSON.parse(localStorage.getItem('token')!) as string;
+    const userDto=JSON.parse(localStorage.getItem('session')!) as UserDto;
+
+    if(accessToken) this.accessToken.next(accessToken);
+    if(userDto) this.getUserInfos.next(userDto);
+  }
+
+
 
 }

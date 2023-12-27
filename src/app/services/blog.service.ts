@@ -16,12 +16,12 @@ export class BlogService {
 
   getBlogs(request:PaginatedRequest):Observable<ListBlogDtos>{
     let params = new HttpParams()
-    .set('Page', request.page || '')
-    .set('PageSize', request.pageSize || '')
-    .set('OrderBy', String(request.orderBy) || '')
-    .set('OrderByPropertname', request.orderByPropertname || '');
+    params.set('Page', request.page || '')
+    params.set('PageSize', request.pageSize || '')
+    params.set('OrderBy', String(request.orderBy) || '')
+    params.set('OrderByPropertname', request.orderByPropertname || '');
 if(request.filter){
-    params.set('Filter', request.filter!   );
+  params=  params.append('Filter', request.filter!   );
     };    ;
 debugger
     return this.httpClient.get<ListBlogDtos>(this.blogEndpoint,{params});
