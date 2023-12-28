@@ -52,6 +52,7 @@ defaultOrderByName:string='Rating';
   ) {
     this.userService.getUser().subscribe({});
     this.chatHubService.startConnection();
+
   }
 
 
@@ -60,6 +61,8 @@ defaultOrderByName:string='Rating';
     //this.getConsultants();
     //this.getSupervisors();
   }
+
+  
 
   getUser() {
     this.userService.getUser$.subscribe({

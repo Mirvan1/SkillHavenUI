@@ -44,6 +44,7 @@ export class ChatDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data:any,
     private toastr: ToastrService
    ){
+    debugger
     if(data){
       this.receiverUserId = data.userId;
       this.receiverUsername = data.fullName
@@ -55,7 +56,7 @@ export class ChatDialogComponent implements OnInit {
   ngOnInit(): void {
     let request:PaginatedRequest={
       page:1,
-      pageSize:10,
+      pageSize:100,
       orderBy:true,
     };
     this.chatService.getAllChatUser(request).subscribe({
@@ -84,13 +85,15 @@ export class ChatDialogComponent implements OnInit {
       orderBy:true,
       receiverUserId:userId
     };
-
+debugger
     this.chatService.getMessagesByUser(messsages).subscribe({
       next:(res)=>{
        this.receiverUserId=userId;
-       this.receiverUsername = res.data.find(x=>x.receiverUserId === this.receiverUserId)?.receiverUsername!;
+       this.receiverUsername =res.receiverUsername;// res.data.find(x=>x.receiverUserId === this.receiverUserId)?.receiverUsername!;
+      console.log("recevi",this.receiverUsername)
        this.receiverStatus= res.data.find(x=>x.receiverUserId === this.receiverUserId)?.receiverStatus!;
-        //console.log('getUsermessage',this.getMessageByUser)
+      
+       //console.log('getUsermessage',this.getMessageByUser)
         
       },
       error:(err)=>alert(JSON.stringify(err))
@@ -107,7 +110,10 @@ export class ChatDialogComponent implements OnInit {
     .then(()=>{
       this.chatHub.loadChatHistory(userId);
     })
-    .catch((err:ErrorResult)=>this.toastr.error(err.Message,`Failed with ${err.StatusCode}`));
+    .catch((err:ErrorResult)=>{
+      this.chatHub.loadChatHistory(userId);
+
+      this.toastr.error(err.Message,`Failed with ${err.StatusCode}`)});
 
   }
 

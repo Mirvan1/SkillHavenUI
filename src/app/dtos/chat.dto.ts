@@ -45,6 +45,11 @@ export interface ListChatMessagesDtos {
     data: GetMessagesByUserResponse[];
 }
 
+export interface ChatMessagesResponse extends ListChatMessagesDtos{
+    receiverUsername:string;
+    receiverProfilePicture:string;
+}
+
 export interface GetMessagesByUserResponse {
  messageId  :number;
  senderChatId  :number;

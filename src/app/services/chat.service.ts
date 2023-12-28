@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environment/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { GetChatUserDto, GetMessagesByUser, ListChatMessagesDtos, ListChatUsersDtos } from '../dtos/chat.dto';
+import { ChatMessagesResponse, GetChatUserDto, GetMessagesByUser, ListChatMessagesDtos, ListChatUsersDtos } from '../dtos/chat.dto';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { PaginatedRequest } from '../dtos/skills';
 
@@ -16,14 +16,14 @@ export class ChatService {
   
   constructor(private httpClient:HttpClient) { }
 
-  getMessagesByUser(request:GetMessagesByUser):Observable<ListChatMessagesDtos>{
+  getMessagesByUser(request:GetMessagesByUser):Observable<ChatMessagesResponse>{
     let params = new HttpParams()
     .set('Page', request.page || '')
     .set('PageSize', request.pageSize || '')
     .set('OrderBy', request.orderBy || '')
     .set('ReceiverUserId', request.receiverUserId || '');
 
-    return this.httpClient.get<ListChatMessagesDtos>(`${this.chatEndpoint}/GetMessageByUser`,{params}).pipe(
+    return this.httpClient.get<ChatMessagesResponse>(`${this.chatEndpoint}/GetMessageByUser`,{params}).pipe(
       tap((res)=>{
         if(res){
             this.messageSubject.next(res);

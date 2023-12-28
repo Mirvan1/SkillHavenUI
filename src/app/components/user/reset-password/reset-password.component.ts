@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ErrorResult } from '../../../utils/global.dto';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { ResetPasswordDto } from '../../../dtos/user.dto';
 
@@ -30,7 +30,8 @@ export class ResetPasswordComponent implements OnInit{
 
   constructor(private route: ActivatedRoute,
     private userService:UserService,
-    private toasterService:ToastrService
+    private toasterService:ToastrService,
+    private router:Router
     ){
     this.userForm = new FormGroup({
       password: new FormControl('', [Validators.required ]),
@@ -60,7 +61,8 @@ export class ResetPasswordComponent implements OnInit{
   this.userService.resetPassword(request).subscribe({
     next:(res)=>{
       debugger;
-console.log(res)
+console.log(res);
+this.router.navigateByUrl('login');
     },
     error:(err)=>{
 this.toasterService.error(JSON.stringify(err));
