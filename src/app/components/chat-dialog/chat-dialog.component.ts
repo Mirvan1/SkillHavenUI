@@ -64,9 +64,8 @@ export class ChatDialogComponent implements OnInit {
         if(res){
           this.chatUsers=res;
         }
-      },
-      error:(err:ErrorResult)=>this.toastr.error(err.Message,`Failed with ${err.StatusCode}`)
-    });
+      }
+     });
 
 
 
@@ -95,9 +94,8 @@ debugger
       
        //console.log('getUsermessage',this.getMessageByUser)
         
-      },
-      error:(err)=>alert(JSON.stringify(err))
-    });
+      }
+     });
   }
 
 
@@ -113,7 +111,8 @@ debugger
     .catch((err:ErrorResult)=>{
       this.chatHub.loadChatHistory(userId);
 
-      this.toastr.error(err.Message,`Failed with ${err.StatusCode}`)});
+     // this.toastr.error(err.Message,`Failed with ${err.StatusCode}`)
+    });
 
   }
 

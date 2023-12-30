@@ -45,3 +45,26 @@
     flex-direction: row;
     justify-content: space-between;
   }
+
+
+
+  .photo-input{
+    padding: 10px 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    margin-right: 0;
+  }
+  
+  .photo-input:hover{
+    border: 1px solid #0275d8;
+  }
+  
+  .photo-input mat-label{
+    margin-right:10px
+  }
+
+  .photo-input button{
+    float:right;
+  }
+  

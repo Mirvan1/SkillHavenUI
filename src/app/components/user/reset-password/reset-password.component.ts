@@ -63,10 +63,7 @@ export class ResetPasswordComponent implements OnInit{
       debugger;
 console.log(res);
 this.router.navigateByUrl('login');
-    },
-    error:(err)=>{
-this.toasterService.error(JSON.stringify(err));
-    }
+    } 
   });
   
 }

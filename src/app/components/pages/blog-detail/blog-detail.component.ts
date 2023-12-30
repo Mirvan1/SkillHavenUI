@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule,Location } from '@angular/common';
 import { GetBlogDto, VoteBlogDto } from '../../../dtos/blog';
 import { BlogService } from '../../../services/blog.service';
 import { UserService } from '../../../services/user.service';
@@ -9,11 +9,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer } from '@angular/material/sidenav';
 import { BlogDetailCommentComponent } from '../blog/blog-detail-comment/blog-detail-comment.component';
 import { ToDatePipe } from '../../../utils/to-date.pipe';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [CommonModule,MatDividerModule,MatIconModule,BlogDetailCommentComponent,ToDatePipe],
+  imports: [CommonModule,MatDividerModule,MatIconModule,MatButtonModule,BlogDetailCommentComponent,ToDatePipe],
   templateUrl: './blog-detail.component.html',
   styleUrl: './blog-detail.component.css'
 })
@@ -26,7 +27,8 @@ export class BlogDetailComponent implements OnInit {
     private router:ActivatedRoute,
     private redirectRoute:Router,
     private blogService:BlogService,
-    public userService:UserService
+    public userService:UserService,
+   protected location: Location
   ){
     this.blogId=router.snapshot.params['id'];
     debugger
@@ -39,10 +41,7 @@ export class BlogDetailComponent implements OnInit {
         if(res){
             this.blog=res;
         }
-      },
-      error:(err)=>{
-        console.log(err);
-      }
+      } 
     })
   }
   }
@@ -62,9 +61,7 @@ export class BlogDetailComponent implements OnInit {
       next:(res)=>{
         this.blog.vote=res;
           console.log("Unvote",res);
-      },
-      error:(err)=>alert(JSON.stringify(err))
-    })
+      }  })
   }
 
   

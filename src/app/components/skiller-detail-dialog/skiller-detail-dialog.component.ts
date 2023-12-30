@@ -46,9 +46,7 @@ export class SkillerDetailDialogComponent implements OnInit {
     this.skillerService.getSkiller(this.data).subscribe({
       next:(res)=>{
         this.skiller=res;
-      },
-      error:(err)=>alert(err)
-    })
+      } })
   }
 
   convertFloat=(value:number)=>parseFloat(value.toString())

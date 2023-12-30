@@ -16,11 +16,29 @@ body {
 }
 
 /* Header Styles */
-.blog-detail-page h1 {
+.blog-detail-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+/* Header Styles */
+.blog-detail-header h1 {
     font-weight: 700;
     color: #1a1a1a; /* Slightly darker for headings */
     text-align: center;
     margin-bottom: 1rem;
+   margin-left: 40%;
+}
+.blog-detail-header button{
+    cursor: pointer !important;
+    font-size: 1.8rem;
+
+} 
+
+.blog-detail-header mat-icon:hover{
+      box-shadow: 0 0 0px #000000;
+     border-radius: 50px;
+ 
 }
 
 /* Creator Info Styles */

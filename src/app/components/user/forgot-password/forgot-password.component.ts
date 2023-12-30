@@ -35,10 +35,7 @@ export class ForgotPasswordComponent {
       next:(res)=>{
 console.log("forgotpass",res);
 this.toastrService.success("sendmail");
-      },
-      error:(err)=>{
-this.toastrService.error(JSON.stringify(err));
-      }
+      } 
     })
    }
 }

@@ -38,10 +38,7 @@ export class ConfirmDialogComponent {
           console.log("user deleted");
           this.router.navigateByUrl('/login');
         }
-      },
-      error:(err)=>{
-        this.toastr.error(err.message,`Failed with ${err.statusCode}`)
-      }
+      } 
     })
     this.dialogRef.close(true);
   }

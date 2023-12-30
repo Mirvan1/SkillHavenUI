@@ -8,6 +8,8 @@ import { Router, RouterLink } from '@angular/router';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { JsonHubProtocol } from '@microsoft/signalr';
 import { ShortStrPipe } from '../../utils/short-str.pipe';
+import { ToastrService } from 'ngx-toastr';
+import { ErrorResult } from '../../utils/global.dto';
 
 @Component({
   selector: 'app-blog-carousel',
@@ -53,7 +55,8 @@ export class BlogCarouselComponent  implements OnInit {
   blogContent!:ListBlogDtos;
   constructor(
     private blogService:BlogService,
-    private router:Router
+    private router:Router,
+    private toastrService:ToastrService
     ){ }
 
   ngOnInit(): void {
@@ -68,10 +71,7 @@ export class BlogCarouselComponent  implements OnInit {
           })
             this.blogContent=res;
         }
-      },
-      error:(err)=>{
-        alert(err);
-      }      
+      }    
     })
   }
 

@@ -95,9 +95,7 @@ debugger
           content: new FormControl(res.content,[Validators.required,Validators.minLength(50)]),
         });
       
-      },
-      error:(err)=>alert(err)
-      });
+      } });
     }
   }
 
@@ -112,9 +110,7 @@ debugger
         };
 
         this.blogService.createBlog(addBlogDto).subscribe({
-        next:(res)=>{console.log(true)},
-        error:(err)=>alert(err)
-        })
+        next:(res)=>{console.log(true)}  })
       }
       else if(this.crudType == BlogAddOrUpdate.Update){
         let updateBlogDto: UpdateBlogDto ={
@@ -126,9 +122,7 @@ debugger
         };
 
         this.blogService.updateBlog(updateBlogDto).subscribe({
-          next:(res)=>{console.log(true)},
-          error:(err)=>alert(err)
-          })
+          next:(res)=>{console.log(true)} })
       }
 this.redirectionRoute.navigateByUrl('/blog');
   }

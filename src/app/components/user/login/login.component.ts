@@ -14,11 +14,12 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { ErrorResult } from '../../../utils/global.dto';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule,MatSlideToggleModule,ReactiveFormsModule,ToastrModule,RouterLink,MatToolbarModule,FormsModule,MatCardModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatIconModule],
+  imports: [CommonModule ,MatSlideToggleModule,ReactiveFormsModule,RouterLink,MatToolbarModule,FormsModule,MatCardModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatIconModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -63,8 +64,7 @@ debugger
       }
 
       console.log(JSON.stringify(res))
-    },
-     error:(err:ErrorResult)=>this.toastr.success(err.DetailMessage,`Failed ${err.StatusCode}`)
+    } 
     }
     )
   }

@@ -5,9 +5,10 @@
 .skiller-area {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* Reduced gap between cards */
-  justify-content: space-between;
+  gap: 25px; /* Reduced gap between cards */
+  justify-content: flex-start;
   padding: 20px;
+  margin-left:25px;
 }
 
 .skiller-card {

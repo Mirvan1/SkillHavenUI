@@ -28,7 +28,7 @@
         <mat-divider></mat-divider>
         <mat-card-content>
           <div class="skiller-description">
-            <p class="skiller-description-text" >{{skiller.description}}</p>
+            <p class="skiller-description-text" >{{skiller.description ?? skiller.supervisorDescription}}</p>
           </div>
           <div class="skiller-picture">
             <img  [src]="skiller.profilePicture" [alt]="skiller.fullName"/>

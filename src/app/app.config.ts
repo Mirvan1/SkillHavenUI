@@ -11,9 +11,10 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideAnimations(),
+    
     provideToastr({
-      timeOut: 10000,
-      positionClass: 'toast-bottom-right',
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
     })
 ]

@@ -1,6 +1,13 @@
 @if(blog){
 <div class="blog-detail-page" [ngClass]="openCommentDrawer?'comment-background':''">
+   <div class="blog-detail-header">
+   
+    <button     mat-icon-button (click)="location.back()">
+ <mat-icon>arrow_back</mat-icon>
+ </button>
     <h1>{{blog.title}}</h1>
+</div>
+<mat-divider></mat-divider>
     <div class="blog-detail-creater">
         <img [src]="blog.photoPath" [alt]="blog.fullName" />
         <p>{{blog.fullName}} · </p>

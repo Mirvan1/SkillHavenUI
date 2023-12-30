@@ -48,3 +48,14 @@ mat-icon {
     flex-direction: row;
     justify-content: space-between;
 }
+
+.login-redirect-register{
+    margin:20px 0;
+    font-weight: 400;
+}
+
+.login-redirect-register mat-label a{
+    cursor: pointer;
+    font-size: 1.05rem;
+    color:blue;
+}

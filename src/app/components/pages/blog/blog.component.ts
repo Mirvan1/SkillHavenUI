@@ -72,10 +72,7 @@ export class BlogComponent implements OnInit{
           })
             this.blogContent=res;
         }
-      },
-      error:(err)=>{
-        alert(err);
-      }      
+      }       
     })
   }
 
@@ -86,9 +83,7 @@ export class BlogComponent implements OnInit{
     this.blogService.getBlogs(request).subscribe({
       next:(res)=>{
           this.mostVotedBlog=res.data;
-      },
-      error:(err)=>this.toastrService.error(JSON.stringify(err))
-    })
+      } })
 
   }
 

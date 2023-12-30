@@ -19,6 +19,9 @@
     font-family: 'Roboto', sans-serif;
  }
 
+ mat-tab-group{
+  border-radius: 10px;
+ }
 mat-tab{
   overflow-y: hidden;
 

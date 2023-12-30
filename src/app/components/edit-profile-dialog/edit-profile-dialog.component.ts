@@ -45,7 +45,7 @@ constructor(
   public dialogRef: MatDialogRef<EditProfileDialogComponent>,
   private router:Router,
   public dialog: MatDialog,
-  private toastr:ToastrService
+  private toastrService:ToastrService
 ){
 }
 
@@ -71,8 +71,7 @@ constructor(
 
             this.userId=res.userId;
           }
-      },
-      error:(err)=>alert(err)
+      }
     });
 
 
@@ -84,7 +83,7 @@ constructor(
     console.log("save");
     if(!userProfile.valid){
       alert("Not valid");
-      this.toastr.error('User Profile not valid','')
+      this.toastrService.error('User Profile not valid','')
       return;
     }
     let submitUserUpdateForm:UserDto={
@@ -102,12 +101,10 @@ this.userService.updateUser(submitUserUpdateForm).subscribe({
   next:(res)=>{
     if(res){
       console.log(res);
-      
+      this.toastrService.success("Saved")
+
     }
-  },
-  error:(err:ErrorResult)=>{
-    this.toastr.error(err.Message,`Failed with ${err.StatusCode}`)
-  }
+  } 
 })
     
   }
@@ -115,8 +112,7 @@ this.userService.updateUser(submitUserUpdateForm).subscribe({
 
   SubmitChangePassword(changePassword:FormGroup){
     if(!changePassword.valid){
-      alert("Not valid");
-      this.toastr.error('Form Not valid')
+       this.toastrService.warning('Form Not valid')
       return;
     }
     let changePasswordForm:ChangePasswordDto={
@@ -129,9 +125,9 @@ this.userService.updateUser(submitUserUpdateForm).subscribe({
       next:(res)=>{
         if(res){
           console.log('Change pass',res);
+          this.toastrService.success("Saved")
         }
-      },
-      error:(err)=>alert(err)
+      } 
     });
 
 
@@ -149,5 +145,22 @@ this.userService.updateUser(submitUserUpdateForm).subscribe({
 
 
 
+  }
+
+  onFileSelected(event:any) {
+
+    debugger
+    if(event?.target?.files?.length > 0) 
+    {
+ 
+      const reader = new FileReader();
+
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        const base64String = reader.result as string;
+        this.userProfile.patchValue({ profilePicture: base64String });
+       };
+      reader.readAsDataURL(event?.target?.files[0]);
+ 
+    }
   }
 }

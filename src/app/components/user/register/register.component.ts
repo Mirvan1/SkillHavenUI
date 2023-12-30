@@ -45,7 +45,7 @@ export class RegisterComponent {
   constructor(
     private _formBuilder: FormBuilder,
     private userService:UserService,
-    private router:Router
+    protected router:Router
     ){}
 
   onFileSelected(event:any) {
@@ -140,10 +140,7 @@ if(this.mailCode && this.userId){
       next:(res)=>{
         console.log("result",res);
         this.router.navigateByUrl("login");
-      },
-      error:(err)=>{
-alert(err);
-      }
+      } 
     })
   }
   }

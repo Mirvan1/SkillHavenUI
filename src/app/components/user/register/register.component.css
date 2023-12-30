@@ -6,7 +6,15 @@ mat-stepper{
 .right-button{
   float:right;
 }
-
+.login-redirect{
+  float:left;
+   font-weight: 400;
+}
+.login-redirect mat-label a{
+  cursor: pointer;
+  font-size: 1.05rem;
+  color:blue;
+}
 .mat-stepper-horizontal {
     margin-top: 8px;
   }

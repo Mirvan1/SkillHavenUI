@@ -44,6 +44,11 @@
 
 
         <div>
+          <div class="login-redirect">
+            <mat-label>
+              Already have an account?  <a (click)="router.navigateByUrl('login')">Login</a>    
+        </mat-label>
+        </div>
           <button mat-raised-button class="right-button" color="primary"  matStepperNext>Next</button>
         </div>
       </form>
@@ -131,6 +136,7 @@
       </mat-form-field>
     </div>
       <div>
+       
         <button mat-raised-button class="right-button"  (click)="confirmMailCode()">Confirm</button>
         <button mat-raised-button class="right-button" matStepperPrevious>Back</button>
       </div>

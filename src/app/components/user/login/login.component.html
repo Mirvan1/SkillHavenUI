@@ -33,7 +33,7 @@
                 </mat-form-field>
 <div class="login-external" >
 <div>
-    <mat-slide-toggle [(ngModel)]="saveSession" name="remember-me">Remember Me</mat-slide-toggle>
+    <mat-slide-toggle color="primary" [(ngModel)]="saveSession" name="remember-me">Remember Me</mat-slide-toggle>
 </div>
 
 <div>
@@ -44,6 +44,11 @@
 
                 <button mat-raised-button color="primary" class="login-button" (click)="getLogin()">Login</button>
             </form>
+            <div class="login-redirect-register">
+                <mat-label>
+                Don't have account? <a (click)="router.navigateByUrl('register')">Register</a>    
+            </mat-label>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>

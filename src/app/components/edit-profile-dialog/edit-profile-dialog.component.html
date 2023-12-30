@@ -90,18 +90,25 @@
             <input matInput formControlName="email">
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="form-field">
+          <div class="photo-input form-field">
             <mat-label>Picture</mat-label>
-            <input matInput formControlName="profilePicture">
-          </mat-form-field>
+             <input   type="file" #fileInput   (change)="onFileSelected($event)" hidden>
+
+            <button mat-raised-button type="button" (click)="fileInput.click()">Choose File</button>
+          
+          </div>
 
 
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Role</mat-label>
-            <mat-select formControlName="role">
-              <mat-option value="3">Supervisor</mat-option>
-              <mat-option value="4">Consultant</mat-option>
+            <mat-select matSelect formControlName="role"  >
+              <mat-option value="Supervisor">Supervisor</mat-option>
+              <mat-option value="Consultant">Consultant</mat-option>
+              <mat-option value="User">User</mat-option>
+
             </mat-select>
+
+             
           </mat-form-field>
 
 

@@ -37,7 +37,7 @@ constructor(
 
 
 openEditProfile(){
-  const dialogRef = this.editProfileDialog.open(EditProfileDialogComponent, {restoreFocus: false,width:'40%',height:'90%'});
+  const dialogRef = this.editProfileDialog.open(EditProfileDialogComponent, {restoreFocus: false,width:'60%',height:'90%'});
  // dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
  dialogRef.afterClosed().subscribe(result => {
   console.log('The dialog was closed');
