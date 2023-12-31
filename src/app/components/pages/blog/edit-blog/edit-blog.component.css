@@ -35,3 +35,29 @@
 .save-button{
   margin-top: 20px;
 }
+
+
+
+.edit-blog-detail-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.edit-blog-detail-header h2 {
+  font-weight: 700;
+  color: #1a1a1a; /* Slightly darker for headings */
+text-align: center;
+margin-top: 10px;  
+}
+.edit-blog-detail-header button{
+  cursor: pointer !important;
+  font-size: 1.8rem;
+
+} 
+
+.edit-blog-detail-header mat-icon:hover{
+    box-shadow: 0 0 0px #000000;
+   border-radius: 50px;
+   cursor: pointer !important;
+
+}

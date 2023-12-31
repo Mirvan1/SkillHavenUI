@@ -14,7 +14,9 @@ export interface GetBlogDto {
     email: string;
     photoPath?:string;
     vote?:number;
-    nOfReading?:number
+    nOfReading?:number;
+    blogComments?:number;
+
 }
 
 

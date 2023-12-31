@@ -10,7 +10,7 @@ import {
 import {MatAccordion, MatExpansionModule} from '@angular/material/expansion';
 
 import {MatButtonModule} from '@angular/material/button';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import{MatFormFieldModule} from '@angular/material/form-field';
 import { UserService } from '../../services/user.service';
 import { MatSelectModule } from '@angular/material/select';
@@ -22,6 +22,7 @@ import { Router } from '@angular/router';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
 import { ErrorResult } from '../../utils/global.dto';
 import { ToastrService } from 'ngx-toastr';
+import { RxwebValidators } from '@rxweb/reactive-form-validators';
 
 
 @Component({
@@ -56,17 +57,17 @@ constructor(
           if(res){
             this.userProfile= this.fb.group({
               userId:new FormControl(res.userId),
-              firstName:new FormControl(res.firstName),
-              lastName:new FormControl(res.lastName),
-              email:new FormControl(res.email),
-              role:new FormControl(res.role),
+              firstName:new FormControl(res.firstName,[Validators.required,Validators.minLength(5),Validators.maxLength(50)]),
+              lastName:new FormControl(res.lastName,[Validators.required,Validators.minLength(5),Validators.maxLength(50)]),
+              email:new FormControl(res.email,[Validators.required,Validators.email]),
+              role:new FormControl(res.role,Validators.required),
               profilePicture:new FormControl(res.profilePicture)
             });
 
             this.changePassword=new FormGroup({
-              oldPassword:new FormControl(''),
-              newPassword:new FormControl(''),
-              newConfirmPassword:new FormControl('')
+              oldPassword:new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(25)]),
+              newPassword:new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(25),RxwebValidators.compare({fieldName:'password'})]),
+              newConfirmPassword:new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(25)])
             });
 
             this.userId=res.userId;

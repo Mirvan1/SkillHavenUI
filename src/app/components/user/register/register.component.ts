@@ -23,12 +23,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 export class RegisterComponent {
   firstFormGroup = this._formBuilder.group({
     email: ['', [Validators.required,Validators.email]],
-    password: ['', Validators.required],
+    password: ['', [Validators.required,Validators.minLength(5),Validators.maxLength(25)]],
 
   });
   secondFormGroup = this._formBuilder.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
+    firstName: ['', Validators.required,Validators.minLength(5),Validators.maxLength(50)],
+    lastName: ['', Validators.required,Validators.minLength(5),Validators.maxLength(50)],
     role: ['', Validators.required],
     experience: [''],
     description: [''],

@@ -1,49 +1,57 @@
+<mat-sidenav-container class="comment-container" [hasBackdrop]="false">
+  <mat-sidenav #sidenav class="comment-sidenav" mode="push">
+  </mat-sidenav>
 
-<mat-sidenav-container class="comment-container" [hasBackdrop]="false"  >
-    <mat-sidenav #sidenav class="comment-sidenav" mode="push" >
-    </mat-sidenav>
-  
 
-      <!-- <button type="button" mat-button (click)="isDrawerOpen?drawer.open():drawer.close()">
+  <!-- <button type="button" mat-button (click)="isDrawerOpen?drawer.open():drawer.close()">
         Toggle sidenav
       </button> -->
-      <mat-sidenav-content>
-        <div class="comment-sidenav-content">     
-             @if (blogComments) {
-        @for( blogComment of blogComments.data;track blogComment.blogCommentsId){
-            <mat-card class="comment-card">
-                <div class="card-content">
-                  <img mat-card-avatar src="../../../assets/cover.png" alt="User's Name">
-              
-                  <div class="text-content">
-                    <h3 class="username">{{blogComment.fullName}}</h3>
-                    <p class="comment-text">{{blogComment.commentContent}}</p>
-                    <p class="comment-date">{{blogComment.publishDate | toDate}}</p>
-                  </div>
-                </div>
-              </mat-card>
-            }  
-        
-        }
+  <mat-sidenav-content>
+    <div class="comment-sidenav-content">
+      @if (blogComments) {
+      @for( blogComment of blogComments.data;track blogComment.blogCommentsId){
+      <mat-card class="comment-card">
+        <div class="card-content">
+          <img mat-card-avatar src="../../../assets/cover.png" alt="User's Name">
+
+          <div class="text-content">
+            <h3 class="username">{{blogComment.fullName}}</h3>
+            <p class="comment-text">{{blogComment.commentContent}}</p>
+            <p class="comment-date">{{blogComment.publishDate | toDate}}</p>
+          </div>
+        </div>
+      </mat-card>
+      }
+
+      }
 
     </div>
 
-    <div class="add-comment-sidenav-content"> 
-
+    <div class="add-comment-sidenav-content">
+      <form #commentForm="ngForm">
         <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Add Comment</mat-label>
-            <input matInput type="text" [(ngModel)]="addCommentValue">
-            @if (addCommentValue) {
-              <button matSuffix mat-icon-button aria-label="Clear" (click)="addCommentValue=''">
-                <mat-icon>close</mat-icon>
-              </button>
-            }
-          </mat-form-field>
-             <button type="button" mat-raised-button (click)="addComment(addCommentValue)">
-        Send
-      </button>
-    </div>
-</mat-sidenav-content>
+          <mat-label>Add Comment</mat-label>
+          <input matInput type="text" name="comment" [(ngModel)]="addCommentValue" #addCommentModel="ngModel" minlength="5"
+            maxlength="50" required>
+          @if (addCommentValue) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="addCommentValue=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          }
+          @if(addCommentModel.errors?.['required']){
+          <mat-error>Required Fields</mat-error>
+          }
 
-  
-  </mat-sidenav-container>
+          @if(addCommentModel.errors?.['minlength'] || addCommentModel.errors?.['maxlength']){
+          <mat-error>The password between 5 and 50 </mat-error>
+          }
+        </mat-form-field>
+        <button [disabled]="!commentForm.valid" type="button" mat-raised-button (click)="addComment(addCommentValue)">
+          Send
+        </button>
+      </form>
+    </div>
+  </mat-sidenav-content>
+
+
+</mat-sidenav-container>

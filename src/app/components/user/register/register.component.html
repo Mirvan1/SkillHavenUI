@@ -3,8 +3,8 @@
     <mat-toolbar color="primary">
       <span>Register</span>
     </mat-toolbar>
-    </div>
-<mat-stepper linear #stepper>
+  </div>
+  <mat-stepper linear #stepper>
     <mat-step [stepControl]="firstFormGroup" [editable]="true">
 
       <form [formGroup]="firstFormGroup" class="register-form">
@@ -14,134 +14,186 @@
           <mat-label>Email</mat-label>
           <input type="email" matInput formControlName="email" placeholder="Ex:xxxx@xxx.com" required>
           @if (firstFormGroup.get('email')?.value) {
-            <button matSuffix mat-icon-button aria-label="Clear" (click)="firstFormGroup.get('email')?.setValue('')">
-                <mat-icon>close</mat-icon>
-              </button>
-        }
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="firstFormGroup.get('email')?.setValue('')">
+            <mat-icon>close</mat-icon>
+          </button>
+          }
+          @if (firstFormGroup.get('email')?.hasError('required')) {
+          <mat-error>Required field </mat-error>
+          }
+          @if (firstFormGroup.get('email')?.hasError('email')) {
+          <mat-error>Is not valid email</mat-error>
+          }
+
+
         </mat-form-field>
 
 
         <mat-form-field appearance="outline" class="register-input">
-            <mat-label>Password</mat-label>
-            <input [type]="showPassword ? 'text' : 'password'" matInput formControlName="password"  required>
-            @if (firstFormGroup.get('password')?.value) {
-                <button matSuffix mat-icon-button aria-label="Clear" (click)="firstFormGroup.get('password')?.setValue('')">
-                    <mat-icon>close</mat-icon>
-                  </button>
-                
+          <mat-label>Password</mat-label>
+          <input [type]="showPassword ? 'text' : 'password'" matInput formControlName="password" required>
+          @if (firstFormGroup.get('password')?.value) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="firstFormGroup.get('password')?.setValue('')">
+            <mat-icon>close</mat-icon>
+          </button>
+
+          }
+          <button matSuffix mat-icon-button aria-label="Show" (click)="showPassword=!showPassword">
+            @if(showPassword){
+            <mat-icon>visibility</mat-icon>
+
             }
-            <button matSuffix mat-icon-button aria-label="Show" (click)="showPassword=!showPassword">
-@if(showPassword){
-    <mat-icon>visibility</mat-icon>
+            @else{
+            <mat-icon>visibility_off</mat-icon>
 
-}
-@else{
-    <mat-icon>visibility_off</mat-icon>
+            }
 
-}
-            </button>
+
+          </button>
+          @if (firstFormGroup.get('password')?.hasError('required')) {
+          <mat-error>Required Fields</mat-error>
+          }
+
+          @if (firstFormGroup.get('password')?.hasError('minlength') ||
+          firstFormGroup.get('password')?.hasError('maxlength')) {
+          <mat-error>The password between 5 and 25 </mat-error>
+          }
         </mat-form-field>
 
 
         <div>
           <div class="login-redirect">
             <mat-label>
-              Already have an account?  <a (click)="router.navigateByUrl('login')">Login</a>    
-        </mat-label>
-        </div>
-          <button mat-raised-button class="right-button" color="primary"  matStepperNext>Next</button>
+              Already have an account? <a (click)="router.navigateByUrl('login')">Login</a>
+            </mat-label>
+          </div>
+          <button [disabled]="!firstFormGroup.valid" mat-raised-button class="right-button" color="primary"
+            matStepperNext>Next</button>
         </div>
       </form>
 
     </mat-step>
     <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
 
-        <form [formGroup]="secondFormGroup" (ngSubmit)="onSubmit()" class="register-form">
+      <form [formGroup]="secondFormGroup" (ngSubmit)="onSubmit()" class="register-form">
         <ng-template matStepLabel>Fill out your information</ng-template>
 
         <mat-form-field appearance="outline" class="register-input">
           <mat-label>First Name</mat-label>
-          <input matInput formControlName="firstName" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
+          <input matInput formControlName="firstName" placeholder="Ex. 1 Main St, New York, NY" required>
+
+          @if (secondFormGroup.get('firstName')?.hasError('required')) {
+          <mat-error>Required Fields</mat-error>
+          }
+          @if (secondFormGroup.get('firstName')?.hasError('minlength') ||
+          firstFormGroup.get('firstName')?.hasError('maxlength')) {
+          <mat-error>The password between 5 and 50 </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="register-input">
-            <mat-label>Last Name</mat-label>
-            <input matInput formControlName="lastName" placeholder="Ex. 1 Main St, New York, NY"
-                   required>
-          </mat-form-field>
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" placeholder="Ex. 1 Main St, New York, NY" required>
+          @if (secondFormGroup.get('lastName')?.hasError('required')) {
+          <mat-error>Required Fields</mat-error>
+          }
+          @if (secondFormGroup.get('lastName')?.hasError('minlength') ||
+          firstFormGroup.get('lastName')?.hasError('maxlength')) {
+          <mat-error>The password between 5 and 50 </mat-error>
+          }
 
-          <div  appearance="outline" class="photo-input register-input">
-            <mat-label>Profile Picture:</mat-label>
-            <input type="file" #fileInput   (change)="onFileSelected($event)" hidden/>
+        </mat-form-field>
 
-            <button mat-raised-button type="button" (click)="fileInput.click()">Choose File</button>
-          
-            <!-- <div *ngIf="secondFormGroup.get('picture')?.value">
+        <div appearance="outline" class="photo-input register-input">
+          <mat-label>Profile Picture:</mat-label>
+          <input type="file" #fileInput (change)="onFileSelected($event)" hidden />
+
+          <button mat-raised-button type="button" (click)="fileInput.click()">Choose File</button>
+
+          <!-- <div *ngIf="secondFormGroup.get('picture')?.value">
                 <strong>Selected File:</strong>{{ (secondFormGroup.get('picture')?.value as File)?.name }}
 
             </div> -->
         </div>
 
-          <mat-form-field appearance="outline" class="register-input">
-            <mat-label>Role</mat-label>
-            <mat-select formControlName="role" >
-              <mat-option value="4">Supervisor</mat-option>
-              <mat-option value="3">Consultant</mat-option>
-              <mat-option value="2">User</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          @if(secondFormGroup.get('role')?.value === '3'){
-            <mat-form-field appearance="outline" class="register-input">
-                <mat-label>Experience</mat-label>
-                <input matInput formControlName="experience" placeholder="Choose your role"
-                       required>
-              </mat-form-field>
-
-              <mat-form-field appearance="outline">
-                <mat-label>Description</mat-label>
-                <textarea matInput  formControlName="description"></textarea>
-              </mat-form-field>
+        <mat-form-field appearance="outline" class="register-input">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role">
+            <mat-option value="4">Supervisor</mat-option>
+            <mat-option value="3">Consultant</mat-option>
+            <mat-option value="2">User</mat-option>
+          </mat-select>
+          @if (secondFormGroup.get('role')?.hasError('required')) {
+          <mat-error>Required Fields</mat-error>
           }
+        </mat-form-field>
 
-          @if(secondFormGroup.get('role')?.value === '4'){
-            <mat-form-field appearance="outline" class="register-input">
-                <mat-label>Expertise</mat-label>
-                <input matInput formControlName="expertise" placeholder="Your area of expertise "
-                       required>
-              </mat-form-field>
-
-              <mat-form-field appearance="outline" >
-                <mat-label>Description</mat-label>
-                <textarea matInput formControlName="description"></textarea>
-              </mat-form-field>
+        @if(secondFormGroup.get('role')?.value === '3'){
+        <mat-form-field appearance="outline" class="register-input">
+          <mat-label>Experience</mat-label>
+          <input matInput formControlName="experience" placeholder="Choose your role" required>
+          @if (secondFormGroup.get('experience')?.hasError('required')) {
+          <mat-error>Required Fields</mat-error>
           }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+          @if (secondFormGroup.get('description')?.hasError('required')) {
+          <mat-error>Required Fields</mat-error>
+          }
+        </mat-form-field>
+        }
+
+        @if(secondFormGroup.get('role')?.value === '4'){
+        <mat-form-field appearance="outline" class="register-input">
+          <mat-label>Expertise</mat-label>
+          <input matInput formControlName="expertise" placeholder="Your area of expertise " required>
+          @if (secondFormGroup.get('expertise')?.hasError('required')) {
+          <mat-error>Required Fields</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+          @if (secondFormGroup.get('description')?.hasError('required')) {
+          <mat-error>Required Fields</mat-error>
+          }
+        </mat-form-field>
+        }
 
         <div>
-                    <button mat-raised-button class="right-button" color="primary" matStepperNext>Next</button>
-          <button mat-raised-button class="right-button" matStepperPrevious>Back</button>
+          <button mat-raised-button class="right-button" color="primary" matStepperNext>Next</button>
+          <button [disabled]="!secondFormGroup.valid" mat-raised-button class="right-button"
+            matStepperPrevious>Back</button>
         </div>
       </form>
-    
-    
+
+
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Confirm you profile</ng-template>
       <div class="confirmation-area">
-      <p >Welcome you registered.Please confirm with your mail</p>
-      <mat-form-field appearance="outline" class="register-input">
-        <mat-label>Confirmation Code:</mat-label>
-        <input matInput [(ngModel)]="mailCode"  placeholder="Code" required>
-      </mat-form-field>
-    </div>
+        <p>Welcome you registered.Please confirm with your mail</p>
+        <mat-form-field appearance="outline" class="register-input">
+          <mat-label>Confirmation Code:</mat-label>
+          <input matInput [(ngModel)]="mailCode" placeholder="Code" required>
+
+          @if (mailCode === null) {
+          <mat-error>Required Fields</mat-error>
+          }
+
+        </mat-form-field>
+      </div>
       <div>
-       
-        <button mat-raised-button class="right-button"  (click)="confirmMailCode()">Confirm</button>
+
+        <button mat-raised-button class="right-button" (click)="confirmMailCode()">Confirm</button>
         <button mat-raised-button class="right-button" matStepperPrevious>Back</button>
       </div>
     </mat-step>
   </mat-stepper>
 
-  
+
 </div>

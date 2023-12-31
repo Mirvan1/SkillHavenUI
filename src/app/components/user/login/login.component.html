@@ -1,55 +1,72 @@
 <div class="login-page">
-<div class="login-container">
-    <div class="login-label">
-     
+    <div class="login-container">
+        <div class="login-label">
+
         </div>
-    <mat-card class="login-card">
-        <mat-toolbar class="login-label" color="primary">
-            <span>Login</span>
-          </mat-toolbar>
+        <mat-card class="login-card">
+            <mat-toolbar class="login-label" color="primary">
+                <span>Login</span>
+            </mat-toolbar>
 
-        <mat-card-content>
-            <form class="login-form">
-                <mat-form-field appearance="outline" class="form-field">
-                    <mat-label>Email</mat-label>
-                    <input matInput [(ngModel)]="email" name="email" type="email" required>
-                 </mat-form-field>
+            <mat-card-content>
+                <form class="login-form" #loginForm="ngForm">
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Email</mat-label>
+                        <input matInput [(ngModel)]="email" name="email" email type="email" #emailInput="ngModel" required>
+ 
+@if(emailInput.errors?.['required']){
+          <mat-error>Required Fields</mat-error>
 
-                <mat-form-field appearance="outline" class="form-field">
-                    <mat-label>Password</mat-label>
-                    <input matInput [(ngModel)]="password" name="password" type="password"   required>
-                    
-                    <button matSuffix mat-icon-button aria-label="Show" (click)="showPassword=!showPassword">
-                        @if(showPassword){
-                        <mat-icon matSuffix>visibility</mat-icon>
-                    
-                    }
-                    @else{
-                        <mat-icon matSuffix>visibility_off</mat-icon>
-                    
-                    }
-                </button>
+}
 
-                </mat-form-field>
-<div class="login-external" >
-<div>
-    <mat-slide-toggle color="primary" [(ngModel)]="saveSession" name="remember-me">Remember Me</mat-slide-toggle>
-</div>
+@if(emailInput.errors?.['email']){
+    <mat-error>Is not valid email</mat-error>
 
-<div>
-    <a (click)="router.navigateByUrl('forgot-password')">Forgot Password?</a>
-</div>
+}
+                    </mat-form-field>
 
-</div>
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Password</mat-label>
+                        <input matInput [(ngModel)]="password" name="password" type="password" #password1="ngModel" minlength="5" maxlength="25" required>
 
-                <button mat-raised-button color="primary" class="login-button" (click)="getLogin()">Login</button>
-            </form>
-            <div class="login-redirect-register">
-                <mat-label>
-                Don't have account? <a (click)="router.navigateByUrl('register')">Register</a>    
-            </mat-label>
-            </div>
-        </mat-card-content>
-    </mat-card>
-</div>
+                        <button matSuffix mat-icon-button aria-label="Show" (click)="showPassword=!showPassword">
+                            @if(showPassword){
+                            <mat-icon matSuffix>visibility</mat-icon>
+
+                            }
+                            @else{
+                            <mat-icon matSuffix>visibility_off</mat-icon>
+
+                            }
+                        </button>
+                        @if(password1.errors?.['required']){
+                            <mat-error>Required Fields</mat-error>
+                   }
+                  
+                  @if(password1.errors?.['minlength'] || password1.errors?.['maxlength']){
+                    <mat-error>The password between 5 and 25 </mat-error>
+                   }
+                    </mat-form-field>
+                    <div class="login-external">
+                        <div>
+                            <mat-slide-toggle color="primary" [(ngModel)]="saveSession" name="remember-me">Remember
+                                Me</mat-slide-toggle>
+                        </div>
+
+                        <div>
+                            <a (click)="router.navigateByUrl('forgot-password')">Forgot Password?</a>
+                        </div>
+
+                    </div>
+
+                    <button [disabled]="!loginForm.valid" mat-raised-button color="primary" class="login-button" (click)="getLogin()">Login</button>
+                </form>
+                <div class="login-redirect-register">
+                    <mat-label>
+                        Don't have account? <a (click)="router.navigateByUrl('register')">Register</a>
+                    </mat-label>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>

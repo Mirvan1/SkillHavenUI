@@ -12,6 +12,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { ResetPasswordDto } from '../../../dtos/user.dto';
+import { RxwebValidators } from '@rxweb/reactive-form-validators';
 
 
 @Component({
@@ -34,8 +35,8 @@ export class ResetPasswordComponent implements OnInit{
     private router:Router
     ){
     this.userForm = new FormGroup({
-      password: new FormControl('', [Validators.required ]),
-      passwordConfirm: new FormControl('', [Validators.required ])
+      password: new FormControl('', [Validators.required,Validators.minLength(5),Validators.maxLength(25) ]),
+      passwordConfirm: new FormControl('', [Validators.required,Validators.minLength(5),Validators.maxLength(25),RxwebValidators.compare({fieldName:'password'}) ])
     });
   }
   ngOnInit(): void {

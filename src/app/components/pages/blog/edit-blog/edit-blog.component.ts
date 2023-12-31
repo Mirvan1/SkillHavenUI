@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
 import { BlogService } from '../../../../services/blog.service';
 import { UserService } from '../../../../services/user.service';
@@ -61,14 +61,15 @@ export class EditBlogComponent implements OnInit {
     private router:ActivatedRoute,
     private redirectionRoute:Router,
     private blogService:BlogService,
-    private userService:UserService
+    private userService:UserService,
+    protected location:Location
   ){
     this.blogId=  this.router.snapshot.params['id'];
 debugger
     this.blogForm= new FormGroup({
-      title: new FormControl('',Validators.required),
+      title: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(50)]),
       photo:new FormControl(''),
-      content: new FormControl('',[Validators.required,Validators.minLength(50)]),
+      content: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(1000)]),
     });
 
     if(this.blogId) this.crudType=BlogAddOrUpdate.Update;
@@ -110,7 +111,10 @@ debugger
         };
 
         this.blogService.createBlog(addBlogDto).subscribe({
-        next:(res)=>{console.log(true)}  })
+        next:(res)=>{
+          this.redirectionRoute.navigateByUrl('/blog');
+
+          console.log(true)}  })
       }
       else if(this.crudType == BlogAddOrUpdate.Update){
         let updateBlogDto: UpdateBlogDto ={
@@ -122,9 +126,11 @@ debugger
         };
 
         this.blogService.updateBlog(updateBlogDto).subscribe({
-          next:(res)=>{console.log(true)} })
+          next:(res)=>{
+            this.redirectionRoute.navigateByUrl('/blog');
+
+            console.log(true)} })
       }
-this.redirectionRoute.navigateByUrl('/blog');
   }
 
   onFileSelected(event:any) {

@@ -28,9 +28,16 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     .pipe(
       catchError((err) => {
         debugger
-        const errorResult: ErrorResult = JSON.parse(err.error) as ErrorResult;
-        toastrService.error(JSON.stringify(errorResult.DetailMessage), errorResult.Message)
-        throw err;
+        if (err.status === 400) {
+          toastrService.error(JSON.stringify(JSON.parse(err.error)?.errors),JSON.parse( err.error)?.title)
+          throw err;
+        }
+        else {
+          const errorResult: ErrorResult = JSON.parse(err.error) as ErrorResult;
+          toastrService.error(JSON.stringify(errorResult.DetailMessage), errorResult.Message)
+          throw err;
+        }
+
       }),
       finalize(() => {
         console.log("hide service");

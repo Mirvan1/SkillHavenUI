@@ -77,17 +77,39 @@
         <mat-form-field appearance="outline" class="form-field">
             <mat-label>First Name</mat-label>
             <input matInput formControlName="firstName">
+            @if (userProfile.get('firstName')?.hasError('required')) {
+              <mat-error>Required Fields</mat-error>
+              }
+              @if (userProfile.get('firstName')?.hasError('minlength') ||
+              userProfile.get('firstName')?.hasError('maxlength')) {
+              <mat-error>The password between 5 and 25 </mat-error>
+              }
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Last Name</mat-label>
             <input matInput formControlName="lastName">
+            @if (userProfile.get('lastName')?.hasError('required')) {
+              <mat-error>Required Fields</mat-error>
+              }
+              @if (userProfile.get('lastName')?.hasError('minlength') ||
+              userProfile.get('lastName')?.hasError('maxlength')) {
+              <mat-error>The password between 5 and 25 </mat-error>
+              }
           </mat-form-field>
 
 
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Email</mat-label>
             <input matInput formControlName="email">
+
+            @if (userProfile.get('email')?.hasError('required')) {
+              <mat-error>Required field </mat-error>
+              }
+              @if (userProfile.get('email')?.hasError('email')) {
+              <mat-error>Is not valid email</mat-error>
+              }
+    
           </mat-form-field>
 
           <div class="photo-input form-field">
@@ -107,7 +129,9 @@
               <mat-option value="User">User</mat-option>
 
             </mat-select>
-
+            @if (userProfile.get('role')?.hasError('required')) {
+              <mat-error>Required Fields</mat-error>
+              }
              
           </mat-form-field>
 
@@ -134,17 +158,41 @@
             <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Old Password</mat-label>
                 <input matInput formControlName="oldPassword">
+                @if (changePassword.get('oldPassword')?.hasError('required')) {
+                  <mat-error>Required Fields</mat-error>
+                  }
+        
+                  @if (changePassword.get('oldPassword')?.hasError('minlength') ||
+                  changePassword.get('oldPassword')?.hasError('maxlength')) {
+                  <mat-error>The password between 5 and 50 </mat-error>
+                  }
               </mat-form-field>
     
               <mat-form-field appearance="outline" class="form-field">
                 <mat-label>New Password</mat-label>
                 <input matInput formControlName="newPassword">
+                @if (changePassword.get('newPassword')?.hasError('required')) {
+                  <mat-error>Required Fields</mat-error>
+                  }
+        
+                  @if (changePassword.get('newPassword')?.hasError('minlength') ||
+                  changePassword.get('newPassword')?.hasError('maxlength')) {
+                  <mat-error>The password between 5 and 50 </mat-error>
+                  }
               </mat-form-field>
     
     
               <mat-form-field appearance="outline" class="form-field">
                 <mat-label>New Confirm Password</mat-label>
                 <input matInput formControlName="newConfirmPassword">
+                @if (changePassword.get('newConfirmPassword')?.hasError('required')) {
+                  <mat-error>Required Fields</mat-error>
+                  }
+        
+                  @if (changePassword.get('newConfirmPassword')?.hasError('minlength') ||
+                  changePassword.get('newConfirmPassword')?.hasError('maxlength')) {
+                  <mat-error>The password between 5 and 50 </mat-error>
+                  }
               </mat-form-field>
 
     
