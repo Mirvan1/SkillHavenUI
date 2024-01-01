@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { SkillsService } from '../../services/skills.service';
@@ -24,6 +24,7 @@ import { ChatHubService } from '../../services/chat-hub.service';
 import { BlogCarouselComponent } from '../blog-carousel/blog-carousel.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SkillerCardToolbarComponent } from '../skiller-card-toolbar/skiller-card-toolbar.component';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -33,7 +34,7 @@ import { SkillerCardToolbarComponent } from '../skiller-card-toolbar/skiller-car
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit,AfterViewInit {
   allSkillers: ListSkillerDtos | null = null;
   supervisors?: ListSkillerDtos | null;
   consultants?: ListSkillerDtos | null;
@@ -48,13 +49,25 @@ defaultOrderByName:string='Rating';
   constructor(
     private userService: UserService,
     private skillsService: SkillsService,
-    public chatHubService: ChatHubService
+    public chatHubService: ChatHubService,
+    private toastrService:ToastrService
   ) {
     this.userService.getUser().subscribe({});
     this.chatHubService.startConnection();
 
   }
 
+  
+  ngAfterViewInit() {
+    this.chatHubService.addReceiveMessageListener((userId, message) => { 
+      // if(this.receiverUserId){
+      // this.chatHubService.loadChatHistory(this.receiverUserId);
+      // }
+      this.toastrService.success(JSON.stringify(userId),JSON.stringify(message));
+      this.chatHubService.newMessage.next(true);
+
+  });
+  }
 
   ngOnInit(): void {
     this.getAllSkiller(this.defaultPageSize, this.defaultPage,this.defaultSearchValue,this.defaultOrderBy,this.defaultOrderByName);

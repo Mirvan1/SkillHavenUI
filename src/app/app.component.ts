@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { SkillerCardComponent } from './components/skiller-card/skiller-card.component';
@@ -14,11 +14,13 @@ import { UserService } from './services/user.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterLink,RouterOutlet,ChatDialogComponent,EditProfileDialogComponent,
+  imports: [CommonModule, MatBadgeModule,RouterLink,RouterOutlet,ChatDialogComponent,EditProfileDialogComponent,
      MatDialogActions,MatFormFieldModule,MatToolbarModule,MatIconModule,MatButtonModule, MatMenuModule,NgxSpinnerModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -26,13 +28,26 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 export class AppComponent {
   title = 'skill-haven-ui';
 
+badgeVisibility=false;
+
 constructor(
   public router:Router,
   public editProfileDialog: MatDialog,
   public chatDialog: MatDialog,
   public chatHubService:ChatHubService,
-  public userService:UserService
-){}
+  public userService:UserService,
+  public toastrService:ToastrService
+){
+  this.chatHubService.newMessage$.subscribe({
+    next:(res)=>{
+      debugger
+      if(res){
+        this.badgeVisibility=res;
+      }
+    }
+  })
+}
+ 
 
 
 
@@ -59,4 +74,8 @@ logout=()=>{
   this.router.navigateByUrl('/login');
 }
 
+badgeVisible(){
+
+  this.badgeVisibility=false;
+}
 }

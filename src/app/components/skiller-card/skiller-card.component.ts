@@ -12,12 +12,14 @@ import { NgxStarsModule } from 'ngx-stars';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ChatDialogComponent } from '../chat-dialog/chat-dialog.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @Component({
   selector: 'app-skiller-card',
   standalone: true,
-  imports: [CommonModule, MatPaginatorModule,SkillerCardComponent ,NgxStarsModule, MatCardModule, MatDividerModule, MatProgressBarModule, MatButtonModule],
+   imports: [CommonModule,MatIconModule,MatTooltipModule, MatPaginatorModule,SkillerCardComponent ,NgxStarsModule, MatCardModule, MatDividerModule, MatProgressBarModule, MatButtonModule],
   templateUrl: './skiller-card.component.html',
   styleUrl: './skiller-card.component.css'
 })

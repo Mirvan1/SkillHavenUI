@@ -53,12 +53,14 @@ export class BlogDetailCommentComponent implements OnInit, OnChanges {
     if (this.isDrawerOpen
     ) {
       // this.renderer.setStyle(document.body, 'opacity', '0.2');
-
+      this.renderer.setStyle(document.body, 'overflow-y', 'hidden');
       this.sidenav?.open();
 
 
     }
     else {
+      this.renderer.setStyle(document.body, 'overflow-y', 'auto');
+
       debugger
       this.sidenav?.close();
     }
@@ -102,6 +104,8 @@ export class BlogDetailCommentComponent implements OnInit, OnChanges {
 
   closeSidenav(){
     debugger
+    this.renderer.setStyle(document.body, 'overflow-y', 'auto');
+
     this.isDrawerOpen=!this.isDrawerOpen;
     this.drawerOpenEvent.emit(this.isDrawerOpen)
   }

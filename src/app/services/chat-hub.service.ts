@@ -16,7 +16,8 @@ export class ChatHubService {
   chatService: ChatService = inject(ChatService);
   accessToken!: string;
 
-
+   newMessage = new BehaviorSubject<boolean>(false);
+  newMessage$ = this.newMessage.asObservable();
 
   public startConnection = () => {
     this.userService.getAccessToken$.subscribe({

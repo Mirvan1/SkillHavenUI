@@ -24,7 +24,7 @@ import { ErrorResult } from '../../utils/global.dto';
   templateUrl: './chat-dialog.component.html',
   styleUrl: './chat-dialog.component.css'
 })
-export class ChatDialogComponent implements OnInit {
+export class ChatDialogComponent implements OnInit,OnChanges {
 
    chatUsers!:ListChatUsersDtos;
 
@@ -67,15 +67,18 @@ export class ChatDialogComponent implements OnInit {
       }
      });
 
+     this.chatHub.addReceiveMessageListener((userId, message) => { 
+    //  if(this.receiverUserId){
+      this.chatHub.loadChatHistory(this.receiverUserId);
+          //  }
+  });
+
+    }
+
+ngOnChanges():void{
 
 
-    this.chatHub.addReceiveMessageListener((userId, message) => { 
-        if(this.receiverUserId){
-        this.chatHub.loadChatHistory(this.receiverUserId);
-        }
-    });
-
-  }
+}
 
   GetUserMesssage(userId:number){
     let messsages:GetMessagesByUser={

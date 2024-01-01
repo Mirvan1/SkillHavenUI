@@ -94,3 +94,10 @@ mat-card-actions{
           line-clamp: 3; 
   -webkit-box-orient: vertical;
 }
+
+.rate-bar{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap:5px;
+}

@@ -21,9 +21,11 @@
         </mat-card-subtitle>
           <mat-card-title>{{skiller.fullName}}
           
-            <section>
-              <ngx-stars [readonly]="true" [color]="'yellow'" [size]="1" [maxStars]="5" [initialStars]="skiller.rating"></ngx-stars>
-            </section></mat-card-title>
+            <section class="rate-bar">
+              <ngx-stars matTooltip="The skiller rating is calculated based on the number of blogs, their ratings, and the votes each blog receives." [readonly]="true" [color]="'yellow'" [size]="1" [maxStars]="5" [initialStars]="skiller.rating"></ngx-stars>          
+            </section>
+          
+          </mat-card-title>
         </mat-card-header>
         <mat-divider></mat-divider>
         <mat-card-content>

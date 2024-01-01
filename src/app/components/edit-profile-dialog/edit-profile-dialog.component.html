@@ -112,7 +112,7 @@
     
           </mat-form-field>
 
-          <div class="photo-input form-field">
+          <div class="photo-input ">
             <mat-label>Picture</mat-label>
              <input   type="file" #fileInput   (change)="onFileSelected($event)" hidden>
 
@@ -140,7 +140,7 @@
 <mat-divider></mat-divider>
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close  (click)="dialogRef.close()">Close</button>
-    <button mat-raised-button cdkFocusInitial color="primary" type="submit">Save</button>
+    <button [disabled]="!userProfile.valid" mat-raised-button cdkFocusInitial color="primary" type="submit">Save</button>
 
   </mat-dialog-actions>
 
@@ -157,7 +157,7 @@
     
             <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Old Password</mat-label>
-                <input matInput formControlName="oldPassword">
+                <input matInput formControlName="oldPassword" type="password">
                 @if (changePassword.get('oldPassword')?.hasError('required')) {
                   <mat-error>Required Fields</mat-error>
                   }
@@ -170,7 +170,7 @@
     
               <mat-form-field appearance="outline" class="form-field">
                 <mat-label>New Password</mat-label>
-                <input matInput formControlName="newPassword">
+                <input matInput formControlName="newPassword" type="password">
                 @if (changePassword.get('newPassword')?.hasError('required')) {
                   <mat-error>Required Fields</mat-error>
                   }
@@ -184,7 +184,7 @@
     
               <mat-form-field appearance="outline" class="form-field">
                 <mat-label>New Confirm Password</mat-label>
-                <input matInput formControlName="newConfirmPassword">
+                <input matInput formControlName="newConfirmPassword" type="password">
                 @if (changePassword.get('newConfirmPassword')?.hasError('required')) {
                   <mat-error>Required Fields</mat-error>
                   }
@@ -201,7 +201,7 @@
     <mat-divider></mat-divider>
       <mat-dialog-actions align="end">
         <button mat-button mat-dialog-close  (click)="dialogRef.close()">Close</button>
-        <button mat-raised-button cdkFocusInitial color="primary" type="submit">Change Password</button>
+        <button [disabled]="!changePassword.valid" mat-raised-button cdkFocusInitial color="primary" type="submit">Change Password</button>
     
       </mat-dialog-actions>
     

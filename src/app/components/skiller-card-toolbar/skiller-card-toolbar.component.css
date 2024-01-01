@@ -1,91 +1,94 @@
-
-.skiller-toolbar{
- 
-    display: flex;
-    flex-direction: row;
-     max-width: 1200px; /* Maximum width of the container */
-    margin: 5%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
-    font-size: 16px;
-    padding:15px;
-    justify-content: space-between;
-  }
-  
-  .filter-form-field{
-  width: 200px;
-  height: 10px;
-  margin-top:-6%  !important;
-  margin-bottom: -14% !important;
+/* General Toolbar Styling */
+.skiller-toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  padding: 0 !important;
-  border: 0 !important;
-  }
-
-  
-   
-  .mat-mdc-text-field-wrapper{
-    display: flex;
-    flex-direction: row;
-    height: 45px !important;
-  }
-  .mat-menu-content{
-    padding:25px 50px !important;    
-    width:500px;
-  }
-  mat-menu{
-  }
-  
-  .mat-menu-item {
-    height: inherit;
-    width: inherit;
-    background: lightgoldenrodyellow
-  }
-
-  .mat-menu-item:hover{
-    background: lightgoldenrodyellow
-
-  }
-  .ripple-container {
-    cursor: default;
-    text-align: center;
-  
-    height: 100px;
-    line-height: 300px;
-  
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    gap: 20px;
-  
-    -webkit-user-drag: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .sorting-form-container:hover{
-    background-color: transparent !important; /* Removes any background change on hover */
-    color: inherit  !important;
-  }
-
-  .popover-menu {
-    padding: 15px; /* Adjust padding as needed */
-    display: flex;
-    flex-direction: row ;
-    gap: 20px; /* Spacing between elements */
-  }
-
-.sort-toggle{
-    margin-left: 15px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  height: 60px; /* Added a fixed height for uniformity */
 }
-  
-  .sorting-form {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 40px;
-    width: 100%;
-    
-    /* width: 800px; */
-  }
 
-  .sort-button{
-    margin-left: 10px;
-  }
+/* Styling for Search Input Field */
+.filter-form-field {
+  width: 300px; /* Adjusted width */
+  margin: 0; /* Reset margins */
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  border: 0 !important;
+}
+
+/* Adjustments for Text Field Wrapper */
+.mat-mdc-text-field-wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 45px !important;
+  flex-grow: 1; /* Allows the input to grow */
+}
+
+/* Menu Content Styling */
+.mat-menu-content {
+  padding: 15px;
+  width: 300px; /* Adjusted width */
+}
+
+/* Menu Item Styling */
+.mat-menu-item {
+  height: inherit;
+  width: inherit;
+  background: lightgoldenrodyellow;
+}
+
+.mat-menu-item:hover {
+  background: lightgoldenrodyellow;
+}
+
+/* Additional Styling for Popover Menu */
+.popover-menu {
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px; /* Reduced gap */
+}
+
+/* Toggle Button Styling */
+.sort-toggle {
+  margin-left: 5px; /* Reduced margin */
+}
+
+/* Sort Button Styling */
+.sort-button {
+  padding: 5px 10px; /* Adjusted padding for buttons */
+  margin-left: 10px;
+}
+
+/* Other Styling */
+.ripple-container {
+  cursor: default;
+  text-align: center;
+  height: 100px;
+  line-height: 300px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  gap: 20px;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sorting-form-container:hover {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+.sorting-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 40px;
+  width: 100%;
+}

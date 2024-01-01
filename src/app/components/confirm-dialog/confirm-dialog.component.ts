@@ -36,8 +36,11 @@ export class ConfirmDialogComponent {
       next:(res)=>{
         if(res){
           console.log("user deleted");
+          this.userService.logout();
           this.router.navigateByUrl('/login');
-        }
+             window.location.reload();
+            this.toastr.error('User deleted permenantly.If you want to revert this operation. Please contact.','Deleted User')
+          }
       } 
     })
     this.dialogRef.close(true);

@@ -99,3 +99,8 @@ mat-sidenav-container {
     flex-direction: column;
     align-items: flex-start;
   } */  
+
+
+  mat-form-field input{
+    margin: 0!important;
+  }

@@ -1,11 +1,11 @@
 <div class="blog-toolbar">
   <div>
-  <button mat-stroked-button color="primary" (click)="gotoAddBlog()" > <mat-icon>plus_one</mat-icon> Add Blog</button>
+
+    <button  class="sort-icon" mat-icon-button [matMenuTriggerFor]="sortMenu" matTooltip="Sort Elements">
+      <mat-icon >sort</mat-icon>
+    </button>
+  <button mat-stroked-button color="primary" (click)="gotoAddBlog()" > <mat-icon>add</mat-icon> Write Blog</button>
    
-  <button mat-icon-button [matMenuTriggerFor]="sortMenu" matTooltip="Sort Elements">
-    <mat-icon>sort</mat-icon>
-  </button>
-  
   <mat-menu #sortMenu="matMenu" >
     <div class="popover-menu"  (click)="$event.stopPropagation()">
       <!-- Select Dropdown -->
@@ -26,7 +26,7 @@
   </mat-menu>
 
 </div>
-<div>
+<div class="filter-search">
   <mat-form-field appearance="outline" class="filter-form-field">
     <mat-label>Search</mat-label>
     <input matInput type="text" [(ngModel)]="filterValue">

@@ -56,3 +56,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   scrollbar-width: thin; /* "auto" or "thin" */
   scrollbar-color: #888 #f1f1f1; /* thumb and track color */
 }
+
+
+.mat-form-field-outline-start, .mat-form-field-outline-end, .mat-form-field-outline-gap {
+  border-width: 2px !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-start {
+  border-radius: 30px !important;
+  border: none !important;
+}
