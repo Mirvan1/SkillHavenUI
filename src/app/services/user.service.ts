@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environment/environment';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import {  ChangePasswordDto, ForgotPasswordDto, LoginUserDto, RegisterUserDto, ResetPasswordDto, UserDto, VerifyUserDto } from '../dtos/user.dto';
+import {  ChangePasswordDto, ForgotPasswordDto, LoginUserDto, MailUserCheckerDto, RegisterUserDto, ResetPasswordDto, UserDto, VerifyUserDto } from '../dtos/user.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -77,6 +77,10 @@ export class UserService {
   resetPassword(request:ResetPasswordDto){
     return this.httpClient.post<boolean>(`${this.userEndpoint}/reset-password`,request);
  
+  }
+
+  mailChecker(request:MailUserCheckerDto):Observable<boolean>{
+    return this.httpClient.post<boolean>(`${this.userEndpoint}/mail-checker`,request);
   }
 
   logout(){

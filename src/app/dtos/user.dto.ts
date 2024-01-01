@@ -64,3 +64,8 @@ export interface ResetPasswordDto{
     email:string;
     token:string;
 }
+
+
+export interface MailUserCheckerDto{
+    email:string;
+}

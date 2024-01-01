@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatStepperModule} from '@angular/material/stepper';
+import {MatStep, MatStepper, MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { Role } from '../../../dtos/skills';
 import { UserService } from '../../../services/user.service';
-import { ConsultantRegistrationInfo, RegisterUserDto, SupervisorRegistrationInfo, VerifyUserDto } from '../../../dtos/user.dto';
+import { ConsultantRegistrationInfo, MailUserCheckerDto, RegisterUserDto, SupervisorRegistrationInfo, VerifyUserDto } from '../../../dtos/user.dto';
 import { Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -41,11 +42,14 @@ export class RegisterComponent {
   mailCode!:string;
   userId!:number;
     showPassword: boolean = false;
+  IsEmailExist:boolean=false;
+  @ViewChild(MatStepper) stepper?: MatStepper | null = null;
 
   constructor(
     private _formBuilder: FormBuilder,
     private userService:UserService,
-    protected router:Router
+    protected router:Router,
+    private toastrService:ToastrService
     ){}
 
   onFileSelected(event:any) {
@@ -68,6 +72,30 @@ console.log("base64",base64String);
       reader.readAsDataURL(event?.target?.files[0]);
  
     }
+  }
+
+  onStepChange(event:any){
+    debugger
+    if(this.firstFormGroup.valid && event.selectedIndex ===1){
+ 
+    let request:MailUserCheckerDto={
+      email:this.firstFormGroup.get('email')?.value!
+    };
+    this.userService.mailChecker(request).subscribe({
+      next:(res)=>{
+        if(res){
+           this.stepper?.next();
+        }
+        else{
+          this.stepper?.previous();
+
+          this.toastrService.error('Email already exists.','Error')
+        }
+      },
+      error:()=> this.stepper?.previous()
+
+    });
+  }
   }
 
 
@@ -118,7 +146,8 @@ debugger
       next:(res)=>{
         console.log(res);
         this.userId=res;
-      }
+      },
+      error:()=>this.stepper?.previous()
     })
 
   console.log("jghjgh",registerUser)  

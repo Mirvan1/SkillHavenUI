@@ -4,10 +4,10 @@
       <span>Register</span>
     </mat-toolbar>
   </div>
-  <mat-stepper linear #stepper>
-    <mat-step [stepControl]="firstFormGroup" [editable]="true">
+  <mat-stepper linear #stepper  (selectionChange)="onStepChange($event)">
+    <mat-step #step1 [stepControl]="firstFormGroup"    [editable]="true">
 
-      <form [formGroup]="firstFormGroup" class="register-form">
+      <form [formGroup]="firstFormGroup"    class="register-form">
         <ng-template matStepLabel>Fill out login information</ng-template>
 
         <mat-form-field appearance="outline" class="register-input">
@@ -67,7 +67,7 @@
               Already have an account? <a (click)="router.navigateByUrl('login')">Login</a>
             </mat-label>
           </div>
-          <button [disabled]="!firstFormGroup.valid" mat-raised-button class="right-button" color="primary"
+          <button [disabled]="!firstFormGroup.valid && !IsEmailExist"   mat-raised-button class="right-button" color="primary"
             matStepperNext>Next</button>
         </div>
       </form>
