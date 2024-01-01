@@ -63,6 +63,6 @@
 
 
 @if(openCommentDrawer){
-    <app-blog-detail-comment [blogId]="blog.blogId" [isDrawerOpen]="openCommentDrawer"></app-blog-detail-comment>
+    <app-blog-detail-comment [blogId]="blog.blogId" [isDrawerOpen]="openCommentDrawer" (drawerOpenEvent)="drawerOpen($event)"></app-blog-detail-comment>
 }
 }

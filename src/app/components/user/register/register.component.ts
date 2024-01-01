@@ -27,8 +27,8 @@ export class RegisterComponent {
 
   });
   secondFormGroup = this._formBuilder.group({
-    firstName: ['', Validators.required,Validators.minLength(5),Validators.maxLength(50)],
-    lastName: ['', Validators.required,Validators.minLength(5),Validators.maxLength(50)],
+    firstName: ['', [Validators.required,Validators.minLength(5),Validators.maxLength(50)]],
+    lastName: ['', [Validators.required,Validators.minLength(5),Validators.maxLength(50)]],
     role: ['', Validators.required],
     experience: [''],
     description: [''],

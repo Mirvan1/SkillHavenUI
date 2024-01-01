@@ -29,11 +29,12 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       catchError((err) => {
         debugger
         if (err.status === 400) {
-          toastrService.error(JSON.stringify(JSON.parse(err.error)?.errors),JSON.parse( err.error)?.title)
+          let errObj=JSON.parse(JSON.stringify(err.error));
+          toastrService.error(JSON.stringify(errObj.errors),errObj?.title)
           throw err;
         }
         else {
-          const errorResult: ErrorResult = JSON.parse(err.error) as ErrorResult;
+          const errorResult: ErrorResult = JSON.parse(JSON.stringify(err.error)) as ErrorResult;
           toastrService.error(JSON.stringify(errorResult.DetailMessage), errorResult.Message)
           throw err;
         }

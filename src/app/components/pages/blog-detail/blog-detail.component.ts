@@ -64,6 +64,9 @@ export class BlogDetailComponent implements OnInit {
       }  })
   }
 
+
+
   
+drawerOpen=($e:boolean)=>  this.openCommentDrawer=$e;
 
 }

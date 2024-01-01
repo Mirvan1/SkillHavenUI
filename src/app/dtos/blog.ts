@@ -72,6 +72,7 @@ export interface BlogCommentsDto {
     isPublished: boolean;
     fullName: string;
     blogName: string;
+    userPhoto:string;
 }
 
 export interface ListBloCommentsDtos {

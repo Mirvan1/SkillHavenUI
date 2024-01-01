@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../../services/user.service';
 import { BlogService } from '../../../../services/blog.service';
@@ -29,7 +29,7 @@ export class BlogDetailCommentComponent implements OnInit, OnChanges {
   @ViewChild('sidenav') sidenav?: MatSidenav;
 
   addCommentValue: string = '';
-
+@Output() drawerOpenEvent :EventEmitter<boolean>=new EventEmitter<boolean>();
 
   request: GetBlogCommentsDto = {
     blogId: this.blogId,
@@ -52,14 +52,15 @@ export class BlogDetailCommentComponent implements OnInit, OnChanges {
     this.isDrawerOpen = changes['isDrawerOpen'].currentValue;
     if (this.isDrawerOpen
     ) {
-      this.renderer.setStyle(document.body, 'background', ' rgba(255,255,255,0.4)');
+      // this.renderer.setStyle(document.body, 'opacity', '0.2');
 
-      this.sidenav?.open()
+      this.sidenav?.open();
 
 
     }
     else {
-      this.sidenav?.close()
+      debugger
+      this.sidenav?.close();
     }
   }
 
@@ -75,8 +76,7 @@ export class BlogDetailCommentComponent implements OnInit, OnChanges {
     this.blogService.getBlogComments(request).subscribe({
       next: (res) => {
         this.blogComments = res;
-      },
-      error: (err) => alert(err)
+      }
     })
   }
 
@@ -95,8 +95,14 @@ export class BlogDetailCommentComponent implements OnInit, OnChanges {
         if (res) {
           this.getBlogComments(this.request);
         }
-      },
-      error: (err) => alert(err)
+      }
     });
+  }
+
+
+  closeSidenav(){
+    debugger
+    this.isDrawerOpen=!this.isDrawerOpen;
+    this.drawerOpenEvent.emit(this.isDrawerOpen)
   }
 }

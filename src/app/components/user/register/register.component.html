@@ -86,7 +86,7 @@
           <mat-error>Required Fields</mat-error>
           }
           @if (secondFormGroup.get('firstName')?.hasError('minlength') ||
-          firstFormGroup.get('firstName')?.hasError('maxlength')) {
+          secondFormGroup.get('firstName')?.hasError('maxlength')) {
           <mat-error>The password between 5 and 50 </mat-error>
           }
         </mat-form-field>
@@ -98,7 +98,7 @@
           <mat-error>Required Fields</mat-error>
           }
           @if (secondFormGroup.get('lastName')?.hasError('minlength') ||
-          firstFormGroup.get('lastName')?.hasError('maxlength')) {
+          secondFormGroup.get('lastName')?.hasError('maxlength')) {
           <mat-error>The password between 5 and 50 </mat-error>
           }
 
@@ -132,17 +132,17 @@
         <mat-form-field appearance="outline" class="register-input">
           <mat-label>Experience</mat-label>
           <input matInput formControlName="experience" placeholder="Choose your role" required>
-          @if (secondFormGroup.get('experience')?.hasError('required')) {
+          <!-- @if (secondFormGroup.get('experience')?.hasError('required')) {
           <mat-error>Required Fields</mat-error>
-          }
+          } -->
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Description</mat-label>
           <textarea matInput formControlName="description"></textarea>
-          @if (secondFormGroup.get('description')?.hasError('required')) {
+          <!-- @if (secondFormGroup.get('description')?.hasError('required')) {
           <mat-error>Required Fields</mat-error>
-          }
+          } -->
         </mat-form-field>
         }
 
@@ -150,23 +150,23 @@
         <mat-form-field appearance="outline" class="register-input">
           <mat-label>Expertise</mat-label>
           <input matInput formControlName="expertise" placeholder="Your area of expertise " required>
-          @if (secondFormGroup.get('expertise')?.hasError('required')) {
+          <!-- @if (secondFormGroup.get('expertise')?.hasError('required')) {
           <mat-error>Required Fields</mat-error>
-          }
+          } -->
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Description</mat-label>
           <textarea matInput formControlName="description"></textarea>
-          @if (secondFormGroup.get('description')?.hasError('required')) {
+          <!-- @if (secondFormGroup.get('description')?.hasError('required')) {
           <mat-error>Required Fields</mat-error>
-          }
+          } -->
         </mat-form-field>
         }
 
         <div>
-          <button mat-raised-button class="right-button" color="primary" matStepperNext>Next</button>
-          <button [disabled]="!secondFormGroup.valid" mat-raised-button class="right-button"
+          <button  [disabled]="!secondFormGroup.valid" (click)="onSubmit()" mat-raised-button class="right-button" color="primary" matStepperNext>Next</button>
+          <button mat-raised-button class="right-button"
             matStepperPrevious>Back</button>
         </div>
       </form>

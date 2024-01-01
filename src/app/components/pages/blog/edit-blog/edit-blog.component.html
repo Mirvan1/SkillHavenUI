@@ -39,7 +39,7 @@
         blogForm.get('content')?.hasError('maxlength')) {
         <mat-error>The password between 5 and 1000 </mat-error>
         }
-      <button mat-raised-button class="save-button"  color="primary" type="submit">Save</button>
+      <button [disabled]="!blogForm.valid" mat-raised-button class="save-button"  color="primary" type="submit">Save</button>
 
 </form>
 </div>
