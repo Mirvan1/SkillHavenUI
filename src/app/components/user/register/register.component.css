@@ -1,3 +1,6 @@
+
+
+
 mat-stepper{
   overflow: hidden;
 
@@ -60,4 +63,67 @@ mat-stepper{
 
 .confirmation-area{
   margin:20px;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 600px) {
+  /* Switch to vertical layout for the stepper on smaller screens */
+  .mat-stepper-horizontal {
+    flex-direction: column;
+  }
+
+  .mat-horizontal-stepper-header-container {
+    display: none; /* Optionally hide the header on small screens */
+  }
+
+  .mat-step-label {
+    font-size: 0.9rem; /* Reduce font size for step labels */
+  }
+
+  .mat-stepper-icon {
+    font-size: 16px; /* Smaller icons for mobile */
+  }
+
+  /* Adjust content padding inside each step */
+  .mat-step-content {
+    padding: 15px;
+  }
+
+  /* Adjustments for other elements */
+  .register-container {
+    margin: 20px;
+    width: auto;
+  }
+
+  .register-form {
+    padding: 10px;
+  }
+
+  .register-input, .right-button {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .photo-input, .confirmation-area {
+    padding: 10px;
+  }
+
+  .login-redirect mat-label a {
+    font-size: 0.9rem;
+  }
+
+   :host /deep/ .mat-mdc-form-field-icon-suffix{
+    display: flex!important;
+    flex-direction: row !important;
+  }
+
+  mat-icon{
+    font-size: 20px;
+  }
 }

@@ -13,6 +13,7 @@ import { ConsultantRegistrationInfo, MailUserCheckerDto, RegisterUserDto, Superv
 import { Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ToastrService } from 'ngx-toastr';
+import { DeviceService } from '../../../services/device.service';
 
 @Component({
   selector: 'app-register',
@@ -49,7 +50,8 @@ export class RegisterComponent {
     private _formBuilder: FormBuilder,
     private userService:UserService,
     protected router:Router,
-    private toastrService:ToastrService
+    private toastrService:ToastrService,
+    protected deviceService:DeviceService
     ){}
 
   onFileSelected(event:any) {

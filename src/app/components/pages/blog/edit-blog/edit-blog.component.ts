@@ -5,19 +5,22 @@ import { BlogService } from '../../../../services/blog.service';
 import { UserService } from '../../../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BlogAddOrUpdate, CreateBlogDto, UpdateBlogDto } from '../../../../dtos/blog';
+import { BlogAddOrUpdate, CreateBlogDto, GetBlogTopicDto, ListGetBlogTopicDto, UpdateBlogDto } from '../../../../dtos/blog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDto } from '../../../../dtos/user.dto';
+import { PaginatedRequest } from '../../../../dtos/skills';
+import { MatSelectModule } from '@angular/material/select';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-blog',
   standalone: true,
   imports: [CommonModule,AngularEditorModule,ReactiveFormsModule,HttpClientModule,
-    MatInputModule, MatFormFieldModule,MatIconModule,MatButtonModule],
+    MatInputModule, MatFormFieldModule,MatIconModule,MatButtonModule,MatSelectModule],
   templateUrl: './edit-blog.component.html',
   styleUrl: './edit-blog.component.css'
 })
@@ -57,11 +60,15 @@ export class EditBlogComponent implements OnInit {
     ]
   };
 
+  blogTopics!:GetBlogTopicDto[];
+  //blogTopicsControl = new FormControl();
+
   constructor(
     private router:ActivatedRoute,
     private redirectionRoute:Router,
     private blogService:BlogService,
     private userService:UserService,
+    private toastrService:ToastrService,
     protected location:Location
   ){
     this.blogId=  this.router.snapshot.params['id'];
@@ -69,7 +76,8 @@ debugger
     this.blogForm= new FormGroup({
       title: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(50)]),
       photo:new FormControl(''),
-      content: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(1000)]),
+      blogTopics:new FormControl(null,Validators.required),
+      content: new FormControl(null,[Validators.required,Validators.minLength(5),Validators.maxLength(1000)]),
     });
 
     if(this.blogId) this.crudType=BlogAddOrUpdate.Update;
@@ -79,6 +87,7 @@ debugger
 
   ngOnInit(): void {
     this.userService.getUser$.subscribe((res)=>{this.loggedUser=res!;});
+    this.getBlogTopics();
 
 debugger
     if(this.blogId){
@@ -86,15 +95,19 @@ debugger
       next:(res)=>{
         if(res.userId !== this.loggedUser.userId){
           this.redirectionRoute.navigateByUrl('/');
-          alert("Cannot delete others blog content");
+          this.toastrService.error("Cannot delete others blog content");
         
         }
+        console.log("loggg",this.blogTopics.find(x=>x.blogTopicId===res.blogTopicId)) 
         debugger
         this.blogForm= new FormGroup({
           title: new FormControl(res.title,Validators.required),
-          
+          blogTopics:new FormControl(null,Validators.required),
           content: new FormControl(res.content,[Validators.required,Validators.minLength(50)]),
         });
+        this.blogForm.get('blogTopics')?.setValue(this.blogTopics.find(x => x.blogTopicId === res.blogTopicId)?.blogTopicId);
+
+      console.log("form",this.blogForm);
       
       } });
     }
@@ -107,9 +120,10 @@ debugger
           title:this.blogForm.get('title')?.value,
           photo:this.blogForm.get('photo')?.value,
           content:this.blogForm.get('content')?.value,
-          isPublished:true
+          isPublished:true,
+          blogTopicId:this.blogForm.get('blogTopics')?.value
         };
-
+debugger
         this.blogService.createBlog(addBlogDto).subscribe({
         next:(res)=>{
           this.redirectionRoute.navigateByUrl('/blog');
@@ -122,9 +136,11 @@ debugger
           title:this.blogForm.get('title')?.value,
           photo:this.blogForm.get('photo')?.value,
           content:this.blogForm.get('content')?.value,
-          isPublished:true
-        };
+          isPublished:true,
+          blogTopicId:this.blogForm.get('blogTopics')?.value
 
+        };
+debugger
         this.blogService.updateBlog(updateBlogDto).subscribe({
           next:(res)=>{
             this.redirectionRoute.navigateByUrl('/blog');
@@ -153,6 +169,22 @@ console.log("base64",base64String);
       reader.readAsDataURL(event?.target?.files[0]);
  
     }
+  }
+
+
+  getBlogTopics(){
+    let request:PaginatedRequest={
+      page:1,
+      pageSize:10,
+      orderBy:true,
+      orderByPropertname:'TopicName'
+    }
+    this.blogService.getTopics(request).subscribe({
+      next:(res)=>{
+          this.blogTopics=res.data;
+
+      }
+    })
   }
 
 }

@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import {MatBadgeModule} from '@angular/material/badge';
+import { DeviceService } from './services/device.service';
 
 @Component({
   selector: 'app-root',
@@ -37,7 +38,7 @@ constructor(
   public chatHubService:ChatHubService,
   public userService:UserService,
   public toastrService:ToastrService
-){
+  ){
   this.chatHubService.newMessage$.subscribe({
     next:(res)=>{
       debugger

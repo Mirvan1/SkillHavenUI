@@ -5,6 +5,7 @@ import { UserService } from './user.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ChatService } from './chat.service';
 import { GetMessagesByUser } from '../dtos/chat.dto';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class ChatHubService {
   private hubConnection!: signalR.HubConnection;
   userService: UserService = inject(UserService);
   chatService: ChatService = inject(ChatService);
+  toastr:ToastrService=inject(ToastrService);
   accessToken!: string;
 
    newMessage = new BehaviorSubject<boolean>(false);
@@ -47,10 +49,20 @@ export class ChatHubService {
     });
     this.hubConnection.on('ReceiveMessageToClient', (userId, message) => {
       console.log("UserId and message",userId+message);
-
+ 
       onMessageReceived(userId, message);
     });
   }
+
+
+  public addSenderMessageListener = (onMessageReceived: (userId: number, message: string) => void) => {
+    this.hubConnection.on('SenderMessageToClient', (userId, message) => {
+      console.log("UserId and message",userId+message);
+ 
+      onMessageReceived(userId, message);
+    });
+  }
+
 
   public sendMessageToAll = (messageContent: string) => {
     this.hubConnection.invoke('SendMessageToAll', messageContent)

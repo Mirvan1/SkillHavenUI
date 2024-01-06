@@ -1,45 +1,56 @@
 <div class="blog-edit">
-<form [formGroup]="blogForm" (ngSubmit)="submitForm()">
-  <div class="edit-blog-detail-header">
+  <form [formGroup]="blogForm" (ngSubmit)="submitForm()">
+    <div class="edit-blog-detail-header">
 
-  <button mat-icon-button (click)="location.back()">
-    <mat-icon>arrow_back</mat-icon>
-    </button>
-  <h2> {{ crudType === 1 ? 'Add' : 'Update' }} Blog</h2>
-  </div>
+      <button mat-icon-button (click)="location.back()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2> {{ crudType === 1 ? 'Add' : 'Update' }} Blog</h2>
+    </div>
 
     <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Title</mat-label>
-        <input matInput formControlName="title">
-        @if (blogForm.get('title')?.hasError('required')) {
-          <mat-error>Required Fields</mat-error>
-          }
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+      @if (blogForm.get('title')?.hasError('required')) {
+      <mat-error>Required Fields</mat-error>
+      }
 
-          @if (blogForm.get('title')?.hasError('minlength') ||
-          blogForm.get('title')?.hasError('maxlength')) {
-          <mat-error>The password between 5 and 50 </mat-error>
-          }
-      </mat-form-field>
+      @if (blogForm.get('title')?.hasError('minlength') ||
+      blogForm.get('title')?.hasError('maxlength')) {
+      <mat-error>The password between 5 and 50 </mat-error>
+      }
+    </mat-form-field>
 
-      <div  appearance="outline" class="photo-input register-input">
-        <mat-label>Blog Picture:</mat-label>
-        <input type="file" #fileInput   (change)="onFileSelected($event)" hidden/>
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Blog Topic</mat-label>
+      <mat-select formControlName="blogTopics" name="blogTopics">
+        @for (blogTopic of blogTopics; track blogTopic.blogTopicId) {
+        <mat-option [value]="blogTopic.blogTopicId">{{blogTopic.topicName}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
 
-        <button mat-raised-button type="button" (click)="fileInput.click()">Choose File</button>
- 
+    <div appearance="outline" class="photo-input register-input">
+      <mat-label>Blog Picture:</mat-label>
+      <input type="file" #fileInput (change)="onFileSelected($event)" hidden />
+
+      <button mat-raised-button type="button" (click)="fileInput.click()">Choose File</button>
+
     </div>
 
 
-      <angular-editor placeholder="Write blog content here.." formControlName="content" [config]="config"></angular-editor>
-      @if (blogForm.get('content')?.hasError('required')) {
-        <mat-error>Required Fields</mat-error>
-        }
+    <angular-editor placeholder="Write blog content here.." formControlName="content"
+      [config]="config"></angular-editor>
+    @if (blogForm.get('content')?.hasError('required')) {
+    <mat-error>Required Fields</mat-error>
+    }
 
-        @if (blogForm.get('content')?.hasError('minlength') ||
-        blogForm.get('content')?.hasError('maxlength')) {
-        <mat-error>The password between 5 and 1000 </mat-error>
-        }
-      <button [disabled]="!blogForm.valid" mat-raised-button class="save-button"  color="primary" type="submit">Save</button>
+    @if (blogForm.get('content')?.hasError('minlength') ||
+    blogForm.get('content')?.hasError('maxlength')) {
+    <mat-error>The password between 5 and 1000 </mat-error>
+    }
+    <button [disabled]="!blogForm.valid" mat-raised-button class="save-button" color="primary"
+      type="submit">Save</button>
 
-</form>
+  </form>
 </div>

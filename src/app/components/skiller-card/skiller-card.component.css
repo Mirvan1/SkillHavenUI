@@ -101,3 +101,45 @@ mat-card-actions{
   justify-content: flex-start;
   gap:5px;
 }
+
+
+
+
+
+
+
+
+@media screen and (max-width: 600px) {
+  .skiller-area {
+    justify-content: center; /* Center cards on smaller screens */
+    margin-left: 10px; /* Reduced margin for mobile */
+    gap: 15px; /* Smaller gap for mobile */
+  }
+
+  .skiller-card {
+    width: 100%; /* Full width for mobile */
+    margin-bottom: 15px; /* Adjust margin */
+  }
+
+  .skill-picture img {
+    width: 50px; /* Smaller image size for mobile */
+    height: 50px;
+  }
+
+  .skiller-description {
+    margin-left: 5%; /* Adjust margin for description */
+  }
+
+  .mat-card-actions button {
+    padding: 3px 5px; /* Smaller padding for buttons */
+    font-size: 0.8rem; /* Smaller font size for button text */
+  }
+
+  .rate-bar {
+    gap: 3px; /* Smaller gap in rating bar */
+  }
+
+  .skill-description-text {
+    font-size: 0.9rem; /* Smaller font size for descriptions */
+  }
+}

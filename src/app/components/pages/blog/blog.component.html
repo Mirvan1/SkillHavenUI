@@ -1,6 +1,7 @@
 <div class="blog-toolbar">
   <div>
 
+
     <button  class="sort-icon" mat-icon-button [matMenuTriggerFor]="sortMenu" matTooltip="Sort Elements">
       <mat-icon >sort</mat-icon>
     </button>
@@ -40,7 +41,26 @@
 
 </div>
 
+@if(blogTopics){
+  <div class="blog-button-row">
 
+    @for(blogTopic of blogTopics;track blogTopic.topicName){
+      @if(blogTopic.blogTopicId === selectedTopicId){
+      <button mat-raised-button class="topic-button" color="primary"
+       (click)="byBlogTopic(blogTopic.blogTopicId)">{{blogTopic.topicName}}</button>
+      }
+      @else{
+        <button mat-stroked-button color="primary"
+        (click)="byBlogTopic(blogTopic.blogTopicId)">{{blogTopic.topicName}}</button>
+      }
+    }
+
+    <!-- <button mat-stroked-button >Primary</button>
+    <button mat-stroked-button color="accent">Accent</button>
+    <button mat-stroked-button color="warn">Warn</button>
+    <button mat-stroked-button disabled>Disabled</button> -->
+  </div>
+}
 
 <div
 infiniteScroll [infiniteScrollDistance]="2"
@@ -56,7 +76,7 @@ class="blog-container">
     <img mat-card-image [src]="blog.photoPath" [alt]="blog.title"  >
     <mat-card-content class="blog-content">
       <div class="blog-content-creater">
-        <img mat-card-image [src]="blog.photoPath" [alt]="blog.title"  >
+        <img mat-card-image [src]="blog.userPhotoPath" [alt]="blog.title"  >
         <span>{{blog.fullName}}</span>
         <span> · </span>
         <span>{{blog.publishDate | toDate}}</span>
@@ -65,8 +85,12 @@ class="blog-container">
       <mat-divider></mat-divider>
       <span [innerHTML]="blog.content">
       </span>
-      <p>
-        Readed: {{blog.nOfReading??0}} · Voted: {{blog.vote??0}}
+      <mat-divider class="divider"></mat-divider>
+
+      <p class="blog-footer">
+       <span class="blog-footer-info">{{blog.blogTopicName}}</span>
+       <span class="blog-footer-info"> <mat-icon>library_books</mat-icon>  {{blog.nOfReading??0}} read</span>
+       <span class="blog-footer-info"> <mat-icon>how_to_vote</mat-icon>  {{blog.vote??0}} vote </span>
       </p>
 
     </mat-card-content>

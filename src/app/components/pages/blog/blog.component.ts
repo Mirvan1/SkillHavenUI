@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaginatedRequest, SortResultDto } from '../../../dtos/skills';
 import { BlogService } from '../../../services/blog.service';
-import { GetBlogDto, ListBlogDtos } from '../../../dtos/blog';
+import { BlogPaginatedRequest, GetBlogDto, GetBlogTopicDto, ListBlogDtos } from '../../../dtos/blog';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -39,7 +39,7 @@ export class BlogComponent implements OnInit{
     {value:'Vote',text:'Vote'}
   ]
 
-  request:PaginatedRequest={
+  request:BlogPaginatedRequest={
     page:this.defaultPage,
     pageSize:this.defaultPageSize,
     orderBy:false,
@@ -49,7 +49,8 @@ export class BlogComponent implements OnInit{
   blogContent!:ListBlogDtos;
 
   mostVotedBlog!:GetBlogDto[];
-
+  blogTopics!:GetBlogTopicDto[];
+  selectedTopicId?:number;
   constructor(
     private router:Router,
     private blogService:BlogService,
@@ -59,9 +60,10 @@ export class BlogComponent implements OnInit{
   ngOnInit(): void {
     this.getBlogs(this.request);
     this.getMostVotedBlog(this.request);
+    this.getBlogTopics();
   }
   
-  getBlogs(request:PaginatedRequest){
+  getBlogs(request:BlogPaginatedRequest){
     this.blogService.getBlogs(request).subscribe({
       next:(res)=>{
         if(res){
@@ -119,5 +121,29 @@ export class BlogComponent implements OnInit{
       this.getBlogs(this.request);
 
     }
+
+    getBlogTopics(){
+      let request:PaginatedRequest={
+        page:1,
+        pageSize:100,
+        orderBy:true,
+        orderByPropertname:'TopicName'
+      };
+
+      this.blogService.getTopics(request).subscribe({
+        next:(res)=>{
+            this.blogTopics=res.data;
+            console.log("Topic", this.blogTopics);
+            
+        }
+      })
+    }
   
+    byBlogTopic(blogTopicId:number){
+      debugger
+      this.request.blogTopicId=blogTopicId;
+      this.selectedTopicId=blogTopicId;
+      this.getBlogs(this.request);
+    }
+
 }

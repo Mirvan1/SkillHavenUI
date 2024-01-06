@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environment/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { CreateBlogCommentDto, CreateBlogDto, GetBlogCommentsDto, GetBlogDto, ListBloCommentsDtos, ListBlogDtos, UpdateBlogDto, VoteBlogDto } from '../dtos/blog';
+import { BlogPaginatedRequest, CreateBlogCommentDto, CreateBlogDto, GetBlogCommentsDto, GetBlogDto, GetBlogTopicDto, ListBloCommentsDtos, ListBlogDtos, ListGetBlogTopicDto, UpdateBlogDto, VoteBlogDto } from '../dtos/blog';
 import { Observable } from 'rxjs';
 import { PaginatedRequest } from '../dtos/skills';
 
@@ -14,16 +14,19 @@ export class BlogService {
   
   constructor(private httpClient:HttpClient) { }
 
-  getBlogs(request:PaginatedRequest):Observable<ListBlogDtos>{
+  getBlogs(request:BlogPaginatedRequest):Observable<ListBlogDtos>{
     let params = new HttpParams()
-    params.set('Page', request.page || '')
-    params.set('PageSize', request.pageSize || '')
-    params.set('OrderBy', String(request.orderBy) || '')
-    params.set('OrderByPropertname', request.orderByPropertname || '');
-if(request.filter){
+    params= params.set('Page', request.page || '')
+    params= params.set('PageSize', request.pageSize || '')
+    params= params.set('OrderBy', String(request.orderBy) || '')
+    params= params.set('OrderByPropertname', request.orderByPropertname || '');
+    params=   params.set('BlogTopicId', request.blogTopicId || '');
+
+    if(request.filter){
   params=  params.append('Filter', request.filter!   );
     };    ;
-debugger
+debugger;
+console.log("Param",params) 
     return this.httpClient.get<ListBlogDtos>(this.blogEndpoint,{params});
   }
  
@@ -65,5 +68,18 @@ debugger
 
   voteBlog(request:VoteBlogDto){
     return this.httpClient.put<number>(`http://localhost:5095/vote`,request);
+  }
+
+  getTopics(request:PaginatedRequest){
+    let params = new HttpParams()
+    params.set('Page', request.page || '')
+    params.set('PageSize', request.pageSize || '')
+    params.set('OrderBy', String(request.orderBy) || '')
+    params.set('OrderByPropertname', request.orderByPropertname || '');
+if(request.filter){
+  params=  params.append('Filter', request.filter!   );
+    };  
+
+    return this.httpClient.get<ListGetBlogTopicDto>(`http://localhost:5095/topics`,{params});
   }
 }

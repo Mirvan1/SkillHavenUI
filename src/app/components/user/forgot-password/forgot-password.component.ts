@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule,Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StreamInvocationMessage } from '@microsoft/signalr';
@@ -25,7 +25,9 @@ export class ForgotPasswordComponent {
    email!:string;
   
   constructor(private userService:UserService,
-    private toastrService:ToastrService){}
+    private toastrService:ToastrService,
+    protected location: Location
+    ){}
 
    SendMail(){
     let request:ForgotPasswordDto={

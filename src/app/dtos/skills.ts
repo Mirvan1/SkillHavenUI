@@ -44,3 +44,5 @@ export interface SortResultDto{
     column?:string;
     orderBy?:boolean;
 }
+
+

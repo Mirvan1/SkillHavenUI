@@ -53,30 +53,46 @@ export class ChatDialogComponent implements OnInit,OnChanges {
     this.getUserMessage$ = this.chatService.message$;
   }
 
-  ngOnInit(): void {
-    let request:PaginatedRequest={
-      page:1,
-      pageSize:100,
-      orderBy:true,
-    };
-    this.chatService.getAllChatUser(request).subscribe({
-      next:(res)=>{
-        if(res){
-          this.chatUsers=res;
-        }
-      }
-     });
+  ngOnChanges(): void {
+  
 
-     this.chatHub.addReceiveMessageListener((userId, message) => { 
-    //  if(this.receiverUserId){
-      this.chatHub.loadChatHistory(this.receiverUserId);
-          //  }
-  });
+    
 
     }
 
-ngOnChanges():void{
+ngOnInit():void{
+  let request:PaginatedRequest={
+    page:1,
+    pageSize:100,
+    orderBy:true,
+  };
+  this.chatService.getAllChatUser(request).subscribe({
+    next:(res)=>{
+      if(res){
+        this.chatUsers=res;
+      }
+    }
+   });
 
+
+   this.chatHub.addReceiveMessageListener((userId, message) => { 
+      //if(userId===this.receiverUserId){
+      debugger
+      this.toastr.success("receiver Fired",userId.toString());
+      this.chatHub.loadChatHistory(this.receiverUserId);
+        //        }
+                          //  }
+  });
+
+  this.chatHub.addSenderMessageListener((userId, message) => { 
+      //if(userId===this.loggedUser?.userId!){
+      debugger
+      this.toastr.success("sender Fired",userId.toString());
+
+      //  this.chatHub.loadChatHistory(this.receiverUserId);
+      this.chatHub.loadChatHistory(this.loggedUser?.userId!);
+        //    }
+  });
 
 }
 
@@ -113,6 +129,7 @@ debugger
     })
     .catch((err:ErrorResult)=>{
       this.chatHub.loadChatHistory(userId);
+      this.chatHub.loadChatHistory(this.loggedUser?.userId!)
 
      // this.toastr.error(err.Message,`Failed with ${err.StatusCode}`)
     });

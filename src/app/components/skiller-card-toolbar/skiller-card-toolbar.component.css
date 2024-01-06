@@ -92,3 +92,53 @@
   height: 40px;
   width: 100%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 600px) {
+  .skiller-toolbar {
+    flex-direction: row;
+    padding: 10px;
+    height: auto; /* Adjust height for mobile */
+  }
+
+  ::ng-deep .mat-input-wrapper{
+    width:400px !important;
+  }
+
+  .filter-form-field {
+    width: 100%; /* Full width for mobile */
+    margin-top: 10px; /* Add space between search field and other elements */
+  }
+
+  .mat-menu-content {
+    width: auto; /* Adjust width for mobile */
+  }
+
+  .popover-menu {
+    flex-direction: column; /* Stack elements vertically */
+    gap: 5px; /* Smaller gap for mobile */
+  }
+
+  .sort-button {
+    margin-top: 10px; /* Add space above the sort button */
+    width: 100%; /* Full width for mobile */
+  }
+
+  /* Additional adjustments for smaller elements */
+  .sort-toggle, .mat-mdc-text-field-wrapper {
+    margin: 0;
+  }
+}

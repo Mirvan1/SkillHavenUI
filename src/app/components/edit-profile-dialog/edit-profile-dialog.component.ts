@@ -83,8 +83,7 @@ constructor(
   SubmitUserUpdate(userProfile:FormGroup){
     console.log("save");
     if(!userProfile.valid){
-      alert("Not valid");
-      this.toastrService.error('User Profile not valid','')
+       this.toastrService.error('User Profile not valid','')
       return;
     }
     let submitUserUpdateForm:UserDto={

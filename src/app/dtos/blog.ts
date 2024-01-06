@@ -16,9 +16,14 @@ export interface GetBlogDto {
     vote?:number;
     nOfReading?:number;
     blogComments?:number;
-
+    blogTopicId:number;
+    blogTopicName:string;
+    userPhotoPath:string;
 }
 
+export interface BlogPaginatedRequest extends PaginatedRequest{
+    blogTopicId?:number;
+}
 
 export interface UpdateBlogDto {
     id: number;
@@ -27,6 +32,7 @@ export interface UpdateBlogDto {
     content: string;
     isPublished: boolean;
     updateDate?: Date;
+    blogTopicId:number;
 }
 
 
@@ -50,6 +56,7 @@ export interface CreateBlogDto{
     content: string;
     publishDate?: Date;
     isPublished: boolean;
+    blogTopicId:number;
 }
 
 export interface VoteBlogDto {
@@ -81,6 +88,17 @@ export interface ListBloCommentsDtos {
     data: BlogCommentsDto[];
 }
 
+export interface ListGetBlogTopicDto{
+    totalCount: number;
+    totalPages: number;
+    data: GetBlogTopicDto[];
+}
+
+export interface GetBlogTopicDto{
+    topicName:string;
+    isActive:boolean;
+    blogTopicId:number;
+}
 
 export enum BlogAddOrUpdate
 {

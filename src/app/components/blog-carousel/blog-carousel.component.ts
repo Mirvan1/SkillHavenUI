@@ -36,10 +36,10 @@ export class BlogCarouselComponent  implements OnInit {
         items: 1
       },
       400: {
-        items: 2
+        items: 1
       },
       740: {
-        items: 3
+        items: 1
       },
       940: {
         items: 1
@@ -76,8 +76,7 @@ export class BlogCarouselComponent  implements OnInit {
   }
 
   getBlogFromCarousel(blogId:number){
-    alert(JSON.stringify(blogId));
-    console.log(JSON.stringify(blogId));
+     console.log(JSON.stringify(blogId));
     this.router.navigate(['blog-detail',blogId]);
   }
 

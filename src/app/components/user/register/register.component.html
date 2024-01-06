@@ -4,7 +4,7 @@
       <span>Register</span>
     </mat-toolbar>
   </div>
-  <mat-stepper linear #stepper  (selectionChange)="onStepChange($event)">
+  <mat-stepper [orientation]="(deviceService.isMobile$| async)? 'vertical': 'horizontal'" linear #stepper  (selectionChange)="onStepChange($event)">
     <mat-step #step1 [stepControl]="firstFormGroup"    [editable]="true">
 
       <form [formGroup]="firstFormGroup"    class="register-form">
