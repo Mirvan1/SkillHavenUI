@@ -9,11 +9,11 @@
 }
 
   .home-container {
-    max-width: 1200px; /* Maximum width of the container */
-    margin: 0 auto; /* Centers the container */
-    padding: 20px; /* Adds some spacing inside the container */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
-    background-color: #ffffff; /* Background color */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
     font-size: 16px;
     line-height: 1.6;
     font-family: 'Roboto', sans-serif;
@@ -29,7 +29,7 @@ mat-tab{
 
 @media screen and (max-width: 1200px) {
     .home-container {
-        padding: 10px; /* Less padding on smaller screens */
+        padding: 10px;
     }
 }
 

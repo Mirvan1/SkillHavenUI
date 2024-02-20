@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {FormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatStep, MatStepper, MatStepperModule} from '@angular/material/stepper';
+import { MatStepper, MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
@@ -56,28 +56,36 @@ export class RegisterComponent {
 
   onFileSelected(event:any) {
 
-    debugger
+    
     if(event?.target?.files?.length > 0) 
     {
       // this.secondFormGroup.patchValue({
       //    picture: event?.target?.files[0],
       // })
+      if( event.target.files[0].type.match('image.*')) {
+
       const reader = new FileReader();
 
       reader.onload = (e: ProgressEvent<FileReader>) => {
         const base64String = reader.result as string;
         this.secondFormGroup.patchValue({ picture: base64String });
-console.log("base64",base64String);
+
         // Now you have the file as a base64 string
         // You can assign it to a component property or handle it as needed
       };
       reader.readAsDataURL(event?.target?.files[0]);
- 
+    }
+    else{
+      this.toastrService.error("Please upload valid image ","Error");
+      this.stepper?.previous();
+
+    }
+
     }
   }
 
   onStepChange(event:any){
-    debugger
+    
     if(this.firstFormGroup.valid && event.selectedIndex ===1){
  
     let request:MailUserCheckerDto={
@@ -102,7 +110,7 @@ console.log("base64",base64String);
 
 
   onSubmit(){
-  console.log("1form:",this.firstFormGroup.value);
+  
   let registerUser:RegisterUserDto={};
   if(this.firstFormGroup.valid){
     registerUser.email=this.firstFormGroup.get('email')?.value!;
@@ -114,7 +122,7 @@ registerUser.password=this.firstFormGroup.get('password')?.value!;
     registerUser.lastName=this.secondFormGroup.get('lastName')?.value!;
     registerUser.profilePicture=this.secondFormGroup.get('picture')?.value!;
     const roleValue=this.secondFormGroup.get('role')?.value!;
-debugger
+
     if(roleValue in Role){
     registerUser.role=Number(roleValue);//Role[roleValue as keyof typeof Role];
     }
@@ -146,18 +154,18 @@ debugger
 
     this.userService.registerUser(registerUser).subscribe({
       next:(res)=>{
-        console.log(res);
+        
         this.userId=res;
       },
       error:()=>this.stepper?.previous()
     })
 
-  console.log("jghjgh",registerUser)  
+  
 
 
   }
 
-console.log("2form:",this.secondFormGroup.value);
+
   }
 
 
@@ -169,8 +177,9 @@ if(this.mailCode && this.userId){
   }
     this.userService.verifyUser(request).subscribe({
       next:(res)=>{
-        console.log("result",res);
+        
         this.router.navigateByUrl("login");
+        this.toastrService.success('Registered successfully')
       } 
     })
   }

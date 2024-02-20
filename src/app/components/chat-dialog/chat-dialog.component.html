@@ -1,7 +1,7 @@
 <div class="chat-header">
   <p class="chat-header-title"> Chat</p>
-  <button mat-dialog-title class="chat-action-button" (click)="dialogRef.close()" mat-icon-button >
-      <mat-icon>close</mat-icon>
+  <button mat-dialog-title class="chat-action-button" (click)="dialogRef.close()" mat-icon-button>
+    <mat-icon>close</mat-icon>
   </button>
 </div>
 
@@ -10,62 +10,60 @@
   <div class="chat-user-list">
     @if(chatUsers){
     @for( user of chatUsers.data; track user.connectionId){
-    <div class="chat-user" >
+    <div class="chat-user">
 
-        <mat-card class="user-card" (click)="GetUserMesssage(user.userId)">
-          <div class="user-card-photo">
-            <img [src]="user.profilePicture" [alt]="user.fullName">
+      <mat-card class="user-card" (click)="GetUserMesssage(user.userId)">
+        <div class="user-card-photo">
+          <img [src]="user.profilePicture" [alt]="user.fullName">
 
-          </div>
-            <mat-card-content class="user-card-content">{{user.fullName}} 
+        </div>
+        <mat-card-content class="user-card-content">{{user.fullName}}
 
-                <mat-icon class="status-icon" [class.online]="user.status ==='Online'"
-                    [class.offline]="user.status === 'Offline'"
-                >fiber_manual_record</mat-icon>
-            </mat-card-content>
-          </mat-card>
+          <mat-icon class="status-icon" [class.online]="user.status ==='Online'"
+            [class.offline]="user.status === 'Offline'">fiber_manual_record</mat-icon>
+        </mat-card-content>
+      </mat-card>
     </div>
     }
-  }
+    }
   </div>
 
-<div class="chat-messages">
-<div class="chat-messages-content">
-  @if((getUserMessage$ | async)?.data){
-        <div class="chat-messages-content-header">
-          <h4 class="chat-messages-content-header-title">{{receiverUsername}}</h4>
-          <mat-icon class="status-icon" [class.online]="receiverStatus ==='Online'"
-          [class.offline]="receiverStatus === 'Offline'"
-      >fiber_manual_record</mat-icon>
-        </div>
+  <div class="chat-messages">
+    <div class="chat-messages-content">
+      @if((getUserMessage$ | async)?.data){
+      <div class="chat-messages-content-header">
+        <h4 class="chat-messages-content-header-title">{{receiverUsername}}</h4>
+        <mat-icon class="status-icon" [class.online]="receiverStatus ==='Online'"
+          [class.offline]="receiverStatus === 'Offline'">fiber_manual_record</mat-icon>
+      </div>
       <mat-divider></mat-divider>
       <div class="chat-messages-content-container">
-    @for( message of  (getUserMessage$ | async)?.data ; track message.messageId){
-<!-- @if(message.receiverUserId === receiverUserId){ -->
-      <p [ngClass]="message.senderUserId === loggedUser?.userId?
+        @for( message of (getUserMessage$ | async)?.data ; track message.messageId){
+        <!-- @if(message.receiverUserId === receiverUserId){ -->
+        <p [ngClass]="message.senderUserId === loggedUser?.userId?
                     'chat-messages-sender':
                     'chat-messages-receiver'">
 
-         {{message.content}}-{{message.senderUsername}} -{{message.receiverUsername}}  
-      <span class="chat-message-timestamp">{{message.timestamp | date :'short' }}</span>
+          {{message.content}}-{{message.senderUsername}} -{{message.receiverUsername}}
+          <span class="chat-message-timestamp">{{message.timestamp | date :'short' }}</span>
         </p>
-      <!-- }     -->
-  }
+        <!-- }     -->
+        }
 
-</div>
-  <form class="chat-message-send" (ngSubmit)="sendMessageToUser($event,receiverUserId,messageInput)">
-    <mat-form-field appearance="outline" class="form-field">
-      <mat-label>Send Message</mat-label>
-      <input matInput [(ngModel)]="messageInput" [ngModelOptions]="{standalone: true}">
-    </mat-form-field>
-    
-        <button mat-raised-button type="submit" >Send</button>
-  </form>
-}
+      </div>
+      <form class="chat-message-send" (ngSubmit)="sendMessageToUser($event,receiverUserId,messageInput)">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Send Message</mat-label>
+          <input matInput [(ngModel)]="messageInput" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
 
-@else{
- <h4 class="empty-message"> Please select any conversation</h4>
-} 
-</div>
-</div>
+        <button mat-raised-button type="submit">Send</button>
+      </form>
+      }
+
+      @else{
+      <h4 class="empty-message"> Please select any conversation</h4>
+      }
+    </div>
+  </div>
 </mat-dialog-content>

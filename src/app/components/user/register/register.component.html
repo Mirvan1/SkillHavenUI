@@ -4,10 +4,11 @@
       <span>Register</span>
     </mat-toolbar>
   </div>
-  <mat-stepper [orientation]="(deviceService.isMobile$| async)? 'vertical': 'horizontal'" linear #stepper  (selectionChange)="onStepChange($event)">
-    <mat-step #step1 [stepControl]="firstFormGroup"    [editable]="true">
+  <mat-stepper [orientation]="(deviceService.isMobile$| async)? 'vertical': 'horizontal'" linear #stepper
+    (selectionChange)="onStepChange($event)">
+    <mat-step #step1 [stepControl]="firstFormGroup" [editable]="true">
 
-      <form [formGroup]="firstFormGroup"    class="register-form">
+      <form [formGroup]="firstFormGroup" class="register-form">
         <ng-template matStepLabel>Fill out login information</ng-template>
 
         <mat-form-field appearance="outline" class="register-input">
@@ -67,8 +68,8 @@
               Already have an account? <a (click)="router.navigateByUrl('login')">Login</a>
             </mat-label>
           </div>
-          <button [disabled]="!firstFormGroup.valid && !IsEmailExist"   mat-raised-button class="right-button" color="primary"
-            matStepperNext>Next</button>
+          <button [disabled]="!firstFormGroup.valid && !IsEmailExist" mat-raised-button class="right-button"
+            color="primary" matStepperNext>Next</button>
         </div>
       </form>
 
@@ -87,7 +88,7 @@
           }
           @if (secondFormGroup.get('firstName')?.hasError('minlength') ||
           secondFormGroup.get('firstName')?.hasError('maxlength')) {
-          <mat-error>The password between 5 and 50 </mat-error>
+          <mat-error>First name between 5 and 50 </mat-error>
           }
         </mat-form-field>
 
@@ -99,14 +100,14 @@
           }
           @if (secondFormGroup.get('lastName')?.hasError('minlength') ||
           secondFormGroup.get('lastName')?.hasError('maxlength')) {
-          <mat-error>The password between 5 and 50 </mat-error>
+          <mat-error>Last name between 5 and 50 </mat-error>
           }
 
         </mat-form-field>
 
         <div appearance="outline" class="photo-input register-input">
           <mat-label>Profile Picture:</mat-label>
-          <input type="file" #fileInput (change)="onFileSelected($event)" hidden />
+          <input type="file" #fileInput (change)="onFileSelected($event)" hidden accept="image/*" />
 
           <button mat-raised-button type="button" (click)="fileInput.click()">Choose File</button>
 
@@ -165,9 +166,9 @@
         }
 
         <div>
-          <button  [disabled]="!secondFormGroup.valid" (click)="onSubmit()" mat-raised-button class="right-button" color="primary" matStepperNext>Next</button>
-          <button mat-raised-button class="right-button"
-            matStepperPrevious>Back</button>
+          <button [disabled]="!secondFormGroup.valid" (click)="onSubmit()" mat-raised-button class="right-button"
+            color="primary" matStepperNext>Next</button>
+          <button mat-raised-button class="right-button" matStepperPrevious>Back</button>
         </div>
       </form>
 

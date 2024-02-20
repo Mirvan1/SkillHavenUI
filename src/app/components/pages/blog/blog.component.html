@@ -2,139 +2,134 @@
   <div>
 
 
-    <button  class="sort-icon" mat-icon-button [matMenuTriggerFor]="sortMenu" matTooltip="Sort Elements">
-      <mat-icon >sort</mat-icon>
+    <button class="sort-icon" mat-icon-button [matMenuTriggerFor]="sortMenu" matTooltip="Sort Elements">
+      <mat-icon>sort</mat-icon>
     </button>
-  <button mat-stroked-button color="primary" (click)="gotoAddBlog()" > <mat-icon>add</mat-icon> Write Blog</button>
-   
-  <mat-menu #sortMenu="matMenu" >
-    <div class="popover-menu"  (click)="$event.stopPropagation()">
-      <!-- Select Dropdown -->
-      <mat-select appearance="outline" placeholder="Select property" [(value)]="selectedSort">
-        <mat-option *ngFor="let optionSort of sortingValues" [value]="optionSort.value">
-          {{ optionSort.text }}
-        </mat-option>
-      </mat-select>
-  
-      <!-- Slide Toggle -->
-      <mat-slide-toggle class="sort-toggle" color="primary" [(ngModel)]="orderBy">
-        Order By {{ selectedSort }}
-      </mat-slide-toggle>
-    </div>
-    <button class="sort-button " mat-raised-button color="primary" (click)="sort()">
+    <button mat-stroked-button color="primary" (click)="gotoAddBlog()"> <mat-icon>add</mat-icon> Write Blog</button>
+
+    <mat-menu #sortMenu="matMenu">
+      <div class="popover-menu" (click)="$event.stopPropagation()">
+        <!-- Select Dropdown -->
+        <mat-select appearance="outline" placeholder="Select property" [(value)]="selectedSort">
+          <mat-option *ngFor="let optionSort of sortingValues" [value]="optionSort.value">
+            {{ optionSort.text }}
+          </mat-option>
+        </mat-select>
+
+        <!-- Slide Toggle -->
+        <mat-slide-toggle class="sort-toggle" color="primary" [(ngModel)]="orderBy">
+          Order By {{ selectedSort }}
+        </mat-slide-toggle>
+      </div>
+      <button class="sort-button " mat-raised-button color="primary" (click)="sort()">
         Sort
       </button>
-  </mat-menu>
+    </mat-menu>
 
-</div>
-<div class="filter-search">
-  <mat-form-field appearance="outline" class="filter-form-field">
-    <mat-label>Search</mat-label>
-    <input matInput type="text" [(ngModel)]="filterValue">
-       <button matSuffix mat-icon-button aria-label="Search" (click)="filterByContent(filterValue)">
+  </div>
+  <div class="filter-search">
+    <mat-form-field appearance="outline" class="filter-form-field">
+      <mat-label>Search</mat-label>
+      <input matInput type="text" [(ngModel)]="filterValue">
+      <button matSuffix mat-icon-button aria-label="Search" (click)="filterByContent(filterValue)">
         <mat-icon>search</mat-icon>
       </button>
-     <!-- <button mat-stroked-button color="primary" (click)="filterByContent(filterValue)" > <mat-icon>filter_alt</mat-icon> Filter</button> -->
+      <!-- <button mat-stroked-button color="primary" (click)="filterByContent(filterValue)" > <mat-icon>filter_alt</mat-icon> Filter</button> -->
 
-  </mat-form-field>
-</div>
+    </mat-form-field>
+  </div>
 
 </div>
 
 @if(blogTopics){
-  <div class="blog-button-row">
+<div class="blog-button-row">
 
-    @for(blogTopic of blogTopics;track blogTopic.topicName){
-      @if(blogTopic.blogTopicId === selectedTopicId){
-      <button mat-raised-button class="topic-button" color="primary"
-       (click)="byBlogTopic(blogTopic.blogTopicId)">{{blogTopic.topicName}}</button>
-      }
-      @else{
-        <button mat-stroked-button color="primary"
-        (click)="byBlogTopic(blogTopic.blogTopicId)">{{blogTopic.topicName}}</button>
-      }
-    }
+  @for(blogTopic of blogTopics;track blogTopic.topicName){
+  @if(blogTopic.blogTopicId === selectedTopicId){
+  <button mat-raised-button class="topic-button" color="primary"
+    (click)="byBlogTopic(blogTopic.blogTopicId)">{{blogTopic.topicName}}</button>
+  }
+  @else{
+  <button mat-stroked-button color="primary"
+    (click)="byBlogTopic(blogTopic.blogTopicId)">{{blogTopic.topicName}}</button>
+  }
+  }
 
-    <!-- <button mat-stroked-button >Primary</button>
+  <!-- <button mat-stroked-button >Primary</button>
     <button mat-stroked-button color="accent">Accent</button>
     <button mat-stroked-button color="warn">Warn</button>
     <button mat-stroked-button disabled>Disabled</button> -->
-  </div>
+</div>
 }
 
-<div
-infiniteScroll [infiniteScrollDistance]="2"
-[infiniteScrollThrottle]="500"
-(scrolled)="onScroll()"
-[scrollWindow]="true"
-class="blog-container">
+<div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()"
+  [scrollWindow]="true" class="blog-container">
 
-<div class="blog-cards-container">
-@if(blogContent){
+  <div class="blog-cards-container">
+    @if(blogContent){
     @for( blog of blogContent.data;track blog.blogId){
-<mat-card class="blog-card" (click)="getBlogDetail(blog.blogId)">
-    <img mat-card-image [src]="blog.photoPath" [alt]="blog.title"  >
-    <mat-card-content class="blog-content">
-      <div class="blog-content-creater">
-        <img mat-card-image [src]="blog.userPhotoPath" [alt]="blog.title"  >
-        <span>{{blog.fullName}}</span>
-        <span> · </span>
-        <span>{{blog.publishDate | toDate}}</span>
-      </div>
-      <h2> {{blog.title}}</h2>
-      <mat-divider></mat-divider>
-      <span [innerHTML]="blog.content">
-      </span>
-      <mat-divider class="divider"></mat-divider>
+    <mat-card class="blog-card" (click)="getBlogDetail(blog.blogId)">
+      <img mat-card-image [src]="blog.photoPath" [alt]="blog.title">
+      <mat-card-content class="blog-content">
+        <div class="blog-content-creater">
+          <img mat-card-image [src]="blog.userPhotoPath" [alt]="blog.title">
+          <span>{{blog.fullName}}</span>
+          <span> · </span>
+          <span>{{blog.publishDate | toDate}}</span>
+        </div>
+        <h2> {{blog.title}}</h2>
+        <mat-divider></mat-divider>
+        <span [innerHTML]="blog.content">
+        </span>
+        <mat-divider class="divider"></mat-divider>
 
-      <p class="blog-footer">
-       <span class="blog-footer-info">{{blog.blogTopicName}}</span>
-       <span class="blog-footer-info"> <mat-icon>library_books</mat-icon>  {{blog.nOfReading??0}} read</span>
-       <span class="blog-footer-info"> <mat-icon>how_to_vote</mat-icon>  {{blog.vote??0}} vote </span>
-      </p>
+        <p class="blog-footer">
+          <span class="blog-footer-info">{{blog.blogTopicName}}</span>
+          <span class="blog-footer-info"> <mat-icon>library_books</mat-icon> {{blog.nOfReading??0}} read</span>
+          <span class="blog-footer-info"> <mat-icon>how_to_vote</mat-icon> {{blog.vote??0}} vote </span>
+        </p>
 
-    </mat-card-content>
-    <!-- <mat-card-actions>
+      </mat-card-content>
+      <!-- <mat-card-actions>
       <button mat-button>Details</button>
     </mat-card-actions> -->
-  </mat-card>
-}
+    </mat-card>
+    }
 
-}
-@else{
-<h3>No blog found</h3>
-}
+    }
+    @else{
+    <h3>No blog found</h3>
+    }
+
+  </div>
+
+
+
+  <div class="most-used-blog-container">
+
+    @if(mostVotedBlog){
+    <h2> </h2>
+    <div mat-subheader>Most Voted Blogs</div>
+
+    <mat-list>
+      @for( blog of mostVotedBlog;track blog.blogId){
+
+      <mat-list-item class="most-used-blog-item">
+        <div>
+          <div matListItemLine class="most-used-blog-creater" (click)="getBlogDetail(blog.blogId)">
+            <img mat-card-image [src]="blog.photoPath" [alt]="blog.title">
+            <span>{{blog.fullName}}</span>
+          </div>
+
+
+          <div matListItemTitle class="most-used-blog-title">{{blog.title}}</div>
+        </div>
+      </mat-list-item>
+      }
+
+    </mat-list>
+    }
+
+  </div>
 
 </div>
-
-
-
-<div class="most-used-blog-container">
-  
-@if(mostVotedBlog){
-  <h2> </h2>
-  <div mat-subheader>Most Voted Blogs</div>
-
-<mat-list>
-  @for( blog of mostVotedBlog;track blog.blogId){
-
-  <mat-list-item class="most-used-blog-item">
-    <div >
-      <div matListItemLine class="most-used-blog-creater" (click)="getBlogDetail(blog.blogId)">
-        <img mat-card-image [src]="blog.photoPath" [alt]="blog.title"  >
-        <span>{{blog.fullName}}</span>
-      </div>
-
-
-    <div matListItemTitle class="most-used-blog-title">{{blog.title}}</div>
-     </div>
-  </mat-list-item>
-}
-
-</mat-list>
-}
-
-</div>
-
-</div>
-

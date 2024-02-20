@@ -6,11 +6,11 @@ html {
   display: flex;
   flex-direction: row;
   max-width: 1200px;
-  /* Maximum width of the container */
+ 
   margin: 5%;
   margin-top: 1%!important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  /* Optional: adds a subtle shadow */
+ 
   font-size: 16px;
   line-height: 1.6;
   font-family: 'Roboto', sans-serif;
@@ -21,9 +21,9 @@ html {
 
 .blog-cards-container {
   max-width: 1200px;
-  /* Maximum width of the container */
+ 
   background-color: #ffffff;
-  /* Background color */
+ 
   font-size: 16px;
   line-height: 1.6;
   font-family: 'Roboto', sans-serif;
@@ -31,18 +31,18 @@ html {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 5px;
-  /* Reduced gap between cards */
+ 
   justify-content: space-between;
   padding: 25px;
   width: 65% !important;
-  /* Fixed width for cards */
+ 
   border-right: 1px solid rgb(221, 220, 220);
   ;
 }
 
 .most-used-blog-container {
   background-color: #ffffff;
-  /* Background color */
+ 
   font-size: 16px;
   line-height: 1.6;
   font-family: 'Roboto', sans-serif;
@@ -50,7 +50,7 @@ html {
   flex-direction: column;
   flex-wrap: wrap;
   gap: 5px;
-  /* Reduced gap between cards */
+ 
   justify-content: space-between;
   padding: 5px;
   width: 20%;
@@ -61,9 +61,9 @@ html {
 .blog-card {
   height: 10%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow for depth */
+ 
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* Smooth transition for hover effects */
+ 
   margin-bottom: 2%;
   display: flex;
   flex-direction: row-reverse;
@@ -74,7 +74,7 @@ html {
 
 .blog-card:hover {
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-  /* Subtle shadow for depth */
+ 
   transform: translateY(-5px);
   color: #f3f2f2
 }
@@ -122,9 +122,9 @@ html {
   white-space: nowrap;
   overflow: hidden;
   line-height: 1.5em;
-  /* Example line height */
+ 
   max-height: 4.5em;
-  /* Adjust as needed for 2 or 3 lines */
+ 
 }
 
 
@@ -156,7 +156,7 @@ html {
 
 .most-used-blog-item:hover {
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-  /* Subtle shadow for depth */
+ 
   transform: translateY(-5px);
   color: #f3f2f2;
   cursor: pointer;
@@ -166,7 +166,7 @@ html {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center; /* Align items vertically */
+  align-items: center;
   max-width: 1200px;
   margin: 5%;
   margin-bottom: 0!important;
@@ -186,14 +186,14 @@ html {
   padding-top:30px; 
 }
 .filter-form-field {
-  width: 250px; /* Adjust width as needed */
-  margin: 0; /* Reset margins for alignment */
+  width: 250px;
+  margin: 0;
 
   display: flex;
-  align-items: center; /* Center align the input field */
+  align-items: center;
   padding: 0 !important;
   border: 0 !important;
-  height: auto; /* Adjust height for better appearance */
+  height: auto;
 }
 
 .popover-menu {
@@ -206,8 +206,8 @@ html {
 .mat-mdc-text-field-wrapper {
   display: flex;
   flex-direction: row;
-  align-items: center; /* Center align the text field wrapper */
-  height: auto; /* Adjust height for better appearance */
+  align-items: center;
+  height: auto;
 }
 
 mat-divider {
@@ -270,60 +270,60 @@ mat-divider {
 
 
 @media screen and (max-width: 600px) {
-  /* Toolbar alignment and spacing */
+ 
   .blog-toolbar {
       display: flex;
       flex-direction: column;
-      align-items: stretch; /* Stretch toolbar items to full width */
-      gap: 10px; /* Space between toolbar items */
+      align-items: stretch;
+      gap: 10px;
   }
 
   .blog-toolbar > div {
       display: flex;
       flex-direction: row;
-      justify-content: space-between; /* Align toolbar items on opposite ends */
-      flex-wrap: wrap; /* Allow items to wrap */
+      justify-content: space-between;
+      flex-wrap: wrap;
   }
 
   .sort-icon, .filter-search {
-      flex-basis: 48%; /* Allow sort and search to take up nearly half the toolbar width each */
+      flex-basis: 48%;
   }
 
   .filter-form-field {
-      width: 100%; /* Full width of its container */
+      width: 100%;
   }
 
   .blog-button-row {
-      justify-content: center; /* Center the topic buttons */
-      flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+      justify-content: center;
+      flex-wrap: wrap;
   }
 
-  /* Blog cards and most voted blogs container */
+ 
   .blog-cards-container, .most-used-blog-container {
-      width: 100%; /* Full width for containers */
-      order: 1; /* Bring blog cards to top */
+      width: 100%;
+      order: 1;
   }
 
   .most-used-blog-container {
-      order: 2; /* Most voted blogs come after blog cards */
+      order: 2;
   }
 
-  /* Adjustments to the blog card */
+ 
   .blog-card {
-      flex-direction: column; /* Stack elements vertically */
-      align-items: center; /* Center align the content */
+      flex-direction: column;
+      align-items: center;
   }
 
-  /* Ensure images within blog cards are fully visible */
+ 
   .blog-card img, .blog-content-creater img {
-      width: 100%; /* Set images to take full width of their containers */
-      height: auto; /* Adjust height automatically */
+      width: 100%;
+      height: auto;
   }
 
-  /* Adjust the layout of the most voted blog list */
+ 
   .most-used-blog-item {
       display: flex;
-      flex-direction: column; /* Stack elements vertically */
-      align-items: center; /* Center align the content */
+      flex-direction: column;
+      align-items: center;
   }
 }

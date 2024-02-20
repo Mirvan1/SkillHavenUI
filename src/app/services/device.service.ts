@@ -11,6 +11,6 @@ export class DeviceService {
 
   constructor(private deviceDetectorService: DeviceDetectorService) {
     this.isMobileSubject.next(this.deviceDetectorService.isMobile());
-    console.log("IsMobile:",this.deviceDetectorService.isMobile())
+    
    }
 }

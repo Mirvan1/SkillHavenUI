@@ -1,11 +1,11 @@
-/* General Styles */
+
 .chat-page {
     font-family: 'Arial', sans-serif;
     color: #333;
     background-color: #f9f9f9;
 }
 
-/* Chat Header Styles */
+
 .chat-header {
     display: flex;
     align-items: center;
@@ -25,16 +25,16 @@
     color: white;
 }
 
-/* Chat Container */
+
 .chat-container {
     display: flex;
-    height: 600px; /* Adjust based on your requirements */
+    height: 600px;
     margin: 10px;
     background-color: white;
     border: 1px solid #ccc;
 }
 
-/* User Info Area */
+
 .chat-user-list {
     flex: 0 0 30%;
     padding: 10px;
@@ -82,7 +82,7 @@
     color: #f44336;
 }
 
-/* Chat Messages Area */
+
 .chat-messages {
     flex: 1;
     display: flex;
@@ -135,7 +135,7 @@
     margin-top: 5px;
 }
 
-/* Send Message Area */
+
 .chat-message-send {
     display: flex;
     align-items: center;
@@ -163,7 +163,14 @@
     background-color: #32465a;
 }
 
-/* Responsiveness */
+
+.empty-message{
+    color:black;
+    margin:30px;
+    font-size: 1.2rem;
+}
+
+
 @media (max-width: 768px) {
     .chat-container {
         flex-direction: column;

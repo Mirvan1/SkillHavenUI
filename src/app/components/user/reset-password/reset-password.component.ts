@@ -6,7 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ToastrService } from 'ngx-toastr';
-import { ErrorResult } from '../../../utils/global.dto';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -42,15 +41,15 @@ export class ResetPasswordComponent implements OnInit{
   ngOnInit(): void {
     this.route.queryParams
     .subscribe(params => {
-      console.log(params); // { orderby: "price" }
+      
       this.email = params['email'];
-      console.log(this.email); // price
+      
       this.token=params['value'];
     }
   );  }
 
   onSubmit(){
-    debugger
+    
 //if(this.userForm.valid){
   let request:ResetPasswordDto={
     password:this.userForm.get('password')?.value!,
@@ -61,8 +60,8 @@ export class ResetPasswordComponent implements OnInit{
   };
   this.userService.resetPassword(request).subscribe({
     next:(res)=>{
-      debugger;
-console.log(res);
+      ;
+
 this.router.navigateByUrl('login');
     } 
   });

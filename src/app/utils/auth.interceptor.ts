@@ -15,7 +15,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     res => accessToken = res
   );
   loadingService.show();
-  console.log("access", accessToken)
+  
   if (accessToken) {
     req = req.clone({
       setHeaders: {
@@ -27,7 +27,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req)
     .pipe(
       catchError((err) => {
-        debugger
+        
         if (err.status === 400) {
           let errObj=JSON.parse(JSON.stringify(err.error));
           toastrService.error(JSON.stringify(errObj.errors),errObj?.title)
@@ -41,7 +41,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
       }),
       finalize(() => {
-        console.log("hide service");
+        
 
         loadingService.hide()
       }

@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../environment/environment';
 import { ListSkillerDtos, PaginatedRequest, SkillerDto, getAllSkillerDto } from '../dtos/skills';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,7 @@ export class SkillsService {
     .set('OrderByPropertname', request.orderByPropertname || '')
   
     .set('SearchByName', request.filter || '');
-debugger
+
     return this.httpClient.get<ListSkillerDtos>(`${this.skillsEndpoint}/GetAllSkiller`,{params})
     .pipe(
       tap(res=>this.getAllSkillersSubject.next(res))
@@ -59,7 +59,7 @@ debugger
     let params = new HttpParams()
     .set('Page', request.page || '')
     .set('PageSize', request.pageSize || '')
-    .set('OrderBy', request.orderBy || '')
+    .set('OrderBy', request.orderBy?? false)
     .set('OrderByPropertname', request.orderByPropertname || '')
     .set('filter', request.filter || '');
 

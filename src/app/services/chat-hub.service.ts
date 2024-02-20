@@ -1,11 +1,11 @@
 import { Injectable, inject } from '@angular/core';
-import { environment } from '../environment/environment';
 import * as signalR from "@microsoft/signalr";
 import { UserService } from './user.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ChatService } from './chat.service';
 import { GetMessagesByUser } from '../dtos/chat.dto';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -37,18 +37,18 @@ export class ChatHubService {
 
     this.hubConnection
       .start()
-      .then(() => console.log('Connection started'))
+      .then((res) =>console.log(res) )
       .catch(err => console.error('Error while starting connection: ' + err));
   }
 
   public addReceiveMessageListener = (onMessageReceived: (userId: number, message: string) => void) => {
     this.hubConnection.on('ReceiveMessageToAll', (userId, message) => {
-      console.log("UserId and message",userId+message);
+      
       
       onMessageReceived(userId, message);
     });
     this.hubConnection.on('ReceiveMessageToClient', (userId, message) => {
-      console.log("UserId and message",userId+message);
+      
  
       onMessageReceived(userId, message);
     });
@@ -57,7 +57,7 @@ export class ChatHubService {
 
   public addSenderMessageListener = (onMessageReceived: (userId: number, message: string) => void) => {
     this.hubConnection.on('SenderMessageToClient', (userId, message) => {
-      console.log("UserId and message",userId+message);
+      
  
       onMessageReceived(userId, message);
     });

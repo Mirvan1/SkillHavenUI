@@ -1,13 +1,13 @@
-/* Import ngx-bar-rating themes */
+
 @import '../../../../node_modules/ngx-bar-rating/themes/br-default-theme.scss';
 @import '../../../../node_modules/ngx-bar-rating/themes/br-stars-theme.scss';
-/* Detail Header */
+
 .detail-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 15px;
-    background-color: #f8f8f7; /* Light background */
+    background-color: #f8f8f7;
 }
 
 .detail-header-title {
@@ -17,16 +17,16 @@
 }
 
 .detail-header-button mat-icon {
-    color: #333; /* Color for close icon */
+    color: #333;
 }
 
-/* Divider Style */
+
 mat-divider {
     margin: 0 15px;
     background-color: #d1d1d1;
 }
 
-/* Detail Container */
+
 .detail-container {
     display: flex;
     padding: 15px;
@@ -35,15 +35,15 @@ mat-divider {
 .detail-photo{
     margin-right: 5%;
 }
-/* Photo Section */
+
 .detail-photo img {
-    width: 100px; /* Adjust as needed */
-    height: 100px; /* Adjust as needed */
-    border-radius: 50%; /* Circular Image */
-    object-fit: cover; /* Ensures image covers the area */
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
-/* Info Section */
+
 .detail-info {
     margin-left: 20px;
 }
@@ -56,16 +56,16 @@ mat-divider {
 
 mat-label {
     display: block;
-    color: #666; /* Subdued text color */
+    color: #666;
     font-size: 0.9em;
 }
 
-/* Rating Section */
+
 .rating, ngx-stars {
     margin-right: 5px;
 }
 
-/* Description Section */
+
 .detail-description {
     padding: 15px;
     height: 40%;
@@ -76,75 +76,75 @@ mat-label {
     color: #333;
 }
 
-/* Dialog Actions */
+
 mat-dialog-actions {
     padding: 15px;
-    justify-content: flex-end; /* Align buttons to the right */
+    justify-content: flex-end;
 }
 
 mat-dialog-actions button {
-    background-color: #007bff; /* Brand color */
+    background-color: #007bff;
     color: white;
 }
 
 
 
 
-/* Media query for mobile devices */
+
 @media screen and (max-width: 600px) {
     .detail-header {
-        display: block; /* Use block layout for simplicity */
-        text-align: center; /* Center the title */
+        display: block;
+        text-align: center;
         padding: 10px;
         background-color: #f8f8f7;
     }
 
     .detail-header-title {
         font-size: 1.2em;
-        margin: 5px 0; /* Add a small margin around the title */
+        margin: 5px 0;
     }
 
     .detail-header-button {
-        position: absolute; /* Position the button absolutely */
+        position: absolute;
         top: 10px;
-        right: 10px; /* Place it at the top right corner */
+        right: 10px;
         color: #333;
     }
 
     .detail-container {
-        display: block; /* Stack elements vertically */
+        display: block;
         padding: 15px;
     }
 
     .detail-photo img {
-        display: block; /* Center the image */
-        margin: 0 auto; /* Auto margin for horizontal centering */
-        width: 100px; /* Adjust image size */
+        display: block;
+        margin: 0 auto;
+        width: 100px;
         height: 100px;
         border-radius: 50%;
         object-fit: cover;
     }
 
     .detail-info-item {
-        text-align: center; /* Center-align text */
+        text-align: center;
         font-size: 1rem;
-        margin: 5px 0; /* Add spacing between items */
+        margin: 5px 0;
     }
 
     .detail-description {
         padding: 10px;
         font-size: 0.9em;
-        text-align: center; /* Center-align the description */
+        text-align: center;
     }
 
     mat-dialog-actions {
         padding: 10px;
-        text-align: center; /* Center-align action buttons */
+        text-align: center;
     }
 
     mat-dialog-actions button {
-        width: auto; /* Auto width for buttons */
-        margin: 10px 0; /* Add spacing around buttons */
-        padding: 8px 15px; /* Increase padding for better tap targets */
+        width: auto;
+        margin: 10px 0;
+        padding: 8px 15px;
     }
 }

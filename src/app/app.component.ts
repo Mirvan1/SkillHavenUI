@@ -12,11 +12,9 @@ import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.compon
 import { EditProfileDialogComponent } from './components/edit-profile-dialog/edit-profile-dialog.component';
 import { UserService } from './services/user.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import {MatBadgeModule} from '@angular/material/badge';
-import { DeviceService } from './services/device.service';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +25,7 @@ import { DeviceService } from './services/device.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'skill-haven-ui';
+  title = 'SkillHaven - Demo';
 
 badgeVisibility=false;
 
@@ -41,7 +39,7 @@ constructor(
   ){
   this.chatHubService.newMessage$.subscribe({
     next:(res)=>{
-      debugger
+      
       if(res){
         this.badgeVisibility=res;
       }
@@ -54,9 +52,8 @@ constructor(
 
 openEditProfile(){
   const dialogRef = this.editProfileDialog.open(EditProfileDialogComponent, {restoreFocus: false,width:'60%',height:'90%'});
- // dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
  dialogRef.afterClosed().subscribe(result => {
-  console.log('The dialog was closed');
+  
 });
 }
 
@@ -64,7 +61,7 @@ openChatDialog() {
   const chatDialogRef = this.chatDialog.open(ChatDialogComponent,{restoreFocus: false,width:'60%',height:'90%'});
 
   chatDialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog result: ${result}`);
+    
   });
 }
 

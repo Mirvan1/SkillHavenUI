@@ -10,16 +10,7 @@ import { SkillerCardComponent } from '../skiller-card/skiller-card.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { Router, RouterLink, RouterModule } from '@angular/router';
-import {
-  MatDialog,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-} from '@angular/material/dialog';
-import { EditProfileDialogComponent } from '../edit-profile-dialog/edit-profile-dialog.component';
-import { SkillerDetailDialogComponent } from '../skiller-detail-dialog/skiller-detail-dialog.component';
-import { ChatDialogComponent } from '../chat-dialog/chat-dialog.component';
+import { RouterModule } from '@angular/router';
 import { ChatHubService } from '../../services/chat-hub.service';
 import { BlogCarouselComponent } from '../blog-carousel/blog-carousel.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -34,7 +25,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit,AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   allSkillers: ListSkillerDtos | null = null;
   supervisors?: ListSkillerDtos | null;
   consultants?: ListSkillerDtos | null;
@@ -42,40 +33,40 @@ export class HomeComponent implements OnInit,AfterViewInit {
   defaultPageSize: number = 8;
   defaultPage: number = 1;
   defaultSearchValue: string = '';
-  defaultOrderBy:boolean=true;
-defaultOrderByName:string='Rating';
+  defaultOrderBy: boolean = true;
+  defaultOrderByName: string = 'Rating';
 
   activeTab = 0;
   constructor(
     private userService: UserService,
     private skillsService: SkillsService,
     public chatHubService: ChatHubService,
-    private toastrService:ToastrService
+    private toastrService: ToastrService
   ) {
     this.userService.getUser().subscribe({});
     this.chatHubService.startConnection();
 
   }
 
-  
+
   ngAfterViewInit() {
-    this.chatHubService.addReceiveMessageListener((userId, message) => { 
+    this.chatHubService.addReceiveMessageListener((userId, message) => {
       // if(this.receiverUserId){
       // this.chatHubService.loadChatHistory(this.receiverUserId);
       // }
-      this.toastrService.success(JSON.stringify(userId),JSON.stringify(message));
+      this.toastrService.success(JSON.stringify(userId), JSON.stringify(message));
       this.chatHubService.newMessage.next(true);
 
-  });
+    });
   }
 
   ngOnInit(): void {
-    this.getAllSkiller(this.defaultPageSize, this.defaultPage,this.defaultSearchValue,this.defaultOrderBy,this.defaultOrderByName);
+    this.getAllSkiller(this.defaultPageSize, this.defaultPage, this.defaultSearchValue, this.defaultOrderBy, this.defaultOrderByName);
     //this.getConsultants();
     //this.getSupervisors();
   }
 
-  
+
 
   getUser() {
     this.userService.getUser$.subscribe({
@@ -84,12 +75,12 @@ defaultOrderByName:string='Rating';
           this.user = res;
         }
       },
-      error: (err) => alert(err)
+      // error: (err) => alert(err)
     })
   }
 
 
-  getAllSkiller(defaultPageSize: number, defaultPage: number, defaultSearchValue: string,defaultOrderBy:boolean,defaultOrderByName:string) {
+  getAllSkiller(defaultPageSize: number, defaultPage: number, defaultSearchValue: string, defaultOrderBy: boolean, defaultOrderByName: string) {
     let request: getAllSkillerDto = {
       page: defaultPage,
       pageSize: defaultPageSize,
@@ -97,21 +88,21 @@ defaultOrderByName:string='Rating';
       orderByPropertname: defaultOrderByName,
       filter: defaultSearchValue
     };
-    console.log(request)
+
     this.skillsService.getAllSkillerQuery(request).subscribe({
       next: (res) => {
         if (res) {
           this.allSkillers = res;
         }
       },
-      error: (err) => alert(JSON.stringify(err))
+      // error: (err) => alert(JSON.stringify(err))
     });
   }
 
-  getSupervisors(defaultPageSize: number, defaultPage: number, defaultSearchValue: string,defaultOrderBy:boolean,defaultOrderByName:string) {
+  getSupervisors(defaultPageSize: number, defaultPage: number, defaultSearchValue: string, defaultOrderBy: boolean, defaultOrderByName: string) {
     let request: PaginatedRequest = {
       page: defaultPage,
-      pageSize:defaultPageSize,
+      pageSize: defaultPageSize,
       orderBy: defaultOrderBy,
       orderByPropertname: defaultOrderByName,
       filter: defaultSearchValue
@@ -123,11 +114,11 @@ defaultOrderByName:string='Rating';
           this.supervisors = res;
         }
       },
-      error: (err) => alert(err)
+      //error: (err) => alert(err)
     });
   }
 
-  getConsultants(defaultPageSize: number, defaultPage: number, defaultSearchValue: string,defaultOrderBy:boolean,defaultOrderByName:string) {
+  getConsultants(defaultPageSize: number, defaultPage: number, defaultSearchValue: string, defaultOrderBy: boolean, defaultOrderByName: string) {
     let request: PaginatedRequest = {
       page: defaultPage,
       pageSize: defaultPageSize,
@@ -135,42 +126,44 @@ defaultOrderByName:string='Rating';
       orderByPropertname: defaultOrderByName,
       filter: defaultSearchValue
     };
-    debugger
+
     this.skillsService.getConsultants(request).subscribe({
       next: (res) => {
         if (res) {
           this.consultants = res;
         }
       },
-      error: (err) => alert(JSON.stringify(err))
+      //error: (err) => alert(JSON.stringify(err))
     });
   }
 
 
   onTabChange(index: number) {
-    if(this.activeTab !==index) this.defaultSearchValue='';
+    if (this.activeTab !== index) this.defaultSearchValue = '';
 
     this.activeTab = index;
     //   this.defaultPageSize=8;
     // this.defaultPage=1;
-  
+
     if (this.activeTab === 0) {
-      this.getAllSkiller(this.defaultPageSize, this.defaultPage,this.defaultSearchValue,this.defaultOrderBy,this.defaultOrderByName);
+      this.getAllSkiller(this.defaultPageSize, this.defaultPage, this.defaultSearchValue, this.defaultOrderBy, this.defaultOrderByName);
     }
     else if (this.activeTab === 1) {
-      this.getConsultants(this.defaultPageSize, this.defaultPage,this.defaultSearchValue,this.defaultOrderBy,this.defaultOrderByName);
+
+
+      this.getConsultants(this.defaultPageSize, this.defaultPage, this.defaultSearchValue, this.defaultOrderBy, this.defaultOrderByName);
     }
     else if (this.activeTab === 2) {
-      this.getSupervisors(this.defaultPageSize, this.defaultPage,this.defaultSearchValue,this.defaultOrderBy,this.defaultOrderByName);
+      this.getSupervisors(this.defaultPageSize, this.defaultPage, this.defaultSearchValue, this.defaultOrderBy, this.defaultOrderByName);
     }
   }
 
   // allSkillerChanged($e: any) {
-  //   debugger
+  //   
   //   this.defaultPageSize = $e.pageSize;
   //   //this.defaultPage=$e.pageIndex+1;
   //   this.getAllSkiller(this.defaultPageSize, this.defaultPage,this.defaultSearchValue);
-  //   console.log("allskiller", $e);
+  //   
   // }
 
   // getSupervisorsChanged($e: any) {
@@ -188,24 +181,26 @@ defaultOrderByName:string='Rating';
   // }
 
   onScroll = () => {
-    debugger
+
     this.defaultPageSize += this.defaultPageSize;
     this.onTabChange(this.activeTab);
   }
 
   setSearchVal($e: string) {
-    debugger
-    if ( $e) {
+
+    if ($e) {
       this.defaultSearchValue = $e;
       this.onTabChange(this.activeTab);
 
     }
   }
-  setSortVal($e:SortResultDto){
-    debugger
+  setSortVal($e: SortResultDto) {
 
-    this.defaultOrderBy=$e.orderBy!;
-    this.defaultOrderByName=$e.column!;
+
+    this.defaultOrderBy = $e.orderBy!;
+
+
+    this.defaultOrderByName = $e.column!;
     this.onTabChange(this.activeTab);
 
   }

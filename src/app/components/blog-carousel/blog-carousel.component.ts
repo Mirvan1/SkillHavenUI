@@ -76,7 +76,7 @@ export class BlogCarouselComponent  implements OnInit {
   }
 
   getBlogFromCarousel(blogId:number){
-     console.log(JSON.stringify(blogId));
+     
     this.router.navigate(['blog-detail',blogId]);
   }
 

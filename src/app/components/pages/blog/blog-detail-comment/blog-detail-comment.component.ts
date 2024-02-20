@@ -1,11 +1,11 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../../services/user.service';
 import { BlogService } from '../../../../services/blog.service';
-import { BlogCommentsDto, CreateBlogCommentDto, GetBlogCommentsDto, ListBloCommentsDtos } from '../../../../dtos/blog';
+import { CreateBlogCommentDto, GetBlogCommentsDto, ListBloCommentsDtos } from '../../../../dtos/blog';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDrawer, MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,7 +16,7 @@ import { ToDatePipe } from '../../../../utils/to-date.pipe';
 @Component({
   selector: 'app-blog-detail-comment',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatSidenavModule, ToDatePipe,MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatSidenavModule, ToDatePipe, MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
   templateUrl: './blog-detail-comment.component.html',
   styleUrl: './blog-detail-comment.component.css'
 })
@@ -29,7 +29,7 @@ export class BlogDetailCommentComponent implements OnInit, OnChanges {
   @ViewChild('sidenav') sidenav?: MatSidenav;
 
   addCommentValue: string = '';
-@Output() drawerOpenEvent :EventEmitter<boolean>=new EventEmitter<boolean>();
+  @Output() drawerOpenEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   request: GetBlogCommentsDto = {
     blogId: this.blogId,
@@ -48,7 +48,7 @@ export class BlogDetailCommentComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: any): void {
-    debugger
+
     this.isDrawerOpen = changes['isDrawerOpen'].currentValue;
     if (this.isDrawerOpen
     ) {
@@ -61,20 +61,20 @@ export class BlogDetailCommentComponent implements OnInit, OnChanges {
     else {
       this.renderer.setStyle(document.body, 'overflow-y', 'auto');
 
-      debugger
+
       this.sidenav?.close();
     }
   }
 
   ngOnInit(): void {
-    debugger
+
     if (this.blogId) {
       this.getBlogComments(this.request);
     }
   }
 
   getBlogComments(request: GetBlogCommentsDto) {
-    this.request.blogId=this.blogId;
+    this.request.blogId = this.blogId;
     this.blogService.getBlogComments(request).subscribe({
       next: (res) => {
         this.blogComments = res;
@@ -93,7 +93,7 @@ export class BlogDetailCommentComponent implements OnInit, OnChanges {
 
     this.blogService.createBlogComment(commentRequest).subscribe({
       next: (res) => {
-        console.log(res);
+
         if (res) {
           this.getBlogComments(this.request);
         }
@@ -102,11 +102,11 @@ export class BlogDetailCommentComponent implements OnInit, OnChanges {
   }
 
 
-  closeSidenav(){
-    debugger
+  closeSidenav() {
+
     this.renderer.setStyle(document.body, 'overflow-y', 'auto');
 
-    this.isDrawerOpen=!this.isDrawerOpen;
+    this.isDrawerOpen = !this.isDrawerOpen;
     this.drawerOpenEvent.emit(this.isDrawerOpen)
   }
 }

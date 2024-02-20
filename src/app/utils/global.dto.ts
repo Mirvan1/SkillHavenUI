@@ -12,3 +12,11 @@ export class FormErrorStateMatcher implements ErrorStateMatcher {
       return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
     }
   }
+
+
+  
+export class ConfirmDialogModel {
+
+  constructor(public title: string, public userId: number) {
+  }
+}

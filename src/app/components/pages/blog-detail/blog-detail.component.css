@@ -1,30 +1,30 @@
-/* Base Page Styles */
+
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
-    color: #333; /* Dark grey for text */
-    background: #f4f4f4; /* Light grey background */
+    color: #333;
+    background: #f4f4f4;
 }
 
-/* Blog Detail Page Container */
+
 .blog-detail-page {
-    max-width: 800px; /* Optimal reading width */
-    margin: 2rem auto; /* Centered with top & bottom margin */
-    background: #fff; /* White background for content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    padding: 20px; /* Padding inside the container */
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
-/* Header Styles */
+
 .blog-detail-header{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
 }
-/* Header Styles */
+
 .blog-detail-header h1 {
     font-weight: 700;
-    color: #1a1a1a; /* Slightly darker for headings */
+    color: #1a1a1a;
     text-align: center;
     margin-bottom: 1rem;
    margin-left: 40%;
@@ -41,7 +41,7 @@ body {
  
 }
 
-/* Creator Info Styles */
+
 .blog-detail-creater {
     display: flex;
     align-items: center;
@@ -65,7 +65,7 @@ body {
 
 
 
-/* Blog Content Styles */
+
 .blog-detail-content img {
     width: 80%;
     display: block;
@@ -82,12 +82,11 @@ body {
     margin-bottom: 2rem;
 }
 
-/* Vote & Comment Info Styles */
+
 .blog-detail-info {
-    /* display: flex;
-    align-items: center; */
+   
     margin-left: 5%;
-    /* gap: 20px; Space between elements */
+   
 }
 
 .blog-detail-info mat-icon {
@@ -95,7 +94,7 @@ body {
     color: gray;
 }
 
-/* Divider Style */
+
 mat-divider {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -103,9 +102,9 @@ mat-divider {
 
 
 
-/* Hover Effect on Icons */
+
 mat-icon:hover {
-    color: #007bff; /* Blue color on hover */
+    color: #007bff;
     cursor: pointer;
 }
 
@@ -116,15 +115,15 @@ mat-icon:hover {
 
 .blog-detail-readed, .blog-detail-vote-info, .blog-detail-comments {
     display: flex;
-    align-items: center; /* Centers content vertically */
-    gap: 5px; /* Spacing between icon and text */
+    align-items: center;
+    gap: 5px;
 }
 
-/* Icon Styles */
+
 .blog-detail-info mat-icon {
     margin: 0;
     color: gray;
-    /* Remove fixed margin, let flexbox handle spacing */
+   
 }
 .divider{
     margin-top: 50px;
@@ -143,7 +142,7 @@ display: flex;
 align-items: center;
  gap: 20px;
 }
-/* Media Query for Responsive Design */
+
 @media screen and (max-width: 768px) {
     .blog-detail-page {
         padding: 10px;
@@ -163,11 +162,7 @@ align-items: center;
     }
 }
 
-/* .zoom:hover {
-    cursor: pointer;
-    transform: scale(1.5);  (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) 
-  } 
-  */
+
 
 
 

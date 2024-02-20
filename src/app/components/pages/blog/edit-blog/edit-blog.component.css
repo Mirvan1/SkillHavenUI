@@ -1,5 +1,5 @@
 .blog-edit{
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-size: 16px;
   line-height: 1.6;
   font-family: 'Roboto', sans-serif;
@@ -45,7 +45,7 @@
 }
 .edit-blog-detail-header h2 {
   font-weight: 700;
-  color: #1a1a1a; /* Slightly darker for headings */
+  color: #1a1a1a;
 text-align: center;
 margin-top: 10px;  
 }

@@ -13,59 +13,74 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 
 export const routes: Routes = [
     {
-        
+        //change to lazy loading later
         path: '',
-        //canActivate:[authGuard],
-        component: AppComponent
+        //canActivate:[authGuard],//
+        //component: AppComponent
+        pathMatch: 'full',
+
+        redirectTo:'home'
     },
     {
         path: 'register',
-        component: RegisterComponent
+       // component: RegisterComponent
+        loadComponent:()=>import('./components/user/register/register.component').then(x=>x.RegisterComponent)
     },
     {
         path: 'forgot-password',
-        component: ForgotPasswordComponent
+      //  component: ForgotPasswordComponent
+      loadComponent:()=>import('./components/user/forgot-password/forgot-password.component').then(x=>x.ForgotPasswordComponent)
+
     },
     {
         path: 'reset-password',
-        component: ResetPasswordComponent
+       // component: ResetPasswordComponent
+       loadComponent:()=>import('./components/user/reset-password/reset-password.component').then(x=>x.ResetPasswordComponent)
+
     },
     {
         path: 'home',
         canActivate: [authGuard],
-        component: HomeComponent
+       // component: HomeComponent
+       loadComponent:()=>import('./components/home/home.component').then(x=>x.HomeComponent)
+
     },
     {
         path: 'blog',
         canActivate: [authGuard],
-        component: BlogComponent,
-        children: [
-          
-        ]
+        loadComponent:()=>import('./components/pages/blog/blog.component').then(x=>x.BlogComponent)
+
     },
     {
         path: 'add-blog',
         canActivate: [authGuard],
-
-        component: EditBlogComponent
+        loadComponent:()=>import('./components/pages/blog/edit-blog/edit-blog.component').then(x=>x.EditBlogComponent)
+       // component: EditBlogComponent
     },
     {
         path:'update-blog/:id',
         canActivate: [authGuard],
-        component: EditBlogComponent
+       // component: EditBlogComponent
+       loadComponent:()=>import('./components/pages/blog/edit-blog/edit-blog.component').then(x=>x.EditBlogComponent)
+
     },
     {
         path: 'blog-detail/:id',
         canActivate: [authGuard],
-        component: BlogDetailComponent
-    },
+//        component: BlogDetailComponent
+loadComponent:()=>import('./components/pages/blog-detail/blog-detail.component').then(x=>x.BlogDetailComponent)
+
+},
     {
         path: 'login',
-        component: LoginComponent
+        loadComponent:()=>import('./components/user/login/login.component').then(x=>x.LoginComponent)
+
+        //   component: LoginComponent
     }
 ,
     {
         path: '**',
-        component: NotFoundComponent
+        loadComponent:()=>import('./components/not-found/not-found.component').then(x=>x.NotFoundComponent)
+     //   component: NotFoundComponent
     }
 ];

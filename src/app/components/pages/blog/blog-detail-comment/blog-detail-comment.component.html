@@ -1,8 +1,7 @@
-
 @if(isDrawerOpen){
 <mat-sidenav-container class="comment-container" [hasBackdrop]="false">
   <mat-sidenav #sidenav class="comment-sidenav" mode="push">
- 
+
   </mat-sidenav>
 
 
@@ -13,10 +12,10 @@
     <div class="comment-sidenav-content">
       <div class="comment-sidenav-toolbar">
         <h2>Comments</h2>
-      <button mat-dialog-title class="edit-header-button" (click)="closeSidenav()"  mat-icon-button >
-        <mat-icon>close</mat-icon>
-    </button>
-  </div>
+        <button mat-dialog-title class="edit-header-button" (click)="closeSidenav()" mat-icon-button>
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
       @if (blogComments) {
       @for( blogComment of blogComments.data;track blogComment.blogCommentsId){
       <mat-card class="comment-card">
@@ -40,8 +39,8 @@
       <form #commentForm="ngForm">
         <mat-form-field appearance="outline" class="form-field">
           <mat-label>Add Comment</mat-label>
-          <input matInput type="text" name="comment" [(ngModel)]="addCommentValue" #addCommentModel="ngModel" minlength="5"
-            maxlength="500" required>
+          <input matInput type="text" name="comment" [(ngModel)]="addCommentValue" #addCommentModel="ngModel"
+            minlength="5" maxlength="500" required>
           @if (addCommentValue) {
           <button matSuffix mat-icon-button aria-label="Clear" (click)="addCommentValue=''">
             <mat-icon>close</mat-icon>

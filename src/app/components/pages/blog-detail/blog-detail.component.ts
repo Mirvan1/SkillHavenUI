@@ -6,7 +6,6 @@ import { UserService } from '../../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {  MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDrawer } from '@angular/material/sidenav';
 import { BlogDetailCommentComponent } from '../blog/blog-detail-comment/blog-detail-comment.component';
 import { ToDatePipe } from '../../../utils/to-date.pipe';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,7 +30,7 @@ export class BlogDetailComponent implements OnInit {
    protected location: Location
   ){
     this.blogId=router.snapshot.params['id'];
-    debugger
+    
   }
 
   ngOnInit(): void {
@@ -60,7 +59,7 @@ export class BlogDetailComponent implements OnInit {
     this.blogService.voteBlog(request).subscribe({
       next:(res)=>{
         this.blog.vote=res;
-          console.log("Unvote",res);
+          
       }  })
   }
 

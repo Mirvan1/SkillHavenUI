@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../environment/environment';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import {  ChangePasswordDto, ForgotPasswordDto, LoginUserDto, MailUserCheckerDto, RegisterUserDto, ResetPasswordDto, UserDto, VerifyUserDto } from '../dtos/user.dto';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -22,13 +22,13 @@ export class UserService {
    }
 
   getUser():Observable<UserDto>{
-    console.log("---------");
+    
     
     return this.httpClient.get<UserDto>(`${this.userEndpoint}/get-logged-user`)
     .pipe(
       tap(res=>{
-        debugger
-        console.log("GetUawe",res);
+        
+        
         if(!res){
           res=JSON.parse(localStorage.getItem('session')!) as UserDto;
         }
@@ -57,7 +57,7 @@ export class UserService {
     return this.httpClient.post(`${this.userEndpoint}/login`,request, {responseType: 'text'})
     .pipe(
       tap(res=>{
-        debugger
+        
         if(!res){
           res=JSON.parse(localStorage.getItem('token')!) as string;
         }
@@ -67,7 +67,7 @@ export class UserService {
   }
 
   verifyUser(request:VerifyUserDto):Observable<boolean>{
-    return this.httpClient.post<boolean>('http://localhost:5095/api/User/verify-user',request);
+    return this.httpClient.post<boolean>(`${this.userEndpoint}/User/verify-user`,request);
   }
 
   forgotPassword(request:ForgotPasswordDto){

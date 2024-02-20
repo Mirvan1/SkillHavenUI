@@ -6,7 +6,7 @@ import { BlogPaginatedRequest, GetBlogDto, GetBlogTopicDto, ListBlogDtos } from 
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { Router } from '@angular/router';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,38 +23,38 @@ import { Toast, ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [CommonModule,MatSlideToggleModule,MatRippleModule,MatSelectModule,MatMenuModule, InfiniteScrollModule,MatFormFieldModule, ToDatePipe,MatInputModule, FormsModule,MatIconModule,MatCardModule,MatDividerModule, MatButtonModule,MatListModule],
+  imports: [CommonModule, MatSlideToggleModule, MatRippleModule, MatSelectModule, MatMenuModule, InfiniteScrollModule, MatFormFieldModule, ToDatePipe, MatInputModule, FormsModule, MatIconModule, MatCardModule, MatDividerModule, MatButtonModule, MatListModule],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.css'
 })
-export class BlogComponent implements OnInit{
-  defaultPageSize:number=10;
-  defaultPage:number=1;
-  filterValue!:string
-  defaultOrderByName:string='PublishDate';
-  orderBy:boolean=true;
-  selectedSort?:string;
-   sortingValues=[
-    {value:'PublishDate',text:'Publish Date'},
-    {value:'Vote',text:'Vote'}
+export class BlogComponent implements OnInit {
+  defaultPageSize: number = 10;
+  defaultPage: number = 1;
+  filterValue!: string
+  defaultOrderByName: string = 'PublishDate';
+  orderBy: boolean = true;
+  selectedSort?: string;
+  sortingValues = [
+    { value: 'PublishDate', text: 'Publish Date' },
+    { value: 'Vote', text: 'Vote' }
   ]
 
-  request:BlogPaginatedRequest={
-    page:this.defaultPage,
-    pageSize:this.defaultPageSize,
-    orderBy:false,
-    orderByPropertname:this.defaultOrderByName,
-    filter:this.filterValue
+  request: BlogPaginatedRequest = {
+    page: this.defaultPage,
+    pageSize: this.defaultPageSize,
+    orderBy: false,
+    orderByPropertname: this.defaultOrderByName,
+    filter: this.filterValue
   };
-  blogContent!:ListBlogDtos;
+  blogContent!: ListBlogDtos;
 
-  mostVotedBlog!:GetBlogDto[];
-  blogTopics!:GetBlogTopicDto[];
-  selectedTopicId?:number;
+  mostVotedBlog!: GetBlogDto[];
+  blogTopics!: GetBlogTopicDto[];
+  selectedTopicId?: number;
   constructor(
-    private router:Router,
-    private blogService:BlogService,
-    private toastrService:ToastrService){}
+    private router: Router,
+    private blogService: BlogService,
+    private toastrService: ToastrService) { }
 
 
   ngOnInit(): void {
@@ -62,88 +62,89 @@ export class BlogComponent implements OnInit{
     this.getMostVotedBlog(this.request);
     this.getBlogTopics();
   }
-  
-  getBlogs(request:BlogPaginatedRequest){
+
+  getBlogs(request: BlogPaginatedRequest) {
     this.blogService.getBlogs(request).subscribe({
-      next:(res)=>{
-        if(res){
-          res.data.forEach((x)=>{
-            if(!x.photoPath || x.photoPath === undefined || x.photoPath === null){
-              x.photoPath='./././assets/cover.png';
+      next: (res) => {
+        if (res) {
+          res.data.forEach((x) => {
+            if (!x.photoPath || x.photoPath === undefined || x.photoPath === null) {
+              x.photoPath = './././assets/cover.png';
             }
           })
-            this.blogContent=res;
+          this.blogContent = res;
         }
-      }       
+      }
     })
   }
 
-  getMostVotedBlog(request:PaginatedRequest){
-    let mostVotedRequest=request;
-    mostVotedRequest.orderBy=false;
-    mostVotedRequest.orderByPropertname="Vote";
+  getMostVotedBlog(request: PaginatedRequest) {
+    let mostVotedRequest = request;
+    mostVotedRequest.orderBy = false;
+    mostVotedRequest.orderByPropertname = "Vote";
     this.blogService.getBlogs(request).subscribe({
-      next:(res)=>{
-          this.mostVotedBlog=res.data;
-      } })
+      next: (res) => {
+        this.mostVotedBlog = res.data;
+      }
+    })
 
   }
 
-    getBlogDetail(blogId:number){
-     this.router.navigate(['blog-detail',blogId]);
-    }
-    
-    gotoAddBlog(){
-      this.router.navigateByUrl("/add-blog");
-    }
-    onScroll=()=>{
-      debugger
-      this.defaultPageSize+=this.defaultPageSize;
-      this.request.pageSize=this.defaultPageSize;
-      this.getBlogs(this.request);
-    }
+  getBlogDetail(blogId: number) {
+    this.router.navigate(['blog-detail', blogId]);
+  }
+
+  gotoAddBlog() {
+    this.router.navigateByUrl("/add-blog");
+  }
+  onScroll = () => {
+
+    this.defaultPageSize += this.defaultPageSize;
+    this.request.pageSize = this.defaultPageSize;
+    this.getBlogs(this.request);
+  }
 
 
-    filterByContent(filter:string){
-      debugger
-      this.request.filter=filter;
-      this.getBlogs(this.request);
-    }
+  filterByContent(filter: string) {
 
-    sort(){
-      debugger
-      let sortResult:SortResultDto={
-        column:this.selectedSort,
-        orderBy:this.orderBy
-      };
-      this.request.orderBy=this.orderBy;
-      this.request.orderByPropertname=this.selectedSort; 
-      this.getBlogs(this.request);
+    this.request.filter = filter;
+    this.getBlogs(this.request);
+  }
 
-    }
+  sort() {
 
-    getBlogTopics(){
-      let request:PaginatedRequest={
-        page:1,
-        pageSize:100,
-        orderBy:true,
-        orderByPropertname:'TopicName'
-      };
+    let sortResult: SortResultDto = {
+      column: this.selectedSort,
+      orderBy: this.orderBy
+    };
+    this.request.orderBy = this.orderBy;
+    this.request.orderByPropertname = this.selectedSort;
+    this.getBlogs(this.request);
 
-      this.blogService.getTopics(request).subscribe({
-        next:(res)=>{
-            this.blogTopics=res.data;
-            console.log("Topic", this.blogTopics);
-            
-        }
-      })
-    }
-  
-    byBlogTopic(blogTopicId:number){
-      debugger
-      this.request.blogTopicId=blogTopicId;
-      this.selectedTopicId=blogTopicId;
-      this.getBlogs(this.request);
-    }
+  }
+
+  getBlogTopics() {
+    let request: PaginatedRequest = {
+      page: 1,
+      pageSize: 100,
+      orderBy: true,
+      orderByPropertname: 'TopicName'
+    };
+
+    this.blogService.getTopics(request).subscribe({
+      next: (res) => {
+        this.blogTopics = res.data;
+
+
+      }
+    })
+  }
+
+  byBlogTopic(blogTopicId: number) {
+
+    this.request.blogTopicId = blogTopicId;
+    this.selectedTopicId = blogTopicId;
+    this.getBlogs(this.request);
+  }
 
 }

@@ -1,4 +1,4 @@
-/* General Toolbar Styling */
+
 .skiller-toolbar {
   display: flex;
   flex-direction: row;
@@ -9,34 +9,34 @@
   padding: 15px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   font-size: 16px;
-  height: 60px; /* Added a fixed height for uniformity */
+  height: 60px;
 }
 
-/* Styling for Search Input Field */
+
 .filter-form-field {
-  width: 300px; /* Adjusted width */
-  margin: 0; /* Reset margins */
+  width: 300px;
+  margin: 0;
   align-items: center;
   display: flex;
   flex-direction: row;
   border: 0 !important;
 }
 
-/* Adjustments for Text Field Wrapper */
+
 .mat-mdc-text-field-wrapper {
   display: flex;
   flex-direction: row;
   height: 45px !important;
-  flex-grow: 1; /* Allows the input to grow */
+  flex-grow: 1;
 }
 
-/* Menu Content Styling */
+
 .mat-menu-content {
   padding: 15px;
-  width: 300px; /* Adjusted width */
+  width: 300px;
 }
 
-/* Menu Item Styling */
+
 .mat-menu-item {
   height: inherit;
   width: inherit;
@@ -47,26 +47,26 @@
   background: lightgoldenrodyellow;
 }
 
-/* Additional Styling for Popover Menu */
+
 .popover-menu {
   padding: 15px;
   display: flex;
   flex-direction: row;
-  gap: 10px; /* Reduced gap */
+  gap: 10px;
 }
 
-/* Toggle Button Styling */
+
 .sort-toggle {
-  margin-left: 5px; /* Reduced margin */
+  margin-left: 5px;
 }
 
-/* Sort Button Styling */
+
 .sort-button {
-  padding: 5px 10px; /* Adjusted padding for buttons */
+  padding: 5px 10px;
   margin-left: 10px;
 }
 
-/* Other Styling */
+
 .ripple-container {
   cursor: default;
   text-align: center;
@@ -111,7 +111,7 @@
   .skiller-toolbar {
     flex-direction: row;
     padding: 10px;
-    height: auto; /* Adjust height for mobile */
+    height: auto;
   }
 
   ::ng-deep .mat-input-wrapper{
@@ -119,25 +119,25 @@
   }
 
   .filter-form-field {
-    width: 100%; /* Full width for mobile */
-    margin-top: 10px; /* Add space between search field and other elements */
+    width: 100%;
+    margin-top: 10px;
   }
 
   .mat-menu-content {
-    width: auto; /* Adjust width for mobile */
+    width: auto;
   }
 
   .popover-menu {
-    flex-direction: column; /* Stack elements vertically */
-    gap: 5px; /* Smaller gap for mobile */
+    flex-direction: column;
+    gap: 5px;
   }
 
   .sort-button {
-    margin-top: 10px; /* Add space above the sort button */
-    width: 100%; /* Full width for mobile */
+    margin-top: 10px;
+    width: 100%;
   }
 
-  /* Additional adjustments for smaller elements */
+ 
   .sort-toggle, .mat-mdc-text-field-wrapper {
     margin: 0;
   }

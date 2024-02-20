@@ -1,61 +1,61 @@
 <div class="edit-header">
-    <p class="edit-header-title"> User Settings</p>
-    <button mat-dialog-title class="edit-header-button" (click)="dialogRef.close()" mat-icon-button >
-        <mat-icon>close</mat-icon>
-    </button>
+  <p class="edit-header-title"> User Settings</p>
+  <button mat-dialog-title class="edit-header-button" (click)="dialogRef.close()" mat-icon-button>
+    <mat-icon>close</mat-icon>
+  </button>
 </div>
-  <mat-divider></mat-divider>
-  <mat-accordion class="edit-headers-align" multi>
-   
-    <mat-expansion-panel  [expanded]="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Edit Profile
-        </mat-panel-title>
-        <mat-panel-description>
-          Edit your Profile
-          <mat-icon>account_circle</mat-icon>
-        </mat-panel-description>
+<mat-divider></mat-divider>
+<mat-accordion class="edit-headers-align" multi>
 
-      </mat-expansion-panel-header>
-            <ng-container *ngTemplateOutlet="editProfileTemplate">
-            </ng-container>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Edit Profile
+      </mat-panel-title>
+      <mat-panel-description>
+        Edit your Profile
+        <mat-icon>account_circle</mat-icon>
+      </mat-panel-description>
 
-    </mat-expansion-panel>
+    </mat-expansion-panel-header>
+    <ng-container *ngTemplateOutlet="editProfileTemplate">
+    </ng-container>
 
-
-
-    <mat-expansion-panel  >
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Change Password
-        </mat-panel-title>
-        <mat-panel-description>
-          Change Account Password
-          <mat-icon>account_circle</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-  
-   <ng-container  *ngTemplateOutlet="changePasswordTemplate"></ng-container>
-    </mat-expansion-panel>
-  
-
-    <mat-expansion-panel  >
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Delete Account
-        </mat-panel-title>
-        <mat-panel-description>
-          Delete Account Permenantly
-          <mat-icon>account_circle</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-  
-   <ng-container  *ngTemplateOutlet="deleteAccountTemplate"></ng-container>
-    </mat-expansion-panel>
+  </mat-expansion-panel>
 
 
-  </mat-accordion>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Change Password
+      </mat-panel-title>
+      <mat-panel-description>
+        Change Account Password
+        <mat-icon>account_circle</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <ng-container *ngTemplateOutlet="changePasswordTemplate"></ng-container>
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Delete Account
+      </mat-panel-title>
+      <mat-panel-description>
+        Delete Account Permenantly
+        <mat-icon>account_circle</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <ng-container *ngTemplateOutlet="deleteAccountTemplate"></ng-container>
+  </mat-expansion-panel>
+
+
+</mat-accordion>
 
 
 
@@ -69,143 +69,145 @@
 
 <ng-template #editProfileTemplate>
   <!-- <h2 mat-dialog-title>Edit Profile</h2> -->
-<mat-divider></mat-divider>
+  <mat-divider></mat-divider>
 
-<form *ngIf="userProfile" [formGroup]="userProfile" (ngSubmit)="SubmitUserUpdate(userProfile)">
+  <form *ngIf="userProfile" [formGroup]="userProfile" (ngSubmit)="SubmitUserUpdate(userProfile)">
     <mat-dialog-content class="grid-container">
 
-        <mat-form-field appearance="outline" class="form-field">
-            <mat-label>First Name</mat-label>
-            <input matInput formControlName="firstName">
-            @if (userProfile.get('firstName')?.hasError('required')) {
-              <mat-error>Required Fields</mat-error>
-              }
-              @if (userProfile.get('firstName')?.hasError('minlength') ||
-              userProfile.get('firstName')?.hasError('maxlength')) {
-              <mat-error>The password between 5 and 25 </mat-error>
-              }
-          </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName">
+        @if (userProfile.get('firstName')?.hasError('required')) {
+        <mat-error>Required Fields</mat-error>
+        }
+        @if (userProfile.get('firstName')?.hasError('minlength') ||
+        userProfile.get('firstName')?.hasError('maxlength')) {
+        <mat-error>The password between 5 and 25 </mat-error>
+        }
+      </mat-form-field>
 
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Last Name</mat-label>
-            <input matInput formControlName="lastName">
-            @if (userProfile.get('lastName')?.hasError('required')) {
-              <mat-error>Required Fields</mat-error>
-              }
-              @if (userProfile.get('lastName')?.hasError('minlength') ||
-              userProfile.get('lastName')?.hasError('maxlength')) {
-              <mat-error>The password between 5 and 25 </mat-error>
-              }
-          </mat-form-field>
-
-
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email">
-
-            @if (userProfile.get('email')?.hasError('required')) {
-              <mat-error>Required field </mat-error>
-              }
-              @if (userProfile.get('email')?.hasError('email')) {
-              <mat-error>Is not valid email</mat-error>
-              }
-    
-          </mat-form-field>
-
-          <div class="photo-input ">
-            <mat-label>Picture</mat-label>
-             <input   type="file" #fileInput   (change)="onFileSelected($event)" hidden>
-
-            <button mat-raised-button type="button" (click)="fileInput.click()">Choose File</button>
-          
-          </div>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName">
+        @if (userProfile.get('lastName')?.hasError('required')) {
+        <mat-error>Required Fields</mat-error>
+        }
+        @if (userProfile.get('lastName')?.hasError('minlength') ||
+        userProfile.get('lastName')?.hasError('maxlength')) {
+        <mat-error>The password between 5 and 25 </mat-error>
+        }
+      </mat-form-field>
 
 
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Role</mat-label>
-            <mat-select matSelect formControlName="role"  >
-              <mat-option value="Supervisor">Supervisor</mat-option>
-              <mat-option value="Consultant">Consultant</mat-option>
-              <mat-option value="User">User</mat-option>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
 
-            </mat-select>
-            @if (userProfile.get('role')?.hasError('required')) {
-              <mat-error>Required Fields</mat-error>
-              }
-             
-          </mat-form-field>
+        @if (userProfile.get('email')?.hasError('required')) {
+        <mat-error>Required field </mat-error>
+        }
+        @if (userProfile.get('email')?.hasError('email')) {
+        <mat-error>Is not valid email</mat-error>
+        }
+
+      </mat-form-field>
+
+      <div class="photo-input ">
+        <mat-label>Picture</mat-label>
+        <input type="file" #fileInput (change)="onFileSelected($event)" hidden>
+
+        <button mat-raised-button type="button" (click)="fileInput.click()">Choose File</button>
+
+      </div>
 
 
-</mat-dialog-content>
-<mat-divider></mat-divider>
-  <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close  (click)="dialogRef.close()">Close</button>
-    <button [disabled]="!userProfile.valid" mat-raised-button cdkFocusInitial color="primary" type="submit">Save</button>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Role</mat-label>
+        <mat-select matSelect formControlName="role">
+          <mat-option value="Supervisor">Supervisor</mat-option>
+          <mat-option value="Consultant">Consultant</mat-option>
+          <mat-option value="User">User</mat-option>
 
-  </mat-dialog-actions>
+        </mat-select>
+        @if (userProfile.get('role')?.hasError('required')) {
+        <mat-error>Required Fields</mat-error>
+        }
 
-</form>
+      </mat-form-field>
+
+
+    </mat-dialog-content>
+    <mat-divider></mat-divider>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close (click)="dialogRef.close()">Close</button>
+      <button [disabled]="!userProfile.valid" mat-raised-button cdkFocusInitial color="primary"
+        type="submit">Save</button>
+
+    </mat-dialog-actions>
+
+  </form>
 </ng-template>
 
 
 <ng-template #changePasswordTemplate>
-    <mat-divider></mat-divider>
+  <mat-divider></mat-divider>
 
 
-    <form *ngIf="changePassword" [formGroup]="changePassword" (ngSubmit)="SubmitChangePassword(changePassword)">
-        <mat-dialog-content class="grid-container">
-    
-            <mat-form-field appearance="outline" class="form-field">
-                <mat-label>Old Password</mat-label>
-                <input matInput formControlName="oldPassword" type="password">
-                @if (changePassword.get('oldPassword')?.hasError('required')) {
-                  <mat-error>Required Fields</mat-error>
-                  }
-        
-                  @if (changePassword.get('oldPassword')?.hasError('minlength') ||
-                  changePassword.get('oldPassword')?.hasError('maxlength')) {
-                  <mat-error>The password between 5 and 50 </mat-error>
-                  }
-              </mat-form-field>
-    
-              <mat-form-field appearance="outline" class="form-field">
-                <mat-label>New Password</mat-label>
-                <input matInput formControlName="newPassword" type="password">
-                @if (changePassword.get('newPassword')?.hasError('required')) {
-                  <mat-error>Required Fields</mat-error>
-                  }
-        
-                  @if (changePassword.get('newPassword')?.hasError('minlength') ||
-                  changePassword.get('newPassword')?.hasError('maxlength')) {
-                  <mat-error>The password between 5 and 50 </mat-error>
-                  }
-              </mat-form-field>
-    
-    
-              <mat-form-field appearance="outline" class="form-field">
-                <mat-label>New Confirm Password</mat-label>
-                <input matInput formControlName="newConfirmPassword" type="password">
-                @if (changePassword.get('newConfirmPassword')?.hasError('required')) {
-                  <mat-error>Required Fields</mat-error>
-                  }
-        
-                  @if (changePassword.get('newConfirmPassword')?.hasError('minlength') ||
-                  changePassword.get('newConfirmPassword')?.hasError('maxlength')) {
-                  <mat-error>The password between 5 and 50 </mat-error>
-                  }
-              </mat-form-field>
+  <form *ngIf="changePassword" [formGroup]="changePassword" (ngSubmit)="SubmitChangePassword(changePassword)">
+    <mat-dialog-content class="grid-container">
 
-    
-    
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Old Password</mat-label>
+        <input matInput formControlName="oldPassword" type="password">
+        @if (changePassword.get('oldPassword')?.hasError('required')) {
+        <mat-error>Required Fields</mat-error>
+        }
+
+        @if (changePassword.get('oldPassword')?.hasError('minlength') ||
+        changePassword.get('oldPassword')?.hasError('maxlength')) {
+        <mat-error>The password between 5 and 50 </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>New Password</mat-label>
+        <input matInput formControlName="newPassword" type="password">
+        @if (changePassword.get('newPassword')?.hasError('required')) {
+        <mat-error>Required Fields</mat-error>
+        }
+
+        @if (changePassword.get('newPassword')?.hasError('minlength') ||
+        changePassword.get('newPassword')?.hasError('maxlength')) {
+        <mat-error>The password between 5 and 50 </mat-error>
+        }
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>New Confirm Password</mat-label>
+        <input matInput formControlName="newConfirmPassword" type="password">
+        @if (changePassword.get('newConfirmPassword')?.hasError('required')) {
+        <mat-error>Required Fields</mat-error>
+        }
+
+        @if (changePassword.get('newConfirmPassword')?.hasError('minlength') ||
+        changePassword.get('newConfirmPassword')?.hasError('maxlength')) {
+        <mat-error>The password between 5 and 50 </mat-error>
+        }
+      </mat-form-field>
+
+
+
     </mat-dialog-content>
     <mat-divider></mat-divider>
-      <mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close  (click)="dialogRef.close()">Close</button>
-        <button [disabled]="!changePassword.valid" mat-raised-button cdkFocusInitial color="primary" type="submit">Change Password</button>
-    
-      </mat-dialog-actions>
-    
-    </form>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close (click)="dialogRef.close()">Close</button>
+      <button [disabled]="!changePassword.valid" mat-raised-button cdkFocusInitial color="primary" type="submit">Change
+        Password</button>
+
+    </mat-dialog-actions>
+
+  </form>
 
 
 </ng-template>
@@ -213,10 +215,11 @@
 
 <ng-template #deleteAccountTemplate>
   <mat-divider></mat-divider>
-@if(userId){
-    <mat-dialog-content class="delete-user-container">
-      <p>Delete Account</p>
-    <button mat-flat-button color="warn"(click)="deleteAccount(userId)" ><mat-icon>delete</mat-icon> Delete Account</button>
+  @if(userId){
+  <mat-dialog-content class="delete-user-container">
+    <p>Delete Account</p>
+    <button mat-flat-button color="warn" (click)="deleteAccount(userId)"><mat-icon>delete</mat-icon> Delete
+      Account</button>
   </mat-dialog-content>
-}
+  }
 </ng-template>

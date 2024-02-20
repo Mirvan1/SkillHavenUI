@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../environment/environment';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { BlogPaginatedRequest, CreateBlogCommentDto, CreateBlogDto, GetBlogCommentsDto, GetBlogDto, GetBlogTopicDto, ListBloCommentsDtos, ListBlogDtos, ListGetBlogTopicDto, UpdateBlogDto, VoteBlogDto } from '../dtos/blog';
+ import { BlogPaginatedRequest, CreateBlogCommentDto, CreateBlogDto, GetBlogCommentsDto, GetBlogDto, GetBlogTopicDto, ListBloCommentsDtos, ListBlogDtos, ListGetBlogTopicDto, UpdateBlogDto, VoteBlogDto } from '../dtos/blog';
 import { Observable } from 'rxjs';
 import { PaginatedRequest } from '../dtos/skills';
+import { environment } from '../../environments/environment.development';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class BlogService {
   blogEndpoint:string=`${environment.apiUrl}/blog`;
 
   
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient  :HttpClient) { }
 
   getBlogs(request:BlogPaginatedRequest):Observable<ListBlogDtos>{
     let params = new HttpParams()
@@ -25,8 +25,8 @@ export class BlogService {
     if(request.filter){
   params=  params.append('Filter', request.filter!   );
     };    ;
-debugger;
-console.log("Param",params) 
+;
+
     return this.httpClient.get<ListBlogDtos>(this.blogEndpoint,{params});
   }
  
@@ -40,8 +40,7 @@ console.log("Param",params)
     .set('PageSize', request.pageSize || '')
     .set('OrderBy', request.orderBy || '');
 
-    // return this.httpClient.get<ListBloCommentsDtos>(`http://localhost:5095/comments/${request.blogId}`,{params});
-    return this.httpClient.post<ListBloCommentsDtos>(`http://localhost:5095/comments/`,request);
+    return this.httpClient.post<ListBloCommentsDtos>(`${this.blogEndpoint}/comments/`,request);
 
   }
 
@@ -50,7 +49,7 @@ console.log("Param",params)
   }
 
   createBlogComment(request:CreateBlogCommentDto):Observable<boolean>{
-   return this.httpClient.post<boolean>(`http://localhost:5095/commment/create`,request);
+   return this.httpClient.post<boolean>(`${this.blogEndpoint}/commment/create`,request);
   }
 
   updateBlog(request:UpdateBlogDto):Observable<boolean>{
@@ -67,7 +66,7 @@ console.log("Param",params)
 
 
   voteBlog(request:VoteBlogDto){
-    return this.httpClient.put<number>(`http://localhost:5095/vote`,request);
+    return this.httpClient.put<number>(`${this.blogEndpoint}/vote`,request);
   }
 
   getTopics(request:PaginatedRequest){
@@ -80,6 +79,6 @@ if(request.filter){
   params=  params.append('Filter', request.filter!   );
     };  
 
-    return this.httpClient.get<ListGetBlogTopicDto>(`http://localhost:5095/topics`,{params});
+    return this.httpClient.get<ListGetBlogTopicDto>(`${this.blogEndpoint}/topics`,{params});
   }
 }

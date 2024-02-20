@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule,Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { StreamInvocationMessage } from '@microsoft/signalr';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ToastrService } from 'ngx-toastr';
-import { ErrorResult } from '../../../utils/global.dto';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { UserService } from '../../../services/user.service';
 import { ForgotPasswordDto } from '../../../dtos/user.dto';
@@ -34,10 +31,7 @@ export class ForgotPasswordComponent {
       email:this.email
     }
     this.userService.forgotPassword(request).subscribe({
-      next:(res)=>{
-console.log("forgotpass",res);
-this.toastrService.success("sendmail");
-      } 
+      next:()=>this.toastrService.success(`Mail send to ${this.email} successfully`)
     })
    }
 }

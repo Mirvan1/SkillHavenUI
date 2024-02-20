@@ -7,6 +7,7 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { ToasterService } from '@coreui/angular';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmDialogModel } from '../../utils/global.dto';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -21,38 +22,32 @@ export class ConfirmDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<ConfirmDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogModel,
-    private userService:UserService,
-    private router:Router,
-    private toastr:ToastrService
-    ) {
+    private userService: UserService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
     // Update view with given values
     this.title = data.title;
     this.userId = data.userId;
   }
- 
+
   onConfirm(): void {
-    
+
     this.userService.deleteUser(this.userId).subscribe({
-      next:(res)=>{
-        if(res){
-          console.log("user deleted");
+      next: (res) => {
+        if (res) {
+
           this.userService.logout();
           this.router.navigateByUrl('/login');
-             window.location.reload();
-            this.toastr.error('User deleted permenantly.If you want to revert this operation. Please contact.','Deleted User')
-          }
-      } 
+          window.location.reload();
+          this.toastr.error('User deleted permenantly.If you want to revert this operation. Please contact.', 'Deleted User')
+        }
+      }
     })
     this.dialogRef.close(true);
   }
 
   onDismiss(): void {
     this.dialogRef.close(false);
-  }
-}
-
-export class ConfirmDialogModel {
-
-  constructor(public title: string, public userId: number) {
   }
 }

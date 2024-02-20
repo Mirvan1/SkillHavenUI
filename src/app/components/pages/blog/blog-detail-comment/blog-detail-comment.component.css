@@ -22,7 +22,7 @@
 
 mat-card-avatar {
     width: 40px;
-    /* Adjust size as needed */
+   
     height: 40px;
     border-radius: 50%;
     margin-top: 4% !important;
@@ -65,7 +65,7 @@ mat-card-avatar {
 
 mat-sidenav-container {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    /* Subtle shadow */
+   
     opacity: 1!important;
 }
 
@@ -93,12 +93,7 @@ mat-sidenav-container {
     overflow-x: hidden !important;
 }
 
-/* mat-sidenav-content{
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  } */  
+  
 
 
   mat-form-field input{

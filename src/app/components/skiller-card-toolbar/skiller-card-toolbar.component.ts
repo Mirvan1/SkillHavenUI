@@ -35,7 +35,7 @@ export class SkillerCardToolbarComponent {
   }
 
   sort(){
-    debugger
+    
     let sortResult:SortResultDto={
       column:this.selectedSort,
       orderBy:this.orderBy
