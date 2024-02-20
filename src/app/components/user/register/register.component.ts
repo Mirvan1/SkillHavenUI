@@ -59,9 +59,9 @@ export class RegisterComponent {
     
     if(event?.target?.files?.length > 0) 
     {
-      // this.secondFormGroup.patchValue({
-      //    picture: event?.target?.files[0],
-      // })
+      
+      
+      
       if( event.target.files[0].type.match('image.*')) {
 
       const reader = new FileReader();
@@ -70,8 +70,8 @@ export class RegisterComponent {
         const base64String = reader.result as string;
         this.secondFormGroup.patchValue({ picture: base64String });
 
-        // Now you have the file as a base64 string
-        // You can assign it to a component property or handle it as needed
+        
+        
       };
       reader.readAsDataURL(event?.target?.files[0]);
     }
@@ -124,7 +124,7 @@ registerUser.password=this.firstFormGroup.get('password')?.value!;
     const roleValue=this.secondFormGroup.get('role')?.value!;
 
     if(roleValue in Role){
-    registerUser.role=Number(roleValue);//Role[roleValue as keyof typeof Role];
+    registerUser.role=Number(roleValue);
     }
 
     let supervisorInfo:SupervisorRegistrationInfo={};
@@ -136,7 +136,7 @@ registerUser.password=this.firstFormGroup.get('password')?.value!;
       supervisorInfo.expertise='';
       supervisorInfo.description='';
     }
-//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     puxa nfur zsyd inqb
+
 
     let consultantInfo:ConsultantRegistrationInfo={};
     if(registerUser.role === Role.Consultant){
