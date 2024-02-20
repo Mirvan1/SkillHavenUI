@@ -38,3 +38,29 @@ a[mat-menu-item]:hover {
   background-color: rgba(255, 255, 255, 0.3); /* More pronounced white overlay for active link */
   border-radius: 4px; /* Ensure rounded corners for active link */
 }
+
+
+
+.info-box {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color:#f2f2f2	; /* Example background color */
+  color: #333; /* Example text color */
+  text-align: center;
+   box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+  z-index: 99999;
+}
+
+.info-box p {
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
+  font-size: 16px; /* Sets the font size */
+  font-weight: normal; /* Sets the font weight */
+  color: #333; /* Sets the text color */
+  text-align: center; /* Centers the text */
+  line-height: 1.5; /* Adjusts the line height for better readability */
+  color:#242424
+}
+
