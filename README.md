@@ -2,8 +2,7 @@
 
 ## Project Overview
 
-SkillHavenUI is our cool website where you can learn from experts in all kinds of jobs. It's easy to use and helps you get advice from people who know a lot.
-
+SkillHavenApi helps people learn from experts in different jobs. It's like asking for advice and reading their blogs from someone who knows a lot .
 
 ## Technologies Used
 
