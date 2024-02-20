@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-SkillHavenApi helps people learn from experts in different jobs. It's like asking for advice and reading their blogs from someone who knows a lot .
+SkillHaven helps people learn from experts in different jobs. It's like asking for advice and reading their blogs from someone who knows a lot .
 
 ## Technologies Used
 
