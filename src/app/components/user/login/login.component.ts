@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../services/user.service';
 import { LoginUserDto } from '../../../dtos/user.dto';
@@ -13,19 +13,26 @@ import { MatIconModule } from '@angular/material/icon';
 import { ToastrService } from 'ngx-toastr';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {  RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, MatSlideToggleModule, ReactiveFormsModule, RouterLink, MatToolbarModule, FormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatSlideToggleModule, RecaptchaModule,RecaptchaFormsModule,ReactiveFormsModule, RouterLink, MatToolbarModule, FormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
-  email: string
+export class LoginComponent implements OnInit {
+  email: string;
   password: string;
   showPassword: boolean = false;
   saveSession: boolean = false;
+  isCaptchaResolved:boolean=false;
+
+  _captchKey!:string;
+ 
+
   constructor(
     private userService: UserService,
     public router: Router,
@@ -33,6 +40,9 @@ export class LoginComponent {
   ) {
     this.email = 'deneme6@gmail.com';
     this.password = '12345';
+  }
+  ngOnInit(): void {
+    this.getCaptchaKey();
   }
 
   getLogin() {
@@ -59,6 +69,20 @@ export class LoginComponent {
       }
     }
     )
+  }
+
+
+  getCaptchaKey(){
+    this.userService.getCaptchaKey().subscribe({
+      next:(res:string)=>{this._captchKey=res; 
+           console.log("key",this._captchKey)
+    },
+      error:()=>this.isCaptchaResolved=true
+    })
+  }
+
+  checkCaptcha(response:any){
+    this.isCaptchaResolved=(response && response.length>0)?true:false;  
   }
 
 

@@ -99,7 +99,7 @@ export class ChatDialogComponent implements OnInit {
       //if(userId===this.loggedUser?.userId!){
 
       this.toastr.success("sender Fired", userId.toString());
-
+console.log("Sender userid",this.loggedUser?.userId!)
       //  this.chatHub.loadChatHistory(this.receiverUserId);
       this.chatHub.loadChatHistory(this.loggedUser?.userId!);
       //    }

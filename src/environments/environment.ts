@@ -1,7 +1,6 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://api.skillhaven.com/api',
-
-    socketUrl: 'http://api.skillhaven.com/'
+    apiUrl: 'http://192.168.1.104:9992/api',
+    socketUrl: 'http://192.168.1.104:9992'
 
 };

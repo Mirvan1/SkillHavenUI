@@ -55,11 +55,11 @@ export class ChatHubService {
   }
 
 
-  public addSenderMessageListener = (onMessageReceived: (userId: number, message: string) => void) => {
+  public addSenderMessageListener = (onMessageSender: (userId: number, message: string) => void) => {
     this.hubConnection.on('SenderMessageToClient', (userId, message) => {
       
  
-      onMessageReceived(userId, message);
+      onMessageSender(userId, message);
     });
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, shareReplay, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import {  ChangePasswordDto, ForgotPasswordDto, LoginUserDto, MailUserCheckerDto, RegisterUserDto, ResetPasswordDto, UserDto, VerifyUserDto } from '../dtos/user.dto';
 import { environment } from '../../environments/environment.development';
@@ -81,6 +81,10 @@ export class UserService {
 
   mailChecker(request:MailUserCheckerDto):Observable<boolean>{
     return this.httpClient.post<boolean>(`${this.userEndpoint}/mail-checker`,request);
+  }
+
+  getCaptchaKey():Observable<string>{
+    return this.httpClient.get(`${this.userEndpoint}/get-captcha-key`, {responseType: 'text'} ).pipe(shareReplay(1));
   }
 
   logout(){

@@ -49,6 +49,11 @@
                         <mat-error>The password between 5 and 25 </mat-error>
                         }
                     </mat-form-field>
+                    @if(_captchKey){
+                    <re-captcha class="captcha" (resolved)="checkCaptcha($event)" [siteKey]="_captchKey">
+
+                    </re-captcha>
+                    }
                     <div class="login-external">
                         <div>
                             <mat-slide-toggle color="primary" [(ngModel)]="saveSession" name="remember-me">Remember
@@ -60,10 +65,12 @@
                                 Password?</a>
                         </div>
 
+
+
                     </div>
 
-                    <button [disabled]="!loginForm.valid" mat-raised-button color="primary" class="login-button"
-                        (click)="getLogin()">Login</button>
+                    <button [disabled]="!loginForm.valid || !isCaptchaResolved" mat-raised-button color="primary"
+                        class="login-button" (click)="getLogin()">Login</button>
                 </form>
                 <div class="login-redirect-register">
                     <mat-label>
